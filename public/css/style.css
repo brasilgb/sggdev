@@ -1,0 +1,60 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: rgb(221, 221, 221);
+}
+
+body {
+    min-height: 100vh;
+}
+
+#wrap {
+    min-height: 100%;
+}
+
+#main {
+    overflow: auto;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    
+    /* this needs to be bigger than footer height*/
+}
+
+.footer {
+    position: relative;
+    margin-top: -150px;
+    /* negative value of footer height */
+    height: 40px;
+    clear: both;
+    padding-top: 20px;
+    font-size: 0.9rem;
+    background-color: rgb(233, 233, 233);
+    border-top: 2px solid #ffffff;
+}
+.btn-search{
+    border: 1px solid rgb(209, 209, 209);
+}
+.card, .modal-content{
+    border: 1px solid #fff;
+}
+.card-body, .modal-content{
+    background-color: #F8F9FA;
+}
+.card-header, .card-footer, .modal-header, .modal-footer{
+    background-color: #F0F1F2;
+}
+thead > tr{
+    background-color: #EBECED;
+}
+.error{
+    display: block;
+    color: rgb(211, 2, 2);
+    text-align: left!important;
+}
+.col-form-label{
+    font-size: 1rem;
+    color: rgb(53, 53, 53);
+    font-weight: 500;
+}
