@@ -122,7 +122,10 @@ class LoteController extends Controller
      */
     public function update(Request $request, Lote $lote)
     {
-        //
+        $data = $request->all();
+        $data['data_lote'] = Carbon::createFromFormat('d/m/Y', $request->data_lote)->format('Y-m-d');
+        $lote->update($data);
+        return redirect()->route('lotes.index')->with('success', 'Lote editado com sucesso!');
     }
 
     /**

@@ -44,7 +44,7 @@
             <div class="card-body px-4">
                 @include("parts/flash-message")
 
-                @method('POST')
+                @method('PUT')
                 @csrf
 
                 <div class="form-group row">
@@ -63,7 +63,7 @@
                             class="text-danger">*</span></label>
                     <div class="col-sm-7">
                         <input id="lote" type="text" class="form-control" name="lote" value="{{ old('lote', $lote->lote) }}">
-                        <input id="idlote" type="text" value="{{ $lote->id_lote }}">
+                        <input id="idlote" type="hidden" value="{{ $lote->id_lote }}">
                         @error('lote')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror

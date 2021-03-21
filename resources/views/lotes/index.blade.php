@@ -90,7 +90,7 @@
                                 </td>
                                 <td class="align-middle">{{ $lotes->sum('femea') + $lotes->sum('macho') }}</td>
                                 <td class="align-middle">{{ $lote->aviarios->count() }}</td>
-                                <td class="align-middle">{{ date('d/m/Y', strtotime($lote->created_at)) }}</td>
+                                <td class="align-middle">{{ date('d/m/Y', strtotime($lote->data_lote)) }}</td>
                                 <td class="align-middle">
 
                                     <button data-toggle="modal" value="{{ $lote->id_lote }}" data-target="#CapitalizaModal"
@@ -105,7 +105,6 @@
                                             class="fa fa-trash"></i> Excluir</button>
                                 </td>
                             </tr>
-
                         @empty
                             <tr>
                                 <td colspan="9" class="alert alert-danger text-left"><i class="fa fa-exclamation-triangle"></i>
