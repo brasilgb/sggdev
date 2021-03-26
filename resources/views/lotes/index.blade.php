@@ -3,17 +3,18 @@
 @section('content')
 
     <div class="card shadow-sm">
-        <div class="card-header pb-0">
+        <div class="card-header pb-0 border-bottom border-white" style="background-color: #062142;">
             <div class="row">
                 <div class="col">
-                    <h4 class="text-left mt-1"><i class="fa fa-cubes"></i> Lotes</h4>
+                    <h4 class="text-left text-white mt-1"><i class="fa fa-cubes"></i> Lotes</h4>
                 </div>
                 <div class="col">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb pt-1 pb-1 float-right bg-transparent">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
                             <li class="breadcrumb-item active">
-                                @if (isset($busca)) <a href="{{ route('lotes.index') }}">Lotes</a> / Busca @else Lotes @endif
+                                @if (isset($busca)) <a
+                                    href="{{ route('lotes.index') }}">Lotes</a> / Busca @else Lotes @endif
                             </li>
                         </ol>
                     </nav>
@@ -23,24 +24,12 @@
         <div class="card-header">
             <div class="row">
                 <div class="col text-left">
-                    @if (isset($busca))
-                    <button onclick="location.href='{{ url()->previous() }}'" class="btn btn-primary shadow-sm border-white"><i class="fa fa-angle-left"></i> Voltar</button>
-                    @else
-                    <button onclick="location.href='{{ route('lotes.create') }}'" class="btn btn-primary shadow-sm border-white"><i class="fa fa-plus"></i> Adicionar</button>
-                    @endif
+                        <button onclick="window.location='{{ route('lotes.create') }}'"
+                            class="btn btn-primary shadow-sm border-white"><i class="fa fa-plus"></i> Adicionar</button>
                 </div>
 
                 <div class="col">
-                    <form action="{{ route('busca') }}" method="post" class="inline">
-                        @method('POST')
-                        @csrf
-                        <div class="input-group mb-0">
-                            <input type="text" name="termo" class="form-control shadow-sm" placeholder="Buscar lotes">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-search shadow-sm"><i class="fa fa-search"></i></button>
-                            </div>
-                        </div>
-                    </form>
+                    @include('lotes/search')
                 </div>
             </div>
         </div>
@@ -72,11 +61,11 @@
                                     @if ($lote->femea_capitalizada)
                                         {{ $lote->femea_capitalizada }} <strong class="text-dark">/</strong>
                                         {{ date('d/m/Y', strtotime($lote->data_femea_capitalizada)) }}
-                                </td>
-                            @else
-                                Não capitalizada
-                                @endif
 
+                                    @else
+                                        Não capitalizada
+                                    @endif
+                                </td>
                                 <td class="align-middle">{{ $lote->macho }}</td>
                                 <td
                                     class="align-middle {{ $lote->macho_capitalizado ? 'bg-success text-white' : 'bg-info text-white' }}">
@@ -97,7 +86,8 @@
                                         class="btn btn-light border border-white shadow avecap"><i
                                             class="fas fa-chart-line"></i> Capitalizar</button>
 
-                                    <button onclick="location.href='{{ route('lotes.edit', ['lote' => $lote->id_lote]) }}'" id="situacao" class="btn btn-primary border border-white shadow"><i
+                                    <button onclick="window.location='{{ route('lotes.edit', ['lote' => $lote->id_lote]) }}'"
+                                        id="situacao" class="btn btn-primary border border-white shadow"><i
                                             class="fa fa-edit"></i> Editar</button>
 
                                     <button class="btn btn-danger border border-white shadow" data-toggle="modal"
@@ -131,7 +121,7 @@
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form id="capitalizaaves" action="{{ route('capitalizar') }}" method="post" autocomplete="off">
+                <form id="capitalizaaves" action="{{ route('lotes.capitalizar') }}" method="post" autocomplete="off">
                     @method('post')
                     @csrf
                     <div class="modal-header">
@@ -238,28 +228,28 @@
         }
 
 
-            $(document).on("click", ".avecap", function(e) {
-                e.preventDefault();
-                //$("#capitalizaaves").refresh();
-                _token = "{{ csrf_token() }}";
-                idlote = $(this).val();
-                $("#lotecap").val(idlote);
-                $.ajax({
-                    type: 'POST',
-                    url: "{{ route('sowcapitalizada') }}",
-                    data: {
-                        '_token': _token,
-                        'idlote': idlote
-                    }
-                }).done(function(response) {
+        $(document).on("click", ".avecap", function(e) {
+            e.preventDefault();
+            //$("#capitalizaaves").refresh();
+            _token = "{{ csrf_token() }}";
+            idlote = $(this).val();
+            $("#lotecap").val(idlote);
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('lotes.showcapitalizada') }}",
+                data: {
+                    '_token': _token,
+                    'idlote': idlote
+                }
+            }).done(function(response) {
 
-                        $("#femeacap").val(response.capfemea);
-                        $("#machocap").val(response.capmacho);
-                        $("#datafcap").val(response.datafemea);
-                        $("#datamcap").val(response.datamacho);
+                $("#femeacap").val(response.capfemea);
+                $("#machocap").val(response.capmacho);
+                $("#datafcap").val(response.datafemea);
+                $("#datamcap").val(response.datamacho);
 
-                });
             });
+        });
 
         // Valida form add semnas
         if ($("#capitalizaaves").length > 0) {
@@ -288,12 +278,12 @@
                     femea_capitalizada: {
                         required: "Preencha com núm. de fêmeas!",
                         number: "Somente números inteiros!",
-                        notEqual: '<i class="fa fa-exclamation-circle"></i> Insira valores maior que "0"!'
+                        notEqual: 'Insira valores maior que "0"!'
                     },
                     macho_capitalizado: {
                         required: "Preencha com núm. de machos!",
                         number: "Somente números inteiros!",
-                        notEqual: '<i class="fa fa-exclamation-circle"></i> Insira valores maior que "0"!'
+                        notEqual: 'Insira valores maior que "0"!'
                     },
                     data_femea_capitalizada: {
                         required: "Preencha com a data!"
@@ -305,8 +295,10 @@
             })
         }
 
-jQuery.validator.addMethod("notEqual", function (value, element, param) { // Adding rules for Amount(Not equal to zero)
-	return this.optional(element) || value != '0';
-});
+        jQuery.validator.addMethod("notEqual", function(value, element,
+        param) { // Adding rules for Amount(Not equal to zero)
+            return this.optional(element) || value != '0';
+        });
+
     </script>
 @endsection

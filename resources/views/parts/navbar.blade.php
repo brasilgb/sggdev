@@ -11,18 +11,18 @@
           <a class="nav-link {{ (request()->is('periodos*')) ? 'active' : '' }}" href="{{ route('periodos.index') }}">Períodos</a>
         </li>
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle {{ (request()->is('lotes*')) ? 'active' : '' }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle {{ (request()->is('lotes*', 'aviarios*')) ? 'active' : '' }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Lotes/Aviários
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="{{ route('lotes.index') }}">Lotes</a>
-              <a class="dropdown-item" href="#">Aviários</a>
+              <a class="dropdown-item" href="{{ route('aviarios.index') }}">Aviários</a>
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Coletas</a>
+            <a class="nav-link" href="{{ route('coletas.index') }}">Coletas</a>
           </li>
-         
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Ovos
@@ -32,7 +32,7 @@
               <a class="dropdown-item" href="#">Relatório</a>
             </div>
           </li>
-          
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Aves

@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Periodo;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Checklist;
 use App\Models\Periodo;
 use App\Models\Semana;
@@ -159,7 +158,7 @@ class PeriodoController extends Controller
         endif;
         return true;
     }
-    
+
     /**
      * Display the specified resource.
      *

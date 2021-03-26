@@ -13,7 +13,7 @@
                         <ol class="breadcrumb pt-1 pb-1 float-right bg-transparent">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
                             <li class="breadcrumb-item"> <a href="{{ route('lotes.index') }}">Lotes</a></li>
-                            <li class="breadcrumb-item active">Adicionar</a></li>
+                            <li class="breadcrumb-item active">Editar</a></li>
                         </ol>
                     </nav>
                 </div>
@@ -31,11 +31,11 @@
                 </div>
             </div>
         </div>
-        <form id="formlote" action="{{ route('lotes.store') }}" method="post" autocomplete="off">
+        <form id="formlote" action="{{ route('lotes.update', ['lote' => $lote->id_lote]) }}" method="post" autocomplete="off">
             <div class="card-body px-4">
                 @include("parts/flash-message")
 
-                @method('POST')
+                @method('PUT')
                 @csrf
 
                 <div class="form-group row">
@@ -43,7 +43,7 @@
                             class="text-danger">*</span></label>
                     <div class="col-sm-7">
                         <input id="dataform" type="text" class="form-control" name="data_lote"
-                            value="{{ old('data_lote', date('d/m/Y', strtotime(now()))) }}">
+                            value="{{ old('data_lote', date('d/m/Y', strtotime($lote->data_lote))) }}">
                         @error('data_lote')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -53,7 +53,8 @@
                     <label for="lote" class="col-sm-3 col-form-label text-left">Identificação do lote <span
                             class="text-danger">*</span></label>
                     <div class="col-sm-7">
-                        <input id="lote" type="text" class="form-control" name="lote" value="{{ old('lote') }}">
+                        <input id="lote" type="text" class="form-control" name="lote" value="{{ old('lote', $lote->lote) }}">
+                        <input id="idlote" type="hidden" value="{{ $lote->id_lote }}">
                         @error('lote')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -64,7 +65,7 @@
                     <label for="femea" class="col-sm-3 col-form-label text-left">Aves fêmeas <span
                             class="text-danger">*</span></label>
                     <div class="col-sm-7">
-                        <input id="femea" type="text" class="form-control" name="femea" value="{{ old('femea') }}">
+                        <input id="femea" type="text" class="form-control" name="femea" value="{{ old('femea', $lote->femea) }}">
                         @error('femea')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -75,7 +76,7 @@
                     <label for="macho" class="col-sm-3 col-form-label text-left">Aves machos <span
                             class="text-danger">*</span></label>
                     <div class="col-sm-7">
-                        <input id="macho" type="text" class="form-control" name="macho" value="{{ old('macho') }}">
+                        <input id="macho" type="text" class="form-control" name="macho" value="{{ old('macho', $lote->macho) }}">
                         @error('macho')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -106,11 +107,14 @@
                 lote: {
                     required: true,
                     remote: {
-                        url: "{{ route('lotes.checklote') }}",
+                        url: "{{ route('lotes.checkuplote') }}",
                         type: "post",
                         data: {
                             _token: function() {
                                 return "{{ csrf_token() }}"
+                            },
+                            idlote: function() {
+                                return $("#idlote").val();
                             },
                             lote: function() {
                                 return $("#lote").val();
@@ -130,20 +134,20 @@
                 }
             },
             messages: {
-                data_lote: 'notEqual: 'Insira valores maior que "0"!'Selecione uma data para o lote!',
+                data_lote: '<i class="fa fa-exclamation-circle"></i> Selecione uma data para o lote!',
                 lote: {
-                    required: 'notEqual: 'Insira valores maior que "0"!'Insira uma identificação para o lote!',
-                    remote: 'notEqual: 'Insira valores maior que "0"!'Identificação do lote em uso, escolha outra!'
+                    required: '<i class="fa fa-exclamation-circle"></i> Insira uma identificação para o lote!',
+                    remote: '<i class="fa fa-exclamation-circle"></i> Identificação do lote em uso, escolha outra!'
                 },
                 femea: {
-                    required: 'notEqual: 'Insira valores maior que "0"!'Insira o número de fêmeas para o lote!',
-                    digits: 'notEqual: 'Insira valores maior que "0"!'Insira somente números inteiros!',
-                    notEqual: 'notEqual: 'Insira valores maior que "0"!'Insira valores maior que "0"!'
+                    required: '<i class="fa fa-exclamation-circle"></i> Insira o número de fêmeas para o lote!',
+                    digits: '<i class="fa fa-exclamation-circle"></i> Insira somente números inteiros!',
+                    notEqual: '<i class="fa fa-exclamation-circle"></i> Insira valores maior que "0"!'
                 },
                 macho: {
-                    required: 'notEqual: 'Insira valores maior que "0"!'Insira o número de machos para o lote!',
-                    digits: 'notEqual: 'Insira valores maior que "0"!'Insira somente números inteiros!',
-                    notEqual: 'notEqual: 'Insira valores maior que "0"!'Insira valores maior que "0"!'
+                    required: '<i class="fa fa-exclamation-circle"></i> Insira o número de machos para o lote!',
+                    digits: '<i class="fa fa-exclamation-circle"></i> Insira somente números inteiros!',
+                    notEqual: '<i class="fa fa-exclamation-circle"></i> Insira valores maior que "0"!'
 
                 }
             }

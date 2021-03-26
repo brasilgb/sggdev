@@ -3,10 +3,10 @@
 @section('content')
 
     <div class="card shadow-sm">
-        <div class="card-header pb-0">
+        <div class="card-header pb-0 border-bottom border-white" style="background-color: #062142;">
             <div class="row">
                 <div class="col">
-                    <h4 class="text-left mt-1"><i class="fa fa-clock"></i> Períodos</h4>
+                    <h4 class="text-left text-white mt-1"><i class="fa fa-clock"></i> Períodos</h4>
                 </div>
                 <div class="col">
                     <nav aria-label="breadcrumb">
@@ -26,11 +26,11 @@
                 </div>
                 @include('parts/modal-periodo')
                 <div class="col">
-                    <form action="{{ route('busca') }}" method="post" class="inline">
+                    <form action="{{ route('periodos.busca') }}" method="post" class="inline">
                         @method('POST')
                         @csrf
                         <div class="input-group mb-0">
-                            <input type="text" name="termo" class="form-control shadow-sm" placeholder="Buscar período">
+                            <input type="text" name="termo" class="form-control shadow-sm" placeholder="Buscar período"required>
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-search shadow-sm"><i
                                         class="fa fa-search"></i></button>
@@ -104,7 +104,7 @@
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form id="form-adsemana" method="POST" action="{{ route('addsemanasperiodo') }}" accept-charset="UTF-8"
+                <form id="form-adsemana" method="POST" action="{{ route('periodos.addsemanasperiodo') }}" accept-charset="UTF-8"
                     class="form-horizontal" autocomplete="off">
                     @method('post')
                     @csrf
@@ -208,11 +208,11 @@
             _token = "{{csrf_token()}}";
             $.ajax({
                 type: 'POST',
-                url: "{{route('ativaperiodo')}}",
+                url: "{{route('periodos.ativaperiodo')}}",
                 data: {'idperiodo': idperiodo, 'ativo': ativo, '_token': _token}
             }).done(function(response){
                 if(response == true){
-                   location.reload(); 
+                   location.reload();
                 }
             });
 

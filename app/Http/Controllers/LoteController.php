@@ -24,7 +24,7 @@ class LoteController extends Controller
 
     public function busca(Request $request)
     {
-        $lotes = Lote::where('lote', $request->termo)->paginate('10');
+        $lotes = Lote::where('id_lote', $request->search)->paginate('10');
         $busca = true;
         return view('lotes.index', compact('lotes', 'busca'));
     }
@@ -125,7 +125,7 @@ class LoteController extends Controller
         $data = $request->all();
         $data['data_lote'] = Carbon::createFromFormat('d/m/Y', $request->data_lote)->format('Y-m-d');
         $lote->update($data);
-        return redirect()->route('lotes.index')->with('success', 'Lote editado com sucesso!');
+        return redirect()->route('lotes.show', ['lote' => $lote->id_lote])->with('success', 'Lote editado com sucesso!');
     }
 
     /**
@@ -140,7 +140,7 @@ class LoteController extends Controller
         return redirect()->route('lotes.index')->with('success', 'Lote deletado com sucesso!');
     }
 
-    public function sowcapitalizada(Request $request)
+    public function showcapitalizada(Request $request)
     {
         $cap = Lote::where('id_lote', $request->idlote)->first();
         $dataatual = date("Y-m-d", strtotime(now()));

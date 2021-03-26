@@ -1,5 +1,5 @@
 <script>
-    $('#data_inicial, #datafcap, #datamcap, #dataform').datepicker({
+    $('#data_inicial, #datafcap, #datamcap, #dataform, #datasearch').datepicker({
         dateFormat: 'dd/mm/yy',
         closeText: "Fechar",
         prevText: "&#x3C;Anterior",
@@ -18,6 +18,14 @@
         firstDay: 1
     });
 
-    $('#data_inicial, #datafcap, #datamcap, #dataform').inputmask('99/99/9999');
-
+    $('#data_inicial, #datafcap, #datamcap, #dataform, #datasearch').inputmask('99/99/9999');
+    $("#hora_coleta").inputmask("99:99");
+    // Maiúsculas
+    $(function() {
+        $("#lote, #lote_search").keyup(function() {
+            toup = $(this).val();
+            $(this).val(toup.toUpperCase());
+        });
+    });
+    
 </script>

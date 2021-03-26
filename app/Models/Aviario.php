@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Aviario extends Model
 {
     use HasFactory;
-    
+
     protected $primaryKey = 'id_aviario';
     public $incrementing = false;
     protected $fillable = [
@@ -30,19 +30,32 @@ class Aviario extends Model
         'tot_ave'
     ];
 
+    public function scopeIdaviario() {
+        $lastaviario = Aviario::orderBy('id_aviario', 'desc')->get();
+
+        if ($lastaviario->count() > 0):
+            foreach ($lastaviario as $last):
+                return $last->id_aviario + 1;
+            endforeach;
+        else:
+            return 1;
+        endif;
+    }
+
     public function lotes() {
-        return $this->belongsTo(Lote::class, 'id_lote', 'lote_id');
+        return $this->hasOne(Lote::class, 'id_lote', 'lote_id');
+    }
+
+    public function coletas() {
+        return $this->hasOne(Coleta::class, 'id_aviario', 'id_aviario');
     }
 
     public function estoque_aves()
     {
         return $this->hasOne(Estoque_aves::class, 'id_aviario');
     }
-   
-    public function coleta() {
-        return $this->hasMany(Coleta::class, 'id_aviario');
-    }
-    
+
+
     public function nextAviario() {
         return Aviario::orderBy('id_aviario', 'desc')->first();
     }
@@ -54,16 +67,5 @@ class Aviario extends Model
     public function consumo() {
         return $this->hasMany(Consumo::class, 'aviario_id');
     }
-    
-    public function lastaviario() {
-        $lastaviario = Aviario::orderBy('id_aviario', 'desc')->get();
 
-        if ($lastaviario->count() > 0):
-            foreach ($lastaviario as $last):
-                return $last->id_aviario + 1;
-            endforeach;
-        else:
-            return 1;
-        endif;
-    }
 }
