@@ -47,25 +47,15 @@ class Aviario extends Model
     }
 
     public function coletas() {
-        return $this->hasOne(Coleta::class, 'id_aviario', 'id_aviario');
+        return $this->hasMany(Coleta::class, 'id_aviario', 'id_aviario');
     }
 
-    public function estoque_aves()
-    {
-        return $this->hasOne(Estoque_aves::class, 'id_aviario');
+    public function mortalidades() {
+        return $this->hasMany(Mortalidade::class, 'id_aviario', 'id_aviario');
     }
 
-
-    public function nextAviario() {
-        return Aviario::orderBy('id_aviario', 'desc')->first();
-    }
-
-    public function valLote($idlote) {
-        return Lote::where('id_lote', $idlote)->get();
-    }
-
-    public function consumo() {
-        return $this->hasMany(Consumo::class, 'aviario_id');
+    public function pesagens() {
+        return $this->hasMany(Pesagem::class, 'id_aviario', 'aviario_id');
     }
 
 }

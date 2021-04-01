@@ -53,10 +53,24 @@ class ColetaController extends Controller
         $data = $request->all();
 
         $rules = [
-            'data_lote' => 'date_format:"d/m/Y"|required',
-            'lote' => 'required|unique:lotes',
-            'femea' => 'required|integer',
-            'macho' => 'required|integer'
+            'data_coleta' => 'date_format:"d/m/Y"|required',
+            'hora_coleta' => 'date_format:"H:i"|required',
+            'lote_id' => 'required|integer',
+            'id_aviario' => 'required|integer',
+            'coleta' => 'required|integer',
+            'limpos_ninho' => 'required|integer',
+            'sujos_ninho' => 'required|integer',
+            'ovos_cama' => 'required|integer',
+            'duas_gemas' => 'required|integer',
+            'refugos' => 'required|integer',
+            'deformados' => 'required|integer',
+            'sujos_cama' => 'required|integer',
+            'trincados' => 'required|integer',
+            'eliminados' => 'required|integer',
+            'incubaveis_bons' => 'required|integer',
+            'incubaveis' => 'required|integer',
+            'comerciais' => 'required|integer',
+            'postura_dia' => 'required|integer'
         ];
         $messages = [
             'required' => 'O campo :attribute deve ser preenchido!',
@@ -65,9 +79,9 @@ class ColetaController extends Controller
             'unique' => 'O nome do :attribute já existe na base de dados!'
         ];
         $validator = Validator::make($data, $rules, $messages)->validate();
-        $data['id_coleta'] = Lote::idcoleta();
+        $data['id_coleta'] = Coleta::idcoleta();
         $data['periodo'] = Periodo::ativo();
-        $data['data_coleta'] = Carbon::createFromFormat('d/m/Y', $request->data_lote)->format('Y-m-d');
+        $data['data_coleta'] = Carbon::createFromFormat('d/m/Y', $request->data_coleta)->format('Y-m-d');
 
         $coleta->create($data);
         return redirect()->route('coletas.index')->with('success', 'Coleta adicionada com sucesso!');
@@ -81,7 +95,7 @@ class ColetaController extends Controller
      */
     public function show(Coleta $coleta)
     {
-        //
+        return view('coletas.edit', compact('coleta'));
     }
 
     /**
@@ -92,7 +106,7 @@ class ColetaController extends Controller
      */
     public function edit(Coleta $coleta)
     {
-        //
+        return redirect()->route('coletas.show', ['coleta' => $coleta->id_coleta]);
     }
 
     /**
@@ -104,7 +118,38 @@ class ColetaController extends Controller
      */
     public function update(Request $request, Coleta $coleta)
     {
-        //
+        $data = $request->all();
+        $rules = [
+            'data_coleta' => 'date_format:"d/m/Y"|required',
+            'hora_coleta' => 'date_format:"H:i"|required',
+            'lote_id' => 'required|integer',
+            'id_aviario' => 'required|integer',
+            'coleta' => 'required|integer',
+            'limpos_ninho' => 'required|integer',
+            'sujos_ninho' => 'required|integer',
+            'ovos_cama' => 'required|integer',
+            'duas_gemas' => 'required|integer',
+            'refugos' => 'required|integer',
+            'deformados' => 'required|integer',
+            'sujos_cama' => 'required|integer',
+            'trincados' => 'required|integer',
+            'eliminados' => 'required|integer',
+            'incubaveis_bons' => 'required|integer',
+            'incubaveis' => 'required|integer',
+            'comerciais' => 'required|integer',
+            'postura_dia' => 'required|integer'
+        ];
+        $messages = [
+            'required' => 'O campo :attribute deve ser preenchido!',
+            'integer' => 'O campo :attribute só aceita inteiros!',
+            'date_format' => 'O campo data do lote só aceita datas!',
+            'unique' => 'O nome do :attribute já existe na base de dados!'
+        ];
+        $validator = Validator::make($data, $rules, $messages)->validate();
+        $data['data_coleta'] = Carbon::createFromFormat('d/m/Y', $request->data_coleta)->format('Y-m-d');
+
+        $coleta->update($data);
+        return redirect()->route('coletas.show', ['coleta' => $coleta->id_coleta])->with('success', 'Coleta editada com sucesso!');
     }
 
     /**
@@ -115,6 +160,18 @@ class ColetaController extends Controller
      */
     public function destroy(Coleta $coleta)
     {
-        //
+        $coleta->delete();
+        return redirect()->route('coletas.index')->with('success', 'Coleta excluida com sucesso!');
+    }
+
+    public function numcoleta(Request $request)
+    {
+        $coleta = Coleta::where('lote_id', $request->idlote)->where('id_aviario', $request->idaviario)->orderBy('coleta', 'DESC')->first();
+        if ($coleta) {
+            $response = $coleta->coleta + 1;
+        } else {
+            $response = 1;
+        }
+        return response()->json($response);
     }
 }

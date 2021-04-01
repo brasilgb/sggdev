@@ -95,8 +95,8 @@
                             <label for="coleta" class="col-sm-4 col-form-label text-left">Coleta n° <span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-8">
-                                <input id="coleta" type="text" class="form-control" name="coleta"
-                                    value="{{ old('coleta') }}">
+                                <input id="coleta" type="text" class="form-control font-weight-bold" name="coleta"
+                                    value="{{ old('coleta') }}" readonly>
                                 @error('coleta')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -107,8 +107,8 @@
                             <label for="limpos_ninho" class="col-sm-4 col-form-label text-left">Limpos de ninho <span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-8">
-                                <input id="limpos_ninho" type="text" class="form-control" name="limpos_ninho"
-                                    value="{{ old('limpos_ninho') }}">
+                                <input id="limpos_ninho" type="text" class="form-control cleanzero nosubmit  incubaveisbons incubaveis posturadia" name="limpos_ninho"
+                                    value="{{ old('limpos_ninho', '0') }}" onkeydown="javascript:EnterTab('sujos_ninho',event)">
                                 @error('limpos_ninho')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -119,8 +119,8 @@
                             <label for="sujos_ninho" class="col-sm-4 col-form-label text-left">Sujos de ninho <span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-8">
-                                <input id="sujos_ninho" type="text" class="form-control" name="sujos_ninho"
-                                    value="{{ old('sujos_ninho') }}">
+                                <input id="sujos_ninho" type="text" class="form-control cleanzero nosubmit incubaveisbons incubaveis posturadia" name="sujos_ninho"
+                                    value="{{ old('sujos_ninho', '0') }}" onkeydown="javascript:EnterTab('ovos_cama',event)">
                                 @error('sujos_ninho')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -131,8 +131,8 @@
                             <label for="ovos_cama" class="col-sm-4 col-form-label text-left">Ovos de cama <span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-8">
-                                <input id="ovos_cama" type="text" class="form-control" name="ovos_cama"
-                                    value="{{ old('ovos_cama') }}">
+                                <input id="ovos_cama" type="text" class="form-control cleanzero nosubmit incubaveis posturadia" name="ovos_cama"
+                                    value="{{ old('ovos_cama', '0') }}" onkeydown="javascript:EnterTab('duas_gemas',event)">
                                 @error('ovos_cama')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -143,8 +143,8 @@
                             <label for="duas_gemas" class="col-sm-4 col-form-label text-left">Duas gemas <span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-8">
-                                <input id="duas_gemas" type="text" class="form-control" name="duas_gemas"
-                                    value="{{ old('duas_gemas') }}">
+                                <input id="duas_gemas" type="text" class="form-control cleanzero nosubmit comerciais posturadia" name="duas_gemas"
+                                    value="{{ old('duas_gemas', '0') }}" onkeydown="javascript:EnterTab('refugos',event)">
                                 @error('duas_gemas')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -157,8 +157,8 @@
                             <label for="refugos" class="col-sm-4 col-form-label text-left">Refugos <span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-8">
-                                <input id="refugos" type="text" class="form-control" name="refugos"
-                                    value="{{ old('refugos') }}">
+                                <input id="refugos" type="text" class="form-control cleanzero nosubmit comerciais posturadia" name="refugos"
+                                    value="{{ old('refugos', '0') }}" onkeydown="javascript:EnterTab('deformados',event)">
                                 @error('refugos')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -169,8 +169,8 @@
                             <label for="deformados" class="col-sm-4 col-form-label text-left">Deformados <span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-8">
-                                <input id="deformados" type="text" class="form-control" name="deformados"
-                                    value="{{ old('deformados') }}">
+                                <input id="deformados" type="text" class="form-control cleanzero nosubmit comerciais posturadia" name="deformados"
+                                    value="{{ old('deformados', '0') }}" onkeydown="javascript:EnterTab('sujos_cama',event)">
                                 @error('deformados')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -180,8 +180,8 @@
                             <label for="sujos_cama" class="col-sm-4 col-form-label text-left">Sujos de cama <span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-8">
-                                <input id="sujos_cama" type="text" class="form-control" name="sujos_cama"
-                                    value="{{ old('sujos_cama') }}">
+                                <input id="sujos_cama" type="text" class="form-control cleanzero nosubmit comerciais posturadia" name="sujos_cama"
+                                    value="{{ old('sujos_cama', '0') }}" onkeydown="javascript:EnterTab('trincados',event)">
                                 @error('sujos_cama')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -192,8 +192,8 @@
                             <label for="trincados" class="col-sm-4 col-form-label text-left">Trincados <span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-8">
-                                <input id="trincados" type="text" class="form-control" name="trincados"
-                                    value="{{ old('trincados') }}">
+                                <input id="trincados" type="text" class="form-control cleanzero nosubmit comerciais posturadia" name="trincados"
+                                    value="{{ old('trincados', '0') }}" onkeydown="javascript:EnterTab('eliminados',event)">
                                 @error('trincados')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -203,8 +203,8 @@
                             <label for="eliminados" class="col-sm-4 col-form-label text-left">Eliminados <span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-8">
-                                <input id="eliminados" type="text" class="form-control" name="eliminados"
-                                    value="{{ old('eliminados') }}">
+                                <input id="eliminados" type="text" class="form-control cleanzero nosubmit posturadia" name="eliminados"
+                                    value="{{ old('eliminados', '0') }}" onkeydown="javascript:EnterTab('enviar',event)">
                                 @error('eliminados')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -212,11 +212,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="incubaveis_bons" class="col-sm-4 col-form-label text-left">Incubáveis bons <span
+                            <label for="incubaveisbons" class="col-sm-4 col-form-label text-left">Incubáveis bons <span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-8">
-                                <input id="incubaveis_bons" type="text" class="form-control" name="incubaveis_bons"
-                                    value="{{ old('incubaveis_bons') }}">
+                                <input id="incubaveisbons" type="text" class="form-control" name="incubaveis_bons"
+                                    value="{{ old('incubaveis_bons', '0') }}" readonly>
                                 @error('incubaveis_bons')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -227,7 +227,7 @@
                                     class="text-danger">*</span></label>
                             <div class="col-sm-8">
                                 <input id="incubaveis" type="text" class="form-control" name="incubaveis"
-                                    value="{{ old('incubaveis') }}">
+                                    value="{{ old('incubaveis', '0') }}" readonly>
                                 @error('incubaveis')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -239,7 +239,7 @@
                                     class="text-danger">*</span></label>
                             <div class="col-sm-8">
                                 <input id="comerciais" type="text" class="form-control" name="comerciais"
-                                    value="{{ old('comerciais') }}">
+                                    value="{{ old('comerciais', '0') }}" readonly>
                                 @error('comerciais')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -247,11 +247,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="postura_dia" class="col-sm-4 col-form-label text-left">Postura do Dia <span
+                            <label for="posturadia" class="col-sm-4 col-form-label text-left">Postura do Dia <span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-8">
-                                <input id="postura_dia" type="text" class="form-control" name="postura_dia"
-                                    value="{{ old('postura_dia') }}">
+                                <input id="posturadia" type="text" class="form-control" name="postura_dia"
+                                    value="{{ old('postura_dia', '0') }}" readonly>
                                 @error('postura_dia')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -267,199 +267,12 @@
                         <span class="text-danger">*Obrigatório</span>
                     </div>
                     <div class="col text-right">
-                        <button type="submit" class="btn btn-primary border border-white shadow mr-0"><i
+                        <button type="submit" class="btn btn-primary border border-white shadow mr-0" name="enviar"><i
                                 class="fa fa-save"></i> Salvar</button>
                     </div>
                 </div>
             </div>
         </form>
     </div>
-    <script>
-        $(function(){
-            $("#lote_id").change(function(){
-                idlote = $(this).val();
-                alert(idlote);
-            });
-        });
-        // Valida form add semnas
-        $("#formcoleta").validate({
-            rules: {
-                data_coleta: {
-                    required: true
-                },
-                hora_coleta: {
-                    required: true,
-                },
-                lote_id: {
-                    required: true,
-                    digits: true,
-                    notEqual: '0'
-                },
-                id_aviario: {
-                    required: true,
-                    digits: true,
-                    notEqual: '0'
-                },
-                coleta: {
-                    required: true,
-                    digits: true,
-                    notEqual: '0'
-                },
-                limpos_ninho: {
-                    required: true,
-                    digits: true,
-                    notEqual: '0'
-                },
-                sujos_ninho: {
-                    required: true,
-                    digits: true,
-                    notEqual: '0'
-                },
-                ovos_cama: {
-                    required: true,
-                    digits: true,
-                    notEqual: '0'
-                },
-                duas_gemas: {
-                    required: true,
-                    digits: true,
-                    notEqual: '0'
-                },
-                refugos: {
-                    required: true,
-                    digits: true,
-                    notEqual: '0'
-                },
-                deformados: {
-                    required: true,
-                    digits: true,
-                    notEqual: '0'
-                },
-                sujos_cama: {
-                    required: true,
-                    digits: true,
-                    notEqual: '0'
-                },
-                trincados: {
-                    required: true,
-                    digits: true,
-                    notEqual: '0'
-                },
-                eliminados: {
-                    required: true,
-                    digits: true,
-                    notEqual: '0'
-                },
-                incubaveis_bons: {
-                    required: true,
-                    digits: true,
-                    notEqual: '0'
-                },
-                incubaveis: {
-                    required: true,
-                    digits: true,
-                    notEqual: '0'
-                },
-                comerciais: {
-                    required: true,
-                    digits: true,
-                    notEqual: '0'
-                },
-                postura_dia: {
-                    required: true,
-                    digits: true,
-                    notEqual: '0'
-                }
-            },
-            messages: {
-                data_coleta: 'Selecione uma data para o coleta!',
-                hora_coleta: 'Selecione uma hora para o coleta!',
-                lote_id: {
-                    required: 'Selecione o lote!',
-                    digits: true,
-                    notEqual: 'Insira valores maior que "0"!'
-                },
-                id_aviario: {
-                    required: 'Selecione o lote e/ou aviário!',
-                    digits: true,
-                    notEqual: 'Insira valores maior que "0"!'
-                },
-                coleta: {
-                    required: 'Insira o número da coleta!',
-                    digits: true,
-                    notEqual: 'Insira valores maior que "0"!'
-                },
-                limpos_ninho: {
-                    required: 'Insira os ovos limpos de ninho!',
-                    digits: true,
-                    notEqual: 'Insira valores maior que "0"!'
-                },
-                sujos_ninho: {
-                    required: 'Insira os ovos sujos de ninho!',
-                    digits: true,
-                    notEqual: 'Insira valores maior que "0"!'
-                },
-                ovos_cama: {
-                    required: 'Insira os ovos de cama!',
-                    digits: true,
-                    notEqual: 'Insira valores maior que "0"!'
-                },
-                duas_gemas: {
-                    required: 'Insira os ovos com duas gemas!',
-                    digits: true,
-                    notEqual: 'Insira valores maior que "0"!'
-                },
-                refugos: {
-                    required: 'Insira os ovos de refugo!',
-                    digits: true,
-                    notEqual: 'Insira valores maior que "0"!'
-                },
-                deformados: {
-                    required: 'Insira os ovos deformados!',
-                    digits: true,
-                    notEqual: 'Insira valores maior que "0"!'
-                },
-                sujos_cama: {
-                    required: 'Insira os ovos sujos de cama!',
-                    digits: true,
-                    notEqual: 'Insira valores maior que "0"!'
-                },
-                trincados: {
-                    required: 'Insira os ovos trincados!',
-                    digits: true,
-                    notEqual: 'Insira valores maior que "0"!'
-                },
-                eliminados: {
-                    required: 'Insira os ovos eliminados!',
-                    digits: true,
-                    notEqual: 'Insira valores maior que "0"!'
-                },
-                incubaveis_bons: {
-                    required: 'Insira os ovos incubáveis bons!',
-                    digits: true,
-                    notEqual: 'Insira valores maior que "0"!'
-                },
-                incubaveis: {
-                    required: 'Insira os ovos incubáveis!',
-                    digits: true,
-                    notEqual: 'Insira valores maior que "0"!'
-                },
-                comerciais: {
-                    required: 'Insira os ovos comerciais!',
-                    digits: true,
-                    notEqual: 'Insira valores maior que "0"!'
-                },
-                postura_dia: {
-                    required: 'Insira a postura do dia!',
-                    digits: true,
-                    notEqual: 'Insira valores maior que "0"!'
-                }
-            }
-        });
-        jQuery.validator.addMethod("notEqual", function(value, element,
-            param) { // Adding rules for Amount(Not equal to zero)
-            return this.optional(element) || value != '0';
-        });
-
-    </script>
+    @include('coletas/scripts')
 @endsection

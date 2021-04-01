@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Semana extends Model
 {
     use HasFactory;
-    
+
     protected $primaryKey = 'id_semana';
 //    public $incrementing = true;
     protected $fillable = [
@@ -23,6 +23,11 @@ class Semana extends Model
 
     public function periodos()
     {
-        return $this->belongsTo(Periodo::class, 'id_periodo', 'periodo');
+        return $this->hasOne(Periodo::class, 'id_periodo', 'periodo');
     }
+
+    public function pesagens() {
+        return $this->hasMany(Pesagem::class, 'semana', 'id_semana');
+    }
+
 }

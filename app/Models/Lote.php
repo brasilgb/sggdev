@@ -36,8 +36,8 @@ class Lote extends Model
         return $this->hasMany(Aviario::class, 'lote_id', 'id_lote');
     }
 
-    public function coletas() {
-        return $this->hasOne(Coleta::class, 'lote_id', 'id_lote');
+    public function envios() {
+        return $this->hasMany(Envio::class, 'lote_id', 'id_lote');
     }
 
     public function estoque_aves() {
@@ -48,17 +48,14 @@ class Lote extends Model
         return $this->hasMany(Estoque_ovos::class, 'lote_id');
     }
 
-    public function mortalidade() {
-        return $this->hasMany(Mortalidade::class, 'lote_id');
+    public function mortalidades() {
+        return $this->hasMany(Mortalidade::class, 'lote_id', 'id_lote');
     }
 
-    public function peso() {
-        return $this->hasMany(Peso::class);
+    public function pesagens() {
+        return $this->hasMany(Pesagem::class, 'lote_id', 'id_lote');
     }
 
-    public function envio() {
-        return $this->hasMany(Envio::class, 'lote_id');
-    }
 
     public function recebimentos() {
         return $this->hasMany(Recebimento::class, 'lote_id');

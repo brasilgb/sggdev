@@ -46,12 +46,8 @@ class Coleta extends Model
         endif;
     }
 
-    public function lote() {
-        return $this->belongsTo(Lote::class, 'id_lote', 'lote_id');
-    }
-
-    public function aviario() {
-        return $this->belongsTo(Aviario::class, 'id_aviario', 'id_aviario');
+    public function aviarios() {
+        return $this->hasOne(Aviario::class, 'id_aviario', 'id_aviario');
     }
 
 }

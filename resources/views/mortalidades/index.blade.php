@@ -6,7 +6,7 @@
         <div class="card-header pb-0 border-bottom border-white" style="background-color: #062142;">
             <div class="row">
                 <div class="col">
-                    <h4 class="text-left text-white mt-1"><i class="fa fa-cart-plus"></i> Coletas</h4>
+                    <h4 class="text-left text-white mt-1"><i class="fas fa-fw fa-kiwi-bird"></i> Mortalidades</h4>
                 </div>
                 <div class="col">
                     <nav aria-label="breadcrumb">
@@ -14,7 +14,9 @@
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
                             <li class="breadcrumb-item active">
                                 @if (isset($busca)) <a
-                                    href="{{ route('coletas.index') }}">Coletas</a> / Busca @else Coletas @endif
+                                    href="{{ route('mortalidades.index') }}">Mortalidades</a> / Busca @else
+                                    Mortalidades
+                                @endif
                             </li>
                         </ol>
                     </nav>
@@ -24,51 +26,70 @@
         <div class="card-header">
             <div class="row">
                 <div class="col text-left">
-                        <button onclick="window.location='{{ route('coletas.create') }}'"
-                            class="btn btn-primary shadow-sm border-white"><i class="fa fa-plus"></i> Adicionar</button>
+                    <button onclick="window.location='{{ route('mortalidades.create') }}'"
+                        class="btn btn-primary shadow-sm border-white"><i class="fa fa-plus"></i> Adicionar</button>
                 </div>
 
                 <div class="col">
-                    @include('coletas/search')
+                    @include('mortalidades/search')
                 </div>
             </div>
         </div>
         <div class="card-body p-2">
             <div class="table-responsive">
                 @include("parts/flash-message")
-                <table id="tb-coletas" class="table table-condensed table-striped mb-0">
+                <table id="tb-mortalidades" class="table table-condensed table-striped mb-0">
                     <thead>
                         <tr class="text-left">
                             <th>Lote</th>
                             <th>Aviário</th>
-                            <th>Coleta</th>
-                            <th>Incubáveis</th>
-                            <th>Comerciais</th>
-                            <th>Postura Dia</th>
-                            <th>Data Hora</th>
+                            <th>Fêmeas</th>
+                            <th>Machos</th>
+                            <th>Total</th>
+                            <th>Causa</th>
+                            <th>Cadastro</th>
                             <th style="width: 198px; min-width: 198px;"><i class="fa fa-level-down-alt"></i></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($coletas as $coleta)
-
+                        @forelse ($mortalidades as $mortalidade)
                             <tr class="text-left">
-                                <td class="align-middle">{{ \App\Models\Lote::where('id_lote', $coleta->lote_id)->get('lote')->first()->lote }}</td>
-                                <td class="align-middle">{{ $coleta->aviarios->aviario }}</td>
-                                <td class="align-middle">{{ $coleta->coleta }}</td>
-                                <td class="align-middle">{{ $coleta->incubaveis }}</td>
-                                <td class="align-middle">{{ $coleta->comerciais }}</td>
-                                <td class="align-middle">{{ $coleta->postura_dia }}</td>
-                                <td class="align-middle">{{ date('d/m/Y', strtotime($coleta->data_coleta)) }} {{ date('H:i', strtotime($coleta->hora_coleta)) }}</td>
+                                <td class="align-middle">{{ $mortalidade->lotes->lote }}</td>
+                                <td class="align-middle">{{ $mortalidade->aviarios->aviario }}</td>
+                                <td class="align-middle">{{ $mortalidade->femea }}</td>
+
+                                <td class="align-middle">{{ $mortalidade->macho }}</td>
+                                <td class="align-middle">{{ $mortalidade->tot_ave }}</td>
+                                @php
+                                $causas = function($causa){
+                                    switch ($causa) {
+                                    case '1': return 'Arranhado';
+                                    break;
+                                    case '2': return 'Calor';
+                                    break;
+                                    case '3': return 'Inprodutiva';
+                                    break;
+                                    case '4': return 'Prolapso';
+                                    break;
+                                    case '5': return 'Refugo';
+                                    break;
+                                    case '6': return 'Outros';
+                                    break;
+                                }
+                            }
+                                @endphp
+                                <td class="align-middle">{{ $causas($mortalidade->motivo) }}</td>
+                                <td class="align-middle">{{ date('d/m/Y', strtotime($mortalidade->data_mortalidade)) }}</td>
                                 <td class="align-middle">
 
-                                    <button onclick="window.location='{{ route('coletas.edit', ['coleta' => $coleta->id_coleta]) }}'"
+                                    <button
+                                        onclick="window.location='{{ route('mortalidades.edit', ['mortalidade' => $mortalidade->id_mortalidade]) }}'"
                                         id="situacao" class="btn btn-primary border border-white shadow"><i
                                             class="fa fa-edit"></i> Editar</button>
 
                                     <button class="btn btn-danger border border-white shadow" data-toggle="modal"
-                                        onclick="deleteData({{ $coleta->id_coleta }})" data-target="#DeleteModal"><i
-                                            class="fa fa-trash"></i> Excluir</button>
+                                        onclick="deleteData({{ $mortalidade->id_mortalidade }})"
+                                        data-target="#DeleteModal"><i class="fa fa-trash"></i> Excluir</button>
                                 </td>
                             </tr>
                         @empty
@@ -77,7 +98,7 @@
                                     @if (isset($busca))
                                         Não foram encontrados dados que correspondam com sua busca!
                                     @else
-                                        Não há coletas cadastradas, adicione um coleta!
+                                        Não há mortalidades cadastrados, cadastre para continuar!
                                     @endif
                                 </td>
                             </tr>
@@ -86,9 +107,9 @@
                 </table>
             </div>
         </div>
-        @if ($coletas->hasPages())
+        @if ($mortalidades->hasPages())
             <div class="card-footer pb-0">
-                {{ $coletas->links() }}
+                {{ $mortalidades->links() }}
             </div>
         @endif
     </div>
@@ -107,7 +128,8 @@
                     <div class="modal-body">
                         @csrf
                         @method('DELETE')
-                        <p class="text-center">Tem certeza de que deseja excluir este coleta?</p>
+                        <p class="text-center">Tem certeza de que deseja excluir esta mortalidade?
+                        </p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary border border-white shadow" data-dismiss="modal"><i
@@ -122,7 +144,7 @@
     <script>
         function deleteData(id) {
             var id = id;
-            var url = '{{ route('coletas.destroy', ':id') }}';
+            var url = '{{ route('mortalidades.destroy', ':id') }}';
             url = url.replace(':id', id);
             $("#deleteForm").attr('action', url);
         }
@@ -131,54 +153,6 @@
             $("#deleteForm").submit();
         }
 
-        // Valida form add semnas
-        if ($("#capitalizaaves").length > 0) {
-            $("#capitalizaaves").validate({
-
-                rules: {
-                    femea_capitalizada: {
-                        required: true,
-                        number: true,
-                        notEqual: true
-                    },
-                    macho_capitalizado: {
-                        required: true,
-                        number: true,
-                        notEqual: true
-                    },
-                    data_femea_capitalizada: {
-                        required: true
-                    },
-                    data_macho_capitalizado: {
-                        required: true
-                    },
-                },
-                messages: {
-
-                    femea_capitalizada: {
-                        required: "Preencha com núm. de fêmeas!",
-                        number: "Somente números inteiros!",
-                        notEqual: 'Insira valores maior que "0"!'
-                    },
-                    macho_capitalizado: {
-                        required: "Preencha com núm. de machos!",
-                        number: "Somente números inteiros!",
-                        notEqual: 'Insira valores maior que "0"!'
-                    },
-                    data_femea_capitalizada: {
-                        required: "Preencha com a data!"
-                    },
-                    data_macho_capitalizado: {
-                        required: "Preencha com a data!"
-                    },
-                },
-            })
-        }
-
-        jQuery.validator.addMethod("notEqual", function(value, element,
-        param) { // Adding rules for Amount(Not equal to zero)
-            return this.optional(element) || value != '0';
-        });
-
     </script>
+
 @endsection

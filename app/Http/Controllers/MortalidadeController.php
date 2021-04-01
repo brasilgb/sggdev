@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Aviario;
-use App\Models\Estoque_ave;
 use App\Models\Lote;
+use App\Models\Mortalidade;
 use App\Models\Periodo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class AviarioController extends Controller
+class MortalidadeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,15 +18,18 @@ class AviarioController extends Controller
      */
     public function index()
     {
-        $aviarios = Aviario::orderBy('id_aviario', 'DESC')->paginate(15);
-        return view('aviarios.index', compact('aviarios'));
+        $mortalidades = Mortalidade::orderBy('id_mortalidade', 'DESC')->paginate(15);
+
+        return view('mortalidades.index', compact('mortalidades'));
     }
 
     public function busca(Request $request)
     {
-        $aviarios = Aviario::where('lote_id', $request->search)->paginate(15);
+        $datamortalidade = Carbon::createFromFormat('d/m/Y', $request->search)->format('Y-m-d');
+
+        $mortalidades = Mortalidade::where('data_mortalidade', $datamortalidade)->paginate(15);
         $busca = true;
-        return view('aviarios.index', compact('aviarios', 'busca'));
+        return view('mortalidades.index', compact('mortalidades', 'busca'));
     }
 
     /**
@@ -37,8 +39,8 @@ class AviarioController extends Controller
      */
     public function create()
     {
-        $lotes = Lote::orderBy('id_lote', 'ASC')->get();
-        return view('aviarios.create', compact('lotes'));
+        $lotes = Lote::orderBy('lote', 'ASC')->get();
+        return view('mortalidades.create', compact('lotes'));
     }
 
     /**
@@ -47,14 +49,15 @@ class AviarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Aviario $aviario)
+    public function store(Request $request, Mortalidade $mortalidade)
     {
         $data = $request->all();
 
         $rules = [
-            'data_aviario' => 'date_format:"d/m/Y"|required',
+            'data_mortalidade' => 'date_format:"d/m/Y"|required',
             'lote_id' => 'required',
-            'aviario' => 'required',
+            'id_aviario' => 'required',
+            'motivo' => 'required',
             'femea_box1' => 'required',
             'femea_box2' => 'required',
             'femea_box3' => 'required',
@@ -73,52 +76,53 @@ class AviarioController extends Controller
             'unique' => 'O nome do :attribute já existe na base de dados!'
         ];
         $validator = Validator::make($data, $rules, $messages)->validate();
-        $data['id_aviario'] = Aviario::idaviario();
+        $data['id_mortalidade'] = Mortalidade::idmortalidade();
         $data['periodo'] = Periodo::ativo();
-        $data['data_aviario'] = Carbon::createFromFormat('d/m/Y', $request->data_aviario)->format('Y-m-d');
+        $data['data_mortalidade'] = Carbon::createFromFormat('d/m/Y', $request->data_mortalidade)->format('Y-m-d');
         $data['tot_ave'] = $request->femea + $request->macho;
 
-        $aviario->create($data);
-        return redirect()->route('aviarios.index')->with('success', 'Aviario adicionado com sucesso!');
+        $mortalidade->create($data);
+        return redirect()->route('mortalidades.index')->with('success', 'Baixa de aves efetuada com sucesso!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Mortalidade  $mortalidade
      * @return \Illuminate\Http\Response
      */
-    public function show(Aviario $aviario)
+    public function show(Mortalidade $mortalidade)
     {
-        return view('aviarios.edit', compact('aviario'));
+        return view('mortalidades.edit', compact('mortalidade'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Mortalidade  $mortalidade
      * @return \Illuminate\Http\Response
      */
-    public function edit(Aviario $aviario)
+    public function edit(Mortalidade $mortalidade)
     {
-        return redirect()->route('aviarios.show', ['aviario' => $aviario->id_aviario]);
+        return redirect()->route('mortalidades.show', ['mortalidade' => $mortalidade->id_mortalidade]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Mortalidade  $mortalidade
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Aviario $aviario)
+    public function update(Request $request, Mortalidade $mortalidade)
     {
         $data = $request->all();
 
         $rules = [
-            'data_aviario' => 'date_format:"d/m/Y"|required',
+            'data_mortalidade' => 'date_format:"d/m/Y"|required',
             'lote_id' => 'required',
-            'aviario' => 'required',
+            'id_aviario' => 'required',
+            'motivo' => 'required',
             'femea_box1' => 'required',
             'femea_box2' => 'required',
             'femea_box3' => 'required',
@@ -137,58 +141,22 @@ class AviarioController extends Controller
             'unique' => 'O nome do :attribute já existe na base de dados!'
         ];
         $validator = Validator::make($data, $rules, $messages)->validate();
-        $data['data_aviario'] = Carbon::createFromFormat('d/m/Y', $request->data_aviario)->format('Y-m-d');
+        $data['data_mortalidade'] = Carbon::createFromFormat('d/m/Y', $request->data_mortalidade)->format('Y-m-d');
         $data['tot_ave'] = $request->femea + $request->macho;
 
-        $aviario->update($data);
-        return redirect()->route('aviarios.show', ['aviario' => $aviario->id_aviario])->with('success', 'Aviario editado com sucesso!');
+        $mortalidade->update($data);
+        return redirect()->route('mortalidades.show', ['mortalidade' => $mortalidade->id_mortalidade])->with('success', 'Baixa de aves alterada com sucesso!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Mortalidade  $mortalidade
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Aviario $aviario)
+    public function destroy(Mortalidade $mortalidade)
     {
-        $aviario->delete();
-        return redirect()->route('aviarios.index')->with('success', 'Aviario deletado com sucesso!');
-    }
-
-    public function autocomplete(Request $request)
-    {
-        $termo = $request->termo;
-        if ($termo == '') :
-            $lotes = Lote::orderby('lote', 'ASC')->select('id_lote', 'lote')->limit(5)->get();
-        else :
-            $lotes = Lote::orderby('lote', 'ASC')->select('id_lote', 'lote')->where('lote', 'LIKE', $termo . '%')->get();
-        endif;
-
-        foreach ($lotes as $lote) {
-            $response[] = ['value' => $lote->id_lote, 'label' => $lote->lote];
-        }
-        return response()->json($response);
-    }
-
-    public function aveslote(Request $request)
-    {
-        $estoqueaves = Estoque_ave::where('lote', $request->loteid)->get();
-
-        $lotes       = Lote::where('id_lote', $request->loteid)->first();
-        if ($estoqueaves->sum->tot_ave > 0){
-            $femea = $lotes->femea - $estoqueaves->sum->femea;
-            $macho = $lotes->macho - $estoqueaves->sum->macho;
-        }else{
-            $femea = $lotes->femea;
-            $macho = $lotes->macho;
-        }
-        return response()->json(['femea' => $femea, 'macho' => $macho]);
-    }
-
-    public function aviarioslote(Request $request)
-    {
-        $aviarios = Aviario::where('lote_id', $request->idlote)->pluck("aviario", "id_aviario");
-        return response()->json($aviarios);
+        $mortalidade->delete();
+        return redirect()->route('mortalidades.index')->with('success', 'Baixa de aves deletada com sucesso!');
     }
 }

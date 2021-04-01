@@ -19,7 +19,7 @@
     });
 
     $('#data_inicial, #datafcap, #datamcap, #dataform, #datasearch').inputmask('99/99/9999');
-    $("#hora_coleta").inputmask("99:99");
+    $("#hora_coleta, #hora_envio").inputmask("99:99");
     // Maiúsculas
     $(function() {
         $("#lote, #lote_search").keyup(function() {
@@ -27,5 +27,5 @@
             $(this).val(toup.toUpperCase());
         });
     });
-    
+
 </script>

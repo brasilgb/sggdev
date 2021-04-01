@@ -24,22 +24,21 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle {{ (request()->is('envios*')) ? 'active' : '' }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Ovos
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Envio</a>
-              <a class="dropdown-item" href="#">Relatório</a>
+              <a class="dropdown-item" href="{{ route('envios.index')}}">Envio</a>
             </div>
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle {{ (request()->is('mortalidades*','pesagens*')) ? 'active' : '' }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Aves
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Mortalidade</a>
-              <a class="dropdown-item" href="#">Pesagem</a>
+              <a class="dropdown-item" href="{{route('mortalidades.index') }}">Mortalidade</a>
+              <a class="dropdown-item" href="{{route('pesagens.index') }}">Pesagem</a>
             </div>
           </li>
 

@@ -42,7 +42,7 @@
                             class="text-danger">*</span></label>
                     <div class="col-sm-7">
                         <input id="dataform" type="text" class="form-control" name="data_aviario"
-                            value="{{ old('data_aviario', date('d/m/Y', strtotime($aviario->data_aviario))) }}">
+                            value="{{ old('data_aviario', date('d/m/Y', strtotime(now()))) }}">
                         @error('data_aviario')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -77,10 +77,14 @@
                     <label for="macho" class="col-sm-3 col-form-label text-left">Boxes fêmeas <span
                             class="text-danger">*</span></label>
                     <div class="col-sm-7 d-flex">
-                        <div class="mr-2"><input id="femea_box1" type="text" class="form-control mr-2 avesfemeas" name="femea_box1" value="{{ old('femea_box1', $aviario->femea_box1) }}" placeholder="Box 1"></div>
-                        <div class="mr-2"><input id="femea_box2" type="text" class="form-control mr-2 avesfemeas" name="femea_box2" value="{{ old('femea_box2', $aviario->femea_box2) }}" placeholder="Box 2"></div>
-                        <div class="mr-2"><input id="femea_box3" type="text" class="form-control mr-2 avesfemeas" name="femea_box3" value="{{ old('femea_box3', $aviario->femea_box3) }}" placeholder="Box 3"></div>
-                        <div><input id="femea_box4" type="text" class="form-control avesfemeas" name="femea_box4" value="{{ old('femea_box4', $aviario->femea_box4) }}" placeholder="Box 4"></div>
+                        <div class="mr-2"><input id="femea_box1" type="text" class="form-control mr-2 avesfemeas compareaves"
+                                name="femea_box1" value="{{ old('femea_box1', $aviario->femea_box1) }}" placeholder="Box 1"></div>
+                        <div class="mr-2"><input id="femea_box2" type="text" class="form-control mr-2 avesfemeas compareaves"
+                                name="femea_box2" value="{{ old('femea_box2', $aviario->femea_box2) }}" placeholder="Box 2"></div>
+                        <div class="mr-2"><input id="femea_box3" type="text" class="form-control mr-2 avesfemeas compareaves"
+                                name="femea_box3" value="{{ old('femea_box3', $aviario->femea_box3) }}" placeholder="Box 3"></div>
+                        <div><input id="femea_box4" type="text" class="form-control avesfemeas compareaves" name="femea_box4"
+                                value="{{ old('femea_box4', $aviario->femea_box4) }}" placeholder="Box 4"></div>
                         @error('macho')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -91,10 +95,14 @@
                     <label for="macho" class="col-sm-3 col-form-label text-left">Boxes machos <span
                             class="text-danger">*</span></label>
                     <div class="col-sm-7 d-flex justify-content-center">
-                        <div class="mr-2"><input id="macho_box1" type="text" class="form-control avesmachos" name="macho_box1" value="{{ old('macho_box1', $aviario->macho_box1) }}" placeholder="Box 1"></div>
-                        <div class="mr-2"><input id="macho_box2" type="text" class="form-control avesmachos" name="macho_box2" value="{{ old('macho_box2', $aviario->macho_box2) }}" placeholder="Box 2"></div>
-                        <div class="mr-2"><input id="macho_box3" type="text" class="form-control avesmachos" name="macho_box3" value="{{ old('macho_box3', $aviario->macho_box3) }}" placeholder="Box 3"></div>
-                        <div><input id="macho_box4" type="text" class="form-control avesmachos" name="macho_box4" value="{{ old('macho_box4', $aviario->macho_box4) }}" placeholder="Box 4"></div>
+                        <div class="mr-2"><input id="macho_box1" type="text" class="form-control avesmachos compareaves"
+                                name="macho_box1" value="{{ old('macho_box1', $aviario->macho_box1) }}" placeholder="Box 1"></div>
+                        <div class="mr-2"><input id="macho_box2" type="text" class="form-control avesmachos compareaves"
+                                name="macho_box2" value="{{ old('macho_box2', $aviario->macho_box2) }}" placeholder="Box 2"></div>
+                        <div class="mr-2"><input id="macho_box3" type="text" class="form-control avesmachos compareaves"
+                                name="macho_box3" value="{{ old('macho_box3', $aviario->macho_box3) }}" placeholder="Box 3"></div>
+                        <div><input id="macho_box4" type="text" class="form-control avesmachos compareaves" name="macho_box4"
+                                value="{{ old('macho_box4', $aviario->macho_box4) }}" placeholder="Box 4"></div>
                         @error('macho')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -107,13 +115,16 @@
                     <div class="col-sm-7 d-flex justify-content-init">
                         <div class="mr-2 flex-fill">
                             <input id="avesfemeas" type="text" class="form-control mr-2" name="femea"
-                                value="{{ old('femea', $aviario->femea) }}" placeholder="Fêmeas" style="border-radius: 0.2rem 0.25rem 0 0!important" readonly>
-                                <div id="dbfemea" class="bg-warning text-dark p-2 rounded-bottom border" style="border: 1px solid #ced4da!important;display:none;"></div>
+                                value="{{ old('femea', $aviario->femea) }}" placeholder="Fêmeas" readonly>
+                                <input id="femeadb" type="hidden" value="{{ $aviario->femea }}">
+                            <div id="dbfemea" class="bg-warning text-dark p-2 rounded-bottom border"
+                                style="border: 1px solid #ced4da!important;display:none;"></div>
                         </div>
                         <div class="flex-fill">
                             <input id="avesmachos" type="text" class="form-control" name="macho"
-                                value="{{ old('macho', $aviario->macho) }}" placeholder="Machos" style="border-radius: 0.2rem 0.25rem 0 0!important" readonly>
-                                <div id="dbmacho" class="bg-warning text-dark p-2 rounded-bottom border" style="border: 1px solid #ced4da!important;display:none;"></div>
+                                value="{{ old('macho', $aviario->macho) }}" placeholder="Machos" readonly>
+                                <input id="machodb" type="hidden" value="{{ $aviario->macho }}">
+                            <div id="dbmacho" class="bg-warning text-dark p-2 rounded-bottom border" style="border: 1px solid #ced4da!important;display:none;"></div>
                         </div>
                     </div>
                 </div>
@@ -125,125 +136,12 @@
                         <span class="text-danger">*Obrigatório</span>
                     </div>
                     <div class="col text-right">
-                        <button type="submit" class="btn btn-primary border border-white shadow mr-0"><i
+                        <button id="btnaviario" type="submit" class="btn btn-primary border border-white shadow mr-0"><i
                                 class="fa fa-save"></i> Salvar</button>
                     </div>
                 </div>
             </div>
         </form>
     </div>
-    <script>
-        $(function(){
-            loteid = $("#lote_id").val();
-            $.ajax({
-                    url: "{{ route('aviarios.aviarioslote') }}",
-                    dataType: "JSON",
-                    type: "POST",
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        loteid: loteid
-                    }
-                }).done(function(response) {
-
-                    $("#avesfemeas, #avesmachos").attr("style", "border-radius: 0.2rem 0.25rem 0 0!important");
-                    $("#dbfemea").fadeIn().html('Fêmeas disponíveis <span class="text-weight-bolder bg-primary px-2 rounded shadow-sm text-white">' + response.femea + '</span>');
-                    $("#dbmacho").fadeIn().html('Machos disponíveis <span class="text-weight-bolder bg-primary px-2 rounded shadow-sm text-white">' + response.macho + '</span>');
-                });
-        });
-        $(function() {
-            $("#lote_id").change(function(e) {
-                e.preventDefault();
-                loteid = $(this).val();
-                if(loteid){
-                $.ajax({
-                    url: "{{ route('aviarios.aviarioslote') }}",
-                    dataType: "JSON",
-                    type: "POST",
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        loteid: loteid
-                    }
-                }).done(function(response) {
-
-                    $("#femea_box1, #femea_box2, #femea_box3, #femea_box4, #macho_box1, #macho_box2, #macho_box3, #macho_box4").attr('disabled', false);
-                    $("#avesfemeas, #avesmachos").attr("style", "border-radius: 0.2rem 0.25rem 0 0!important");
-                    $("#dbfemea").fadeIn().html('Fêmeas disponíveis <span class="text-weight-bolder bg-primary px-2 rounded shadow-sm text-white">' + response.femea + '</span>');
-                    $("#dbmacho").fadeIn().html('Machos disponíveis <span class="text-weight-bolder bg-primary px-2 rounded shadow-sm text-white">' + response.macho + '</span>');
-                });
-                }else{
-                    location.reload();
-                }
-            });
-        });
-        // Valida form add semnas
-        $("#formlote").validate({
-            rules: {
-                data_aviario: {
-                    required: true
-                },
-                lote_id: {
-                    required: true
-                },
-                aviario: {
-                    required: true
-                },
-                femea_box1: {
-                    required: true,
-                    digits: true,
-                    notEqual: '0'
-                },
-                macho_box1: {
-                    required: true,
-                    digits: true,
-                    notEqual: '0'
-                }
-            },
-            messages: {
-                data_aviario: 'Selecione uma data para o aviario!',
-                lote_id: {
-                    required: 'Selecione o lote do aviário!'
-                },
-                aviario: {
-                    required: 'Digite a identificação do aviário!'
-                },
-                femea_box1: {
-                    required: 'Digite o n° de fêmeas!',
-                    digits: 'Somente inteiros!',
-                    notEqual: 'Insira maior que "0"!'
-                },
-                macho_box1: {
-                    required: 'Digite o n° de machos!',
-                    digits: 'Somente inteiros!',
-                    notEqual: 'Insira maior que "0"!'
-
-                }
-            }
-        });
-        jQuery.validator.addMethod("notEqual", function(value, element, param) { // Adding rules for Amount(Not equal to zero)
-            return this.optional(element) || value != '0';
-        });
-
-
-    $(".avesfemeas").keyup(function () {
-        var femeas = 0;
-        $(".avesfemeas").each(function (index, element) {
-            if ($(element).val()) {
-                femeas += parseInt($(element).val());
-            }
-        });
-        $("#avesfemeas").val(femeas);
-    });
-
-    $(".avesmachos").keyup(function () {
-        var machos = 0;
-        $(".avesmachos").each(function (index, element) {
-            if ($(element).val()) {
-                machos += parseInt($(element).val());
-            }
-        });
-        $("#avesmachos").val(machos);
-    });
-
-
-</script>
+    @include('aviarios/scripts')
 @endsection
