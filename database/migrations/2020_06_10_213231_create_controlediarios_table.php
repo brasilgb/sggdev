@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateControlesTable extends Migration
+class CreateControlediariosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,13 +18,12 @@ class CreateControlesTable extends Migration
             $table->date('data_controle');
             $table->integer('periodo');
             $table->integer('aviario');
-            $table->decimal('temperatura_max', 10,2);
-            $table->decimal('temperatura_min', 10,2);
-            $table->decimal('umidade', 10,2);
+            $table->decimal('temperatura_max', 10,1);
+            $table->decimal('temperatura_min', 10,1);
+            $table->integer('umidade');
             $table->integer('leitura_agua');
             $table->integer('consumo_total');
             $table->decimal('consumo_ave', 10,2);
-            $table->integer('valorinicial');
             $table->timestamps();
         });
     }

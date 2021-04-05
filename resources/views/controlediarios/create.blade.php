@@ -34,18 +34,19 @@
         <form id="formlote" action="{{ route('controlediarios.store') }}" method="post" autocomplete="off">
             <div class="card-body px-4">
                 @include("parts/flash-message")
-
+                <div class="alert alert-danger leitura-inicial-0" style="display: none;">
+                    <i class="fa fa-exclamation-triangle"></i> Não há leitura anterior para este aviário, inicialmente os cálculos de consumo total e por ave estarão zerados, preencha com os dados de leitura do início do alojamento das aves.
+                </div>
                 @method('POST')
                 @csrf
-                @if ($controlediario->count() > 0)
 
                     <div class="form-group row">
                         <label for="dataform" class="col-sm-3 col-form-label text-left">Data de leitura <span
                                 class="text-danger">*</span></label>
                         <div class="col-sm-7">
-                            <input id="dataform" type="text" class="form-control" name="data_controlediario"
-                                value="{{ old('data_controlediario', date('d/m/Y', strtotime(now()))) }}">
-                            @error('data_controlediario')
+                            <input id="dataform" type="text" class="form-control" name="data_controle"
+                                value="{{ old('data_controle', date('d/m/Y', strtotime(now()))) }}">
+                            @error('data_controle')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
@@ -71,10 +72,10 @@
                         <label for="id_aviario" class="col-sm-3 col-form-label text-left">Aviário <span
                                 class="text-danger">*</span></label>
                         <div class="col-sm-7">
-                            <select id="id_aviario" type="text" class="custom-select" name="id_aviario">
+                            <select id="id_aviario" type="text" class="custom-select" name="aviario">
                                 <option value="">Selecione o lote</option>
                             </select>
-                            @error('id_aviario')
+                            @error('aviario')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
@@ -124,44 +125,16 @@
                                 class="text-danger">*</span></label>
                         <div class="col-sm-7 d-flex justify-content-init">
                             <div class="mr-2 flex-fill">
-                                <input id="consumo" type="text" class="form-control mr-2" name="consumo_total"
-                                    value="{{ old('consumo_total') }}" placeholder="Consumo total">
+                                <input id="consumo_total" type="text" class="form-control mr-2" name="consumo_total"
+                                    value="{{ old('consumo_total') }}" placeholder="Consumo total" readonly>
                             </div>
                             <div class="flex-fill">
-                                <input id="consumo" type="text" class="form-control" name="consumo_ave"
-                                    value="{{ old('consumo_ave') }}" placeholder="Por ave">
+                                <input id="consumo_ave" type="text" class="form-control" name="consumo_ave"
+                                    value="{{ old('consumo_ave') }}" placeholder="Por ave" readonly>
                             </div>
                         </div>
                     </div>
 
-
-                @else
-
-                    <div class="form-group row">
-                        <label for="dataform" class="col-sm-3 col-form-label text-left">Data de leitura <span
-                                class="text-danger">*</span></label>
-                        <div class="col-sm-7">
-                            <input id="dataform" type="text" class="form-control" name="data_controlediario"
-                                value="{{ old('data_controlediario', date('d/m/Y', strtotime(now()))) }}">
-                            @error('data_controlediario')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="leitura_agua" class="col-sm-3 col-form-label text-left">Leitura da água inicial <span
-                                class="text-danger">*</span></label>
-                        <div class="col-sm-7">
-                            <input id="leitura_agua" type="text" class="form-control" name="leitura_agua"
-                                value="{{ old('leitura_agua') }}">
-                            @error('leitura_agua')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-
-                @endif
             </div>
             <div class="card-footer">
                 <div class="row">
@@ -178,4 +151,39 @@
         </form>
     </div>
     @include('controlediarios/scripts')
+    <script>
+        $(function(){
+            $("#id_aviario").change(function(){
+                idlote = $("#lote_id").val();
+                idaviario = $(this).val();
+                // alert(idlote + ' -- ' + idaviario);
+                $.ajax({
+                    url: "{{ route('controlediarios.verificacontrole') }}",
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data:{
+                        _token: "{{ csrf_token() }}",
+                        idlote: idlote,
+                        idaviario:idaviario
+                        }
+                }).done(function(response){
+                    if(response.leitura > 0){
+                        var aves = parseInt(response.aves);
+                        var leitura_anterior = parseInt(response.leitura_anterior)
+                        $("#leitura_agua").keyup(function (e) {
+                            e.preventDefault();
+                            leitura_atual = $(this).val();
+                            $("#consumo_total").val(leitura_atual - leitura_anterior);
+                            $("#consumo_ave").val(((leitura_atual - leitura_anterior)/aves).toFixed(2));
+                        });
+                    }else{
+                    $(".leitura-inicial-0").show('fade');
+                    $("#consumo_total, #consumo_ave").val(0);
+                    }
+
+                });
+            });
+        });
+    </script>
 @endsection
+

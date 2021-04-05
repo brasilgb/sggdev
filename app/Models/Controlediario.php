@@ -26,8 +26,13 @@ class Controlediario extends Model
         'valorinicial'
     ];
 
+
     public function lotes() {
-        return $this->hasOne(Lote::class, 'lote_id');
+        return $this->hasOne(Lote::class, 'id_lote', 'lote_id');
+    }
+
+    public function aviarios() {
+        return $this->hasOne(Aviario::class, 'id_aviario', 'aviario');
     }
 
     public function scopeIdcontrole() {

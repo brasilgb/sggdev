@@ -22,145 +22,78 @@ $(function() {
         });
     });
 
-    $(function() {
-        $("#lote_id").change(function(e) {
-            e.preventDefault();
-            loteid = $(this).val();
-            if (loteid) {
-                $.ajax({
-                    url: "{{ route('aviarios.aveslote') }}",
-                    dataType: "JSON",
-                    type: "POST",
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        loteid: loteid
-                    }
-                }).done(function(response) {
-
-                    $("#femea_box1, #femea_box2, #femea_box3, #femea_box4, #macho_box1, #macho_box2, #macho_box3, #macho_box4")
-                        .attr('disabled', false);
-                    $("#avesfemeas, #avesmachos").attr("style",
-                        "border-radius: 0.2rem 0.25rem 0 0!important");
-                    $("#dbfemea").fadeIn().html(
-                        'Fêmeas disponíveis <span class="text-weight-bolder bg-primary px-2 rounded shadow-sm text-white">' +
-                        response.femea + '</span>');
-                    $("#dbmacho").fadeIn().html(
-                        'Machos disponíveis <span class="text-weight-bolder bg-primary px-2 rounded shadow-sm text-white">' +
-                        response.macho + '</span>');
-
-                });
-            } else {
-                location.reload();
-            }
-        });
-    });
 
     // Valida form add semnas
     $("#formlote").validate({
         rules: {
-            data_aviario: {
+            data_controle: {
                 required: true
             },
             lote_id: {
                 required: true
             },
-            id_aviario: {
+            aviario: {
                 required: true
             },
-            motivo: {
-                required: true
-            },
-            femea_box1: {
+            temperatura_min: {
                 required: true,
-                digits: true
+                number: true
             },
-            macho_box1: {
+            temperatura_max: {
                 required: true,
+                number: true
+            },
+            umidade: {
+                required: true,
+                number: true
+            },
+            leitura_agua: {
                 digits: true
             },
-            femea_box2: {
+            consumo_total: {
                 digits: true
             },
-            macho_box2: {
-                digits: true
-            },
-            femea_box3: {
-                digits: true
-            },
-            macho_box3: {
-                digits: true
-            },
-            femea_box4: {
-                digits: true
-            },
-            macho_box4: {
-                digits: true
+            consumo_ave: {
+                number: true
             }
         },
         messages: {
-            data_aviario: 'Selecione uma data para o aviario!',
+            data_controle: 'Selecione uma data para o aviario!',
             lote_id: {
                 required: 'Selecione o lote do aviário!'
             },
-            id_aviario: {
-                required: 'Selecione o lote e aviário!'
+            aviario: {
+                required: 'Selecione o lote e lote/aviário!'
             },
-            motivo: {
-                required: 'Selecione a causa da morte!'
+            temperatura_min: {
+                required: 'Digite a temp. mín.!',
+                number: 'Somente números!'
             },
-            femea_box1: {
-                required: 'Digite o n° de fêmeas!',
+            temperatura_max: {
+                required: 'Digite a temp. max.!',
+                number: 'Somente números!'
+            },
+            umidade: {
+                required: 'Digite a umidade!',
+                number: 'Somente números!'
+            },
+            leitura_agua: {
+                required: 'Digite a leitura d´agua!',
                 digits: 'Somente inteiros!'
             },
-            macho_box1: {
-                required: 'Digite o n° de machos!',
-                digits: 'Somente inteiros!'
-
-            },
-            femea_box2: {
+            consumo_total: {
+                required: 'Consumo do aviário!',
                 digits: 'Somente inteiros!'
             },
-            macho_box2: {
-                digits: 'Somente inteiros!'
-            },
-            femea_box3: {
-                digits: 'Somente inteiros!'
-            },
-            macho_box3: {
-                digits: 'Somente inteiros!'
-            },
-            femea_box4: {
-                digits: 'Somente inteiros!'
-            },
-            macho_box4: {
-                digits: 'Somente inteiros!'
+            consumo_ave: {
+                required: 'Consumo por aves!',
+                number: 'Somente números!'
             }
         }
     });
     jQuery.validator.addMethod("notEqual", function(value, element,
         param) { // Adding rules for Amount(Not equal to zero)
         return this.optional(element) || value != '0';
-    });
-
-
-    $(".avesfemeas").keyup(function() {
-        var femeas = 0;
-        $(".avesfemeas").each(function(index, element) {
-            if ($(element).val()) {
-                femeas += parseInt($(element).val());
-            }
-        });
-        $("#avesfemeas").val(femeas);
-    });
-
-    $(".avesmachos").keyup(function() {
-        var machos = 0;
-        $(".avesmachos").each(function(index, element) {
-            if ($(element).val()) {
-                machos += parseInt($(element).val());
-            }
-        });
-        $("#avesmachos").val(machos);
     });
 
 </script>

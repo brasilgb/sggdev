@@ -69,7 +69,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="9" class="alert alert-danger text-left"><i class="fa fa-exclamation-triangle"></i>
+                                <td colspan="5" class="alert alert-danger text-left"><i class="fa fa-exclamation-triangle"></i>
                                     @if (isset($busca))
                                         Não foram encontrados dados que correspondam com sua busca!
                                     @else

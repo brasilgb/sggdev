@@ -66,7 +66,7 @@ class Lote extends Model
     }
 
     public function controles() {
-        return $this->hasMany(Controle::class);
+        return $this->hasMany(Controlediario::class, 'lote_id', 'id_lote');
     }
 
 }

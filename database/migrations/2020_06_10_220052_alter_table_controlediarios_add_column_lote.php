@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterTableControlesAddColumnLote extends Migration
+class AlterTableControlediariosAddColumnLote extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AlterTableControlesAddColumnLote extends Migration
      */
     public function up()
     {
-        Schema::table('controles', function (Blueprint $table) {
+        Schema::table('controlediarios', function (Blueprint $table) {
             $table->integer('lote_id')->after('periodo');
             $table->foreign('lote_id')->references('id_lote')->on('lotes')->onDelete('cascade');
         });
@@ -25,7 +25,7 @@ class AlterTableControlesAddColumnLote extends Migration
      * @return void
      */
     public function down() {
-        Schema::table('controles', function (Blueprint $table) {
+        Schema::table('controlediarios', function (Blueprint $table) {
             $table->dropForeign('controles_lote_foreign');
             $table->dropColumn('lote_id');
         });

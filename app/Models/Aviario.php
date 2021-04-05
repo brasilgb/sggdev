@@ -62,5 +62,8 @@ class Aviario extends Model
         return $this->hasMany(Consumo::class, 'lote_id', 'id_lote');
     }
 
+    public function controles() {
+        return $this->hasMany(Controlediario::class, 'aviario', 'id_aviario');
+    }
 
 }

@@ -90,6 +90,7 @@ Route::resource('geraltarefas', GeraltarefaController::class);
 
 Route::prefix('controlediarios')->name('controlediarios.')->group(function () {
     Route::post('busca', [ControlediarioController::class, 'busca'])->name('busca');
+    Route::post('verificacontrole', [ControlediarioController::class, 'verificacontrole'])->name('verificacontrole');
 });
 Route::resource('controlediarios', ControlediarioController::class);
 
