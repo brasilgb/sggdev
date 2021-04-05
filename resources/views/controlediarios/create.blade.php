@@ -138,6 +138,18 @@
                 @else
 
                     <div class="form-group row">
+                        <label for="dataform" class="col-sm-3 col-form-label text-left">Data de leitura <span
+                                class="text-danger">*</span></label>
+                        <div class="col-sm-7">
+                            <input id="dataform" type="text" class="form-control" name="data_controlediario"
+                                value="{{ old('data_controlediario', date('d/m/Y', strtotime(now()))) }}">
+                            @error('data_controlediario')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <label for="leitura_agua" class="col-sm-3 col-form-label text-left">Leitura da água inicial <span
                                 class="text-danger">*</span></label>
                         <div class="col-sm-7">
