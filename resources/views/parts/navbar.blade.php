@@ -43,22 +43,22 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle {{ (request()->is('recebimentos*','consumos*')) ? 'active' : '' }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Ração
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Recebimento</a>
-              <a class="dropdown-item" href="#">Consumo</a>
+              <a class="dropdown-item" href="{{ route('recebimentos.index') }}">Recebimento</a>
+              <a class="dropdown-item" href="{{ route('consumos.index')}}">Consumo</a>
             </div>
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle {{ (request()->is('geraltarefas*','controles*')) ? 'active' : '' }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Tarefas
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Tarefas gerais</a>
-              <a class="dropdown-item" href="#">Controle diário</a>
+              <a class="dropdown-item" href="{{ route('geraltarefas.index') }}">Tarefas gerais</a>
+              <a class="dropdown-item" href="{{ route('controlediarios.index') }}">Controle diário</a>
             </div>
           </li>
 
@@ -73,7 +73,7 @@
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Previsões
+              Metas
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="#">Action</a>

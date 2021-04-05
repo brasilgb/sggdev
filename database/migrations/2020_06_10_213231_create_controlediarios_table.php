@@ -13,7 +13,7 @@ class CreateControlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('controles', function (Blueprint $table) {
+        Schema::create('controlediarios', function (Blueprint $table) {
             $table->integer('id_controle')->primary();
             $table->date('data_controle');
             $table->integer('periodo');
@@ -36,6 +36,6 @@ class CreateControlesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('controles');
+        Schema::dropIfExists('controlediarios');
     }
 }

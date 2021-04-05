@@ -2,12 +2,16 @@
 
 use App\Http\Controllers\AviarioController;
 use App\Http\Controllers\ColetaController;
+use App\Http\Controllers\ConsumoController;
+use App\Http\Controllers\ControlediarioController;
 use App\Http\Controllers\EnvioController;
+use App\Http\Controllers\GeraltarefaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoteController;
 use App\Http\Controllers\MortalidadeController;
 use App\Http\Controllers\PeriodoController;
 use App\Http\Controllers\PesagemController;
+use App\Http\Controllers\RecebimentoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,34 +27,69 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::prefix('periodos')->name('periodos.')->group(function () {
+    Route::post('addsemanasperiodo', [PeriodoController::class, 'addsemanasperiodo'])->name('addsemanasperiodo');
+    Route::post('ativaperiodo', [PeriodoController::class, 'ativaperiodo'])->name('ativaperiodo');
+    Route::post('busca', [PeriodoController::class, 'busca'])->name('busca');
+});
 Route::resource('periodos', PeriodoController::class);
-Route::post('periodos/addsemanasperiodo', [PeriodoController::class, 'addsemanasperiodo'])->name('periodos.addsemanasperiodo');
-Route::post('periodos/ativaperiodo', [PeriodoController::class, 'ativaperiodo'])->name('periodos.ativaperiodo');
-Route::post('periodos/busca', [PeriodoController::class, 'busca'])->name('periodos.busca');
 
+Route::prefix('lotes')->name('lotes.')->group(function () {
+    Route::post('showcapitalizada', [LoteController::class, 'showcapitalizada'])->name('showcapitalizada');
+    Route::post('capitalizar', [LoteController::class, 'capitalizar'])->name('capitalizar');
+    Route::post('busca', [LoteController::class, 'busca'])->name('busca');
+    Route::post('checklote', [LoteController::class, 'checklote'])->name('checklote');
+    Route::post('checkuplote', [LoteController::class, 'checkuplote'])->name('checkuplote');
+});
 Route::resource('lotes', LoteController::class);
-Route::post('lotes/showcapitalizada', [LoteController::class, 'showcapitalizada'])->name('lotes.showcapitalizada');
-Route::post('lotes/capitalizar', [LoteController::class, 'capitalizar'])->name('lotes.capitalizar');
-Route::post('lotes/busca', [LoteController::class, 'busca'])->name('lotes.busca');
-Route::post('lotes/checklote', [LoteController::class, 'checklote'])->name('lotes.checklote');
-Route::post('lotes/checkuplote', [LoteController::class, 'checkuplote'])->name('lotes.checkuplote');
 
+Route::prefix('aviarios')->name('aviarios.')->group(function () {
+    Route::post('busca', [AviarioController::class, 'busca'])->name('busca');
+    Route::post('autocomplete', [AviarioController::class, 'autocomplete'])->name('autocomplete');
+    Route::post('aveslote', [AviarioController::class, 'aveslote'])->name('aveslote');
+    Route::post('aviarioslote', [AviarioController::class, 'aviarioslote'])->name('aviarioslote');
+});
 Route::resource('aviarios', AviarioController::class);
-Route::post('aviarios/busca', [AviarioController::class, 'busca'])->name('aviarios.busca');
-Route::post('aviarios/autocomplete', [AviarioController::class, 'autocomplete'])->name('aviarios.autocomplete');
-Route::post('aviarios/aveslote', [AviarioController::class, 'aveslote'])->name('aviarios.aveslote');
-Route::post('aviarios/aviarioslote', [AviarioController::class, 'aviarioslote'])->name('aviarios.aviarioslote');
 
+Route::prefix('coletas')->name('coletas.')->group(function () {
+    Route::post('busca', [ColetaController::class, 'busca'])->name('busca');
+    Route::post('numcoleta', [ColetaController::class, 'numcoleta'])->name('numcoleta');
+});
 Route::resource('coletas', ColetaController::class);
-Route::post('coletas/busca', [ColetaController::class, 'busca'])->name('coletas.busca');
-Route::post('coletas/numcoleta', [ColetaController::class, 'numcoleta'])->name('coletas.numcoleta');
 
+Route::prefix('envios')->name('envios.')->group(function () {
+    Route::post('busca', [EnvioController::class, 'busca'])->name('busca');
+    Route::post('ovoslote', [EnvioController::class, 'ovoslote'])->name('ovoslote');
+});
 Route::resource('envios', EnvioController::class);
-Route::post('aviarios/ovoslote', [EnvioController::class, 'ovoslote'])->name('envios.ovoslote');
-Route::post('envios/busca', [EnvioController::class, 'busca'])->name('envios.busca');
 
+Route::prefix('mortalidades')->name('mortalidades.')->group(function () {
+    Route::post('busca', [MortalidadeController::class, 'busca'])->name('busca');
+});
 Route::resource('mortalidades', MortalidadeController::class);
-Route::post('mortalidades/busca', [MortalidadeController::class, 'busca'])->name('mortalidades.busca');
 
+Route::prefix('pesagens')->name('pesagens.')->group(function () {
+    Route::post('busca', [PesagemController::class, 'busca'])->name('busca');
+});
 Route::resource('pesagens', PesagemController::class)->parameters(['pesagens' => 'pesagem']);
-Route::post('pesagens/busca', [PesagemController::class, 'busca'])->name('pesagens.busca');
+
+Route::prefix('recebimentos')->name('recebimentos.')->group(function () {
+    Route::post('busca', [RecebimentoController::class, 'busca'])->name('busca');
+});
+Route::resource('recebimentos', RecebimentoController::class);
+
+Route::prefix('consumos')->name('consumos.')->group(function () {
+    Route::post('busca', [ConsumoController::class, 'busca'])->name('busca');
+});
+Route::resource('consumos', ConsumoController::class);
+
+Route::prefix('geraltarefas')->name('geraltarefas.')->group(function () {
+    Route::post('busca', [GeraltarefaController::class, 'busca'])->name('busca');
+});
+Route::resource('geraltarefas', GeraltarefaController::class);
+
+Route::prefix('controlediarios')->name('controlediarios.')->group(function () {
+    Route::post('busca', [ControlediarioController::class, 'busca'])->name('busca');
+});
+Route::resource('controlediarios', ControlediarioController::class);
+

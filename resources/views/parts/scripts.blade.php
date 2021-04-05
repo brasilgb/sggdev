@@ -1,5 +1,5 @@
 <script>
-    $('#data_inicial, #datafcap, #datamcap, #dataform, #datasearch').datepicker({
+    $('#data_inicial, #datafcap, #datamcap, #dataform, #datasearch, #data1, #data2').datepicker({
         dateFormat: 'dd/mm/yy',
         closeText: "Fechar",
         prevText: "&#x3C;Anterior",
@@ -18,8 +18,8 @@
         firstDay: 1
     });
 
-    $('#data_inicial, #datafcap, #datamcap, #dataform, #datasearch').inputmask('99/99/9999');
-    $("#hora_coleta, #hora_envio").inputmask("99:99");
+    $('#data_inicial, #datafcap, #datamcap, #dataform, #datasearch, #data1, #data2').inputmask('99/99/9999');
+    $("#hora_coleta, #hora_envio, #hora_recebimento, #hora1, #hora2").inputmask("99:99");
     // Maiúsculas
     $(function() {
         $("#lote, #lote_search").keyup(function() {

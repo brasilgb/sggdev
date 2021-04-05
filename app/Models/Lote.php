@@ -58,11 +58,11 @@ class Lote extends Model
 
 
     public function recebimentos() {
-        return $this->hasMany(Recebimento::class, 'lote_id');
+        return $this->hasMany(Recebimento::class, 'lote_id', 'id_lote');
     }
 
     public function consumos() {
-        return $this->hasMany(Consumo::class, 'lote_id');
+        return $this->hasMany(Consumo::class, 'lote_id', 'id_lote');
     }
 
     public function controles() {

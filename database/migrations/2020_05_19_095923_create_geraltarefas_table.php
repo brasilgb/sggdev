@@ -19,11 +19,11 @@ class CreateGeralTarefasTable extends Migration {
             $table->time('hora_inicio');
             $table->date('data_previsao');
             $table->time('hora_previsao');
-            $table->char('descritivo');
+            $table->string('descritivo');
             $table->text('descricao');
             $table->date('data_termino')->nullable();
             $table->time('hora_termino')->nullable();
-            $table->integer('situacao');
+            $table->string('situacao');
             $table->text('observacao')->nullable();
             $table->timestamps();
         });

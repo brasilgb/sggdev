@@ -58,4 +58,9 @@ class Aviario extends Model
         return $this->hasMany(Pesagem::class, 'id_aviario', 'aviario_id');
     }
 
+    public function consumos() {
+        return $this->hasMany(Consumo::class, 'lote_id', 'id_lote');
+    }
+
+
 }

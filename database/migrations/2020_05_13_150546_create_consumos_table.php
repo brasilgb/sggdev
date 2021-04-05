@@ -26,6 +26,8 @@ class CreateConsumosTable extends Migration
             $table->integer('macho_box2')->nullable();
             $table->integer('macho_box3')->nullable();
             $table->integer('macho_box4')->nullable();
+            $table->integer('femea');
+            $table->integer('macho');
             $table->timestamps();
         });
     }
