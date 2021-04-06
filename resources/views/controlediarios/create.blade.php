@@ -156,7 +156,7 @@
             $("#id_aviario").change(function(){
                 idlote = $("#lote_id").val();
                 idaviario = $(this).val();
-                // alert(idlote + ' -- ' + idaviario);
+
                 $.ajax({
                     url: "{{ route('controlediarios.verificacontrole') }}",
                     type: 'POST',

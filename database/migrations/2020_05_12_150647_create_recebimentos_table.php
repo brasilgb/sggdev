@@ -18,7 +18,7 @@ class CreateRecebimentosTable extends Migration
             $table->integer('periodo');
             $table->date('data_recebimento');
             $table->time('hora_recebimento');
-            $table->integer('sexo_ave');
+            $table->string('sexo_ave');
             $table->integer('quantidade');
             $table->integer('nota_fiscal');
             $table->timestamps();

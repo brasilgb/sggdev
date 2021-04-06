@@ -121,14 +121,14 @@ class ControlediarioController extends Controller
     {
         $controle = Controlediario::where('lote_id', $request->idlote)->where('aviario', $request->idaviario)->first();
         $aviarios = Aviario::orderBy('id_aviario', 'DESC')->where('lote_id', $request->idlote)->where('id_aviario', $request->idaviario)->first();
-        if($controle->count()){
+        if(!empty($controle->leitura_agua)){
             $leitura = 1;
             $leitura_anterior = $controle->leitura_agua;
             $aves = $aviarios->tot_ave;
         }else{
-            $leitura = 0;
-            $leitura_anterior = 0;
-            $aves = 0;
+            $leitura = '0';
+            $leitura_anterior = '0';
+            $aves = '0';
         }
         return response()->json(['leitura' => $leitura, 'aves' => $aves, 'leitura_anterior' => $leitura_anterior]);
     }
