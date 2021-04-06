@@ -6,7 +6,7 @@
     <div class="card-header pb-0 border-bottom border-white" style="background-color: #062142;">
         <div class="row">
             <div class="col">
-                <h4 class="text-left text-white mt-1"><i class="fas fa-fw fa-kiwi-bird"></i> Controle diário</h4>
+                <h4 class="text-left text-white mt-1"><i class="fas fa-fw fa-sliders-h"></i> Controle diário</h4>
             </div>
             <div class="col">
                 <nav aria-label="breadcrumb">

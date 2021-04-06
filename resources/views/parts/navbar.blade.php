@@ -53,7 +53,7 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle {{ (request()->is('geraltarefas*','controles*')) ? 'active' : '' }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle {{ (request()->is('geraltarefas*','controlediarios*')) ? 'active' : '' }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Tarefas
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">

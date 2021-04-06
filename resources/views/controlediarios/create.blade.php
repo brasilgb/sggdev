@@ -6,7 +6,7 @@
         <div class="card-header pb-0 border-bottom border-white" style="background-color: #062142;">
             <div class="row">
                 <div class="col">
-                    <h4 class="text-left text-white mt-1"><i class="fas fa-fw fa-calendar-day"></i> Controle diário</h4>
+                    <h4 class="text-left text-white mt-1"><i class="fas fa-fw fa-sliders-h"></i> Controle diário</h4>
                 </div>
                 <div class="col">
                     <nav aria-label="breadcrumb">
@@ -151,39 +151,5 @@
         </form>
     </div>
     @include('controlediarios/scripts')
-    <script>
-        $(function(){
-            $("#id_aviario").change(function(){
-                idlote = $("#lote_id").val();
-                idaviario = $(this).val();
-
-                $.ajax({
-                    url: "{{ route('controlediarios.verificacontrole') }}",
-                    type: 'POST',
-                    dataType: 'JSON',
-                    data:{
-                        _token: "{{ csrf_token() }}",
-                        idlote: idlote,
-                        idaviario:idaviario
-                        }
-                }).done(function(response){
-                    if(response.leitura > 0){
-                        var aves = parseInt(response.aves);
-                        var leitura_anterior = parseInt(response.leitura_anterior)
-                        $("#leitura_agua").keyup(function (e) {
-                            e.preventDefault();
-                            leitura_atual = $(this).val();
-                            $("#consumo_total").val(leitura_atual - leitura_anterior);
-                            $("#consumo_ave").val(((leitura_atual - leitura_anterior)/aves).toFixed(2));
-                        });
-                    }else{
-                    $(".leitura-inicial-0").show('fade');
-                    $("#consumo_total, #consumo_ave").val(0);
-                    }
-
-                });
-            });
-        });
-    </script>
 @endsection
 

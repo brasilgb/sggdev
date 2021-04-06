@@ -6,14 +6,14 @@
         <div class="card-header pb-0 border-bottom border-white" style="background-color: #062142;">
             <div class="row">
                 <div class="col">
-                    <h4 class="text-left text-white mt-1"><i class="fas fa-fw fa-kiwi-bird"></i> Mortalidades</h4>
+                    <h4 class="text-left text-white mt-1"><i class="fas fa-fw fa-sliders-h"></i> Controle diário</h4>
                 </div>
                 <div class="col">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb pt-1 pb-1 float-right bg-transparent">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                            <li class="breadcrumb-item"> <a href="{{ route('lotes.index') }}">Mortalidades</a></li>
-                            <li class="breadcrumb-item active">Editar</a></li>
+                            <li class="breadcrumb-item"> <a href="{{ route('lotes.index') }}">Controle diário</a></li>
+                            <li class="breadcrumb-item active">Adicionar</a></li>
                         </ol>
                     </nav>
                 </div>
@@ -22,148 +22,118 @@
         <div class="card-header">
             <div class="row">
                 <div class="col text-left">
-                    <button onclick="window.location='{{ route('mortalidades.index') }}'"
+                    <button onclick="window.location='{{ route('controlediarios.index') }}'"
                         class="btn btn-primary shadow-sm border-white"><i class="fa fa-angle-left"></i> Voltar</button>
                 </div>
 
                 <div class="col">
-                    @include('mortalidades/search')
+                    @include('controlediarios/search')
                 </div>
             </div>
         </div>
-        <form id="formlote" action="{{ route('mortalidades.update', ['mortalidade' => $mortalidade->id_mortalidade]) }}"
-            method="post" autocomplete="off">
+        <form id="formlote" action="{{ route('controlediarios.store') }}" method="post" autocomplete="off">
             <div class="card-body px-4">
                 @include("parts/flash-message")
-
-                @method('PUT')
+                <div class="alert alert-danger leitura-inicial-0" style="display: none;">
+                    <i class="fa fa-exclamation-triangle"></i> Não há leitura anterior para este aviário, inicialmente os cálculos de consumo total e por ave estarão zerados, preencha com os dados de leitura do início do alojamento das aves.
+                </div>
+                @method('POST')
                 @csrf
 
-                <div class="form-group row">
-                    <label for="dataform" class="col-sm-3 col-form-label text-left">Data da baixa <span
-                            class="text-danger">*</span></label>
-                    <div class="col-sm-7">
-                        <input id="dataform" type="text" class="form-control" name="data_mortalidade"
-                            value="{{ old('data_mortalidade', date('d/m/Y', strtotime(now()))) }}">
-                        @error('data_mortalidade')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="lote" class="col-sm-3 col-form-label text-left">Lote <span
-                            class="text-danger">*</span></label>
-                    <div class="col-sm-7">
-                        <select id="lote_id" type="text" class="custom-select" name="lote_id">
-                            <option value="{{ $mortalidade->lotes->id_lote }}">{{ $mortalidade->lotes->lote }}</option>
-                        </select>
-                        @error('lote_id')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="id_aviario" class="col-sm-3 col-form-label text-left">Aviário <span
-                            class="text-danger">*</span></label>
-                    <div class="col-sm-7">
-                        <select id="id_aviario" type="text" class="custom-select" name="id_aviario">
-                            <option value="{{ $mortalidade->aviarios->id_aviario }}">
-                                {{ $mortalidade->aviarios->aviario }}</option>
-                        </select>
-                        @error('id_aviario')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-
-                @php
-                    $causas = [
-                        '1' => 'Arranhado',
-                        '2' => 'Calor',
-                        '3' => 'Inprodutiva',
-                        '4' => 'Prolapso',
-                        '5' => 'Refugo',
-                        '6' => 'Outros',
-                    ];
-                @endphp
-
-                <div class="form-group row">
-                    <label for="motivo" class="col-sm-3 col-form-label text-left">Causa <span
-                            class="text-danger">*</span></label>
-                    <div class="col-sm-7">
-                        <select name="motivo" id="motivo" class="custom-select">
-                            <option value="">Selecione a causa</option>
-                            @foreach ($causas as $key => $value)
-                                <option value="{{ $key }}" @if ($key == $mortalidade->motivo) selected @endif>{{ $value }}</option>
-                            @endforeach
-                        </select>
-                        @error('motivo')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="macho" class="col-sm-3 col-form-label text-left">Boxes fêmeas <span
-                            class="text-danger">*</span></label>
-                    <div class="col-sm-7 d-flex">
-                        <div class="mr-2"><input id="femea_box1" type="text"
-                                class="form-control mr-2 avesfemeas compareaves" name="femea_box1"
-                                value="{{ old('femea_box1', $mortalidade->femea_box1) }}" placeholder="Box 1"></div>
-                        <div class="mr-2"><input id="femea_box2" type="text"
-                                class="form-control mr-2 avesfemeas compareaves" name="femea_box2"
-                                value="{{ old('femea_box2', $mortalidade->femea_box2) }}" placeholder="Box 2"></div>
-                        <div class="mr-2"><input id="femea_box3" type="text"
-                                class="form-control mr-2 avesfemeas compareaves" name="femea_box3"
-                                value="{{ old('femea_box3', $mortalidade->femea_box3) }}" placeholder="Box 3"></div>
-                        <div><input id="femea_box4" type="text" class="form-control avesfemeas compareaves"
-                                name="femea_box4" value="{{ old('femea_box4', $mortalidade->femea_box4) }}" placeholder="Box 4"></div>
-                        @error('macho')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="macho" class="col-sm-3 col-form-label text-left">Boxes machos <span
-                            class="text-danger">*</span></label>
-                    <div class="col-sm-7 d-flex justify-content-center">
-                        <div class="mr-2"><input id="macho_box1" type="text" class="form-control avesmachos compareaves"
-                                name="macho_box1" value="{{ old('macho_box1', $mortalidade->macho_box1) }}" placeholder="Box 1" ></div>
-                        <div class="mr-2"><input id="macho_box2" type="text" class="form-control avesmachos compareaves"
-                                name="macho_box2" value="{{ old('macho_box2', $mortalidade->macho_box2) }}" placeholder="Box 2"></div>
-                        <div class="mr-2"><input id="macho_box3" type="text" class="form-control avesmachos compareaves"
-                                name="macho_box3" value="{{ old('macho_box3', $mortalidade->macho_box3) }}" placeholder="Box 3"></div>
-                        <div><input id="macho_box4" type="text" class="form-control avesmachos compareaves"
-                                name="macho_box4" value="{{ old('macho_box4', $mortalidade->macho_box4) }}" placeholder="Box 4"></div>
-                        @error('macho')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="femea" class="col-sm-3 col-form-label text-left">Aves fêmeas/macho <span
-                            class="text-danger">*</span></label>
-                    <div class="col-sm-7 d-flex justify-content-init">
-                        <div class="mr-2 flex-fill">
-                            <input id="avesfemeas" type="text" class="form-control mr-2" name="femea"
-                                value="{{ old('femea', $mortalidade->femea) }}" placeholder="Fêmeas" readonly>
-                            <input id="femeadb" type="hidden" value="{{$mortalidade->femea}}">
-                            <div id="dbfemea" class="bg-warning text-dark p-2 rounded-bottom border"
-                                style="border: 1px solid #ced4da!important;display:none;"></div>
-                        </div>
-                        <div class="flex-fill">
-                            <input id="avesmachos" type="text" class="form-control" name="macho"
-                                value="{{ old('macho', $mortalidade->macho) }}" placeholder="Machos" readonly>
-                            <input id="machodb" type="hidden" value="{{$mortalidade->macho}}}">
-                            <div id="dbmacho" class="bg-warning text-dark p-2 rounded-bottom border"
-                                style="border: 1px solid #ced4da!important;display:none;"></div>
+                    <div class="form-group row">
+                        <label for="dataform" class="col-sm-3 col-form-label text-left">Data de leitura <span
+                                class="text-danger">*</span></label>
+                        <div class="col-sm-7">
+                            <input id="dataform" type="text" class="form-control" name="data_controle"
+                                value="{{ old('data_controle', date('d/m/Y', strtotime(now()))) }}">
+                            @error('data_controle')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
-                </div>
+
+                    <div class="form-group row">
+                        <label for="lote" class="col-sm-3 col-form-label text-left">Lote <span
+                                class="text-danger">*</span></label>
+                        <div class="col-sm-7">
+                            <select id="lote_id" type="text" class="custom-select" name="lote_id">
+                                <option value="">Selecione o lote</option>
+                                @foreach ($lotes as $lote)
+                                    <option value="{{ $lote->id_lote }}">{{ $lote->lote }}</option>
+                                @endforeach
+                            </select>
+                            @error('lote_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="id_aviario" class="col-sm-3 col-form-label text-left">Aviário <span
+                                class="text-danger">*</span></label>
+                        <div class="col-sm-7">
+                            <select id="id_aviario" type="text" class="custom-select" name="aviario">
+                                <option value="">Selecione o lote</option>
+                            </select>
+                            @error('aviario')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="temperatura_min" class="col-sm-3 col-form-label text-left">Temperatura (Min/Max) <span
+                                class="text-danger">*</span></label>
+                        <div class="col-sm-7 d-flex justify-content-init">
+                            <div class="mr-2 flex-fill">
+                                <input id="temperatura_min" type="text" class="form-control mr-2" name="temperatura_min"
+                                    value="{{ old('temperatura_min') }}" placeholder="Min">
+                            </div>
+                            <div class="flex-fill">
+                                <input id="temperatura_max" type="text" class="form-control" name="temperatura_max"
+                                    value="{{ old('temperatura_max') }}" placeholder="Max">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="umidade" class="col-sm-3 col-form-label text-left">Umidade (%) <span
+                                class="text-danger">*</span></label>
+                        <div class="col-sm-7">
+                            <input id="umidade" type="text" class="form-control" name="umidade"
+                                value="{{ old('umidade') }}">
+                            @error('umidade')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="leitura_agua" class="col-sm-3 col-form-label text-left">Leitura da água <span
+                                class="text-danger">*</span></label>
+                        <div class="col-sm-7">
+                            <input id="leitura_agua" type="text" class="form-control" name="leitura_agua"
+                                value="{{ old('leitura_agua') }}">
+                            @error('leitura_agua')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="consumo" class="col-sm-3 col-form-label text-left">Consumo (Total/P. Ave) <span
+                                class="text-danger">*</span></label>
+                        <div class="col-sm-7 d-flex justify-content-init">
+                            <div class="mr-2 flex-fill">
+                                <input id="consumo_total" type="text" class="form-control mr-2" name="consumo_total"
+                                    value="{{ old('consumo_total') }}" placeholder="Consumo total" readonly>
+                            </div>
+                            <div class="flex-fill">
+                                <input id="consumo_ave" type="text" class="form-control" name="consumo_ave"
+                                    value="{{ old('consumo_ave') }}" placeholder="Por ave" readonly>
+                            </div>
+                        </div>
+                    </div>
 
             </div>
             <div class="card-footer">
@@ -172,12 +142,14 @@
                         <span class="text-danger">*Obrigatório</span>
                     </div>
                     <div class="col text-right">
-                        <button id="btnmortalidade" type="submit" class="btn btn-primary border border-white shadow mr-0"><i
-                                class="fa fa-save"></i> Salvar</button>
+                        <button id="btncontrolediario" type="submit"
+                            class="btn btn-primary border border-white shadow mr-0"><i class="fa fa-save"></i>
+                            Salvar</button>
                     </div>
                 </div>
             </div>
         </form>
     </div>
-    @include('mortalidades/scripts')
+    @include('controlediarios/scripts')
 @endsection
+
