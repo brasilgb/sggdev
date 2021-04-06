@@ -13,7 +13,7 @@
                         <ol class="breadcrumb pt-1 pb-1 float-right bg-transparent">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
                             <li class="breadcrumb-item"> <a href="{{ route('lotes.index') }}">Controle diário</a></li>
-                            <li class="breadcrumb-item active">Adicionar</a></li>
+                            <li class="breadcrumb-item active">Editar</a></li>
                         </ol>
                     </nav>
                 </div>
@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <form id="formlote" action="{{ route('controlediarios.store') }}" method="post" autocomplete="off">
+        <form id="formlote" action="{{ route('controlediarios.update', ['controlediario' => $controlediario->id_controle]) }}" method="post" autocomplete="off">
             <div class="card-body px-4">
                 @include("parts/flash-message")
                 <div class="alert alert-danger leitura-inicial-0" style="display: none;">
@@ -45,7 +45,7 @@
                                 class="text-danger">*</span></label>
                         <div class="col-sm-7">
                             <input id="dataform" type="text" class="form-control" name="data_controle"
-                                value="{{ old('data_controle', date('d/m/Y', strtotime(now()))) }}">
+                                value="{{ old('data_controle', date('d/m/Y', strtotime($controlediario->data_controle))) }}">
                             @error('data_controle')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -57,10 +57,7 @@
                                 class="text-danger">*</span></label>
                         <div class="col-sm-7">
                             <select id="lote_id" type="text" class="custom-select" name="lote_id">
-                                <option value="">Selecione o lote</option>
-                                @foreach ($lotes as $lote)
-                                    <option value="{{ $lote->id_lote }}">{{ $lote->lote }}</option>
-                                @endforeach
+                                    <option value="{{ $controlediario->lotes->id_lote }}">{{ $controlediario->lotes->lote }}</option>
                             </select>
                             @error('lote_id')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -73,7 +70,7 @@
                                 class="text-danger">*</span></label>
                         <div class="col-sm-7">
                             <select id="id_aviario" type="text" class="custom-select" name="aviario">
-                                <option value="">Selecione o lote</option>
+                                <option value="{{ $controlediario->aviarios->id_aviario}}">{{ $controlediario->aviarios->aviario }}</option>
                             </select>
                             @error('aviario')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -87,11 +84,11 @@
                         <div class="col-sm-7 d-flex justify-content-init">
                             <div class="mr-2 flex-fill">
                                 <input id="temperatura_min" type="text" class="form-control mr-2" name="temperatura_min"
-                                    value="{{ old('temperatura_min') }}" placeholder="Min">
+                                    value="{{ old('temperatura_min', $controlediario->temperatura_min) }}" placeholder="Min">
                             </div>
                             <div class="flex-fill">
                                 <input id="temperatura_max" type="text" class="form-control" name="temperatura_max"
-                                    value="{{ old('temperatura_max') }}" placeholder="Max">
+                                    value="{{ old('temperatura_max', $controlediario->temperatura_max) }}" placeholder="Max">
                             </div>
                         </div>
                     </div>
@@ -101,7 +98,7 @@
                                 class="text-danger">*</span></label>
                         <div class="col-sm-7">
                             <input id="umidade" type="text" class="form-control" name="umidade"
-                                value="{{ old('umidade') }}">
+                                value="{{ old('umidade', $controlediario->umidade) }}">
                             @error('umidade')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -113,7 +110,7 @@
                                 class="text-danger">*</span></label>
                         <div class="col-sm-7">
                             <input id="leitura_agua" type="text" class="form-control" name="leitura_agua"
-                                value="{{ old('leitura_agua') }}">
+                                value="{{ old('leitura_agua', $controlediario->leitura_agua) }}">
                             @error('leitura_agua')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -126,11 +123,11 @@
                         <div class="col-sm-7 d-flex justify-content-init">
                             <div class="mr-2 flex-fill">
                                 <input id="consumo_total" type="text" class="form-control mr-2" name="consumo_total"
-                                    value="{{ old('consumo_total') }}" placeholder="Consumo total" readonly>
+                                    value="{{ old('consumo_total', $controlediario->consumo_total) }}" placeholder="Consumo total" readonly>
                             </div>
                             <div class="flex-fill">
                                 <input id="consumo_ave" type="text" class="form-control" name="consumo_ave"
-                                    value="{{ old('consumo_ave') }}" placeholder="Por ave" readonly>
+                                    value="{{ old('consumo_ave', $controlediario->consumo_ave) }}" placeholder="Por ave" readonly>
                             </div>
                         </div>
                     </div>

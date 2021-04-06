@@ -80,7 +80,7 @@ class ControlediarioController extends Controller
      */
     public function show(Controlediario $controlediario)
     {
-        //
+        return view('controlediarios.edit', compact('controlediario'));
     }
 
     /**
@@ -91,7 +91,7 @@ class ControlediarioController extends Controller
      */
     public function edit(Controlediario $controlediario)
     {
-        //
+        return redirect()->route('controlediarios.show', ['controlediario' => $controlediario->id_controle]);
     }
 
     /**
