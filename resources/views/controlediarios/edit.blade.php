@@ -34,12 +34,9 @@
         <form id="formlote" action="{{ route('controlediarios.update', ['controlediario' => $controlediario->id_controle]) }}" method="post" autocomplete="off">
             <div class="card-body px-4">
                 @include("parts/flash-message")
-                <div class="alert alert-danger leitura-inicial-0" style="display: none;">
-                    <i class="fa fa-exclamation-triangle"></i> Não há leitura anterior para este aviário, inicialmente os cálculos de consumo total e por ave estarão zerados, preencha com os dados de leitura do início do alojamento das aves.
-                </div>
-                @method('POST')
+                @method('PUT')
                 @csrf
-
+                <input type="hidden" id="idcontrole" value="{{$controlediario->id_controle}}">
                     <div class="form-group row">
                         <label for="dataform" class="col-sm-3 col-form-label text-left">Data de leitura <span
                                 class="text-danger">*</span></label>
@@ -111,6 +108,7 @@
                         <div class="col-sm-7">
                             <input id="leitura_agua" type="text" class="form-control" name="leitura_agua"
                                 value="{{ old('leitura_agua', $controlediario->leitura_agua) }}">
+                                <input type="hidden" id="leituradb" value="{{$controlediario->leitura_agua}}">
                             @error('leitura_agua')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -149,4 +147,3 @@
     </div>
     @include('controlediarios/scripts')
 @endsection
-

@@ -1,5 +1,5 @@
 <script>
-$(function() {
+    $(function() {
         $("#lote_id").change(function(e) {
             e.preventDefault;
             idlote = $(this).val();
@@ -22,40 +22,77 @@ $(function() {
         });
     });
 
-    $(function(){
-            $("#id_aviario").change(function(){
-                idlote = $("#lote_id").val();
-                idaviario = $(this).val();
+    $(function() {
+        $("#id_aviario").change(function() {
+            idlote = $("#lote_id").val();
+            idaviario = $(this).val();
 
-                $.ajax({
-                    url: "{{ route('controlediarios.verificacontrole') }}",
-                    type: 'POST',
-                    dataType: 'JSON',
-                    data:{
-                        _token: "{{ csrf_token() }}",
-                        idlote: idlote,
-                        idaviario:idaviario
-                        }
-                }).done(function(response){
-                    if(response.leitura > 0){
-                        $(".leitura-inicial-0").hide('fade');
-                        var aves = parseInt(response.aves);
-                        var leitura_anterior = parseInt(response.leitura_anterior)
-                        $("#leitura_agua").keyup(function (e) {
-                            e.preventDefault();
-                            leitura_atual = $(this).val();
-                            $("#consumo_total").val(leitura_atual - leitura_anterior);
-                            $("#consumo_ave").val(((leitura_atual - leitura_anterior)/aves).toFixed(2));
-                        });
-                    }else{
+            $.ajax({
+                url: "{{ route('controlediarios.verificacontrole') }}",
+                type: 'POST',
+                dataType: 'JSON',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    idlote: idlote,
+                    idaviario: idaviario
+                }
+            }).done(function(response) {
+                if (response.leitura > 0) {
+                    $(".leitura-inicial-0").hide('fade');
+                    var aves = parseInt(response.aves);
+                    var leitura_anterior = parseInt(response.leitura_anterior)
+                    $("#leitura_agua").keyup(function(e) {
+                        e.preventDefault();
+                        leitura_atual = $(this).val();
+                        $("#consumo_total").val(leitura_atual - leitura_anterior);
+                        $("#consumo_ave").val(((leitura_atual - leitura_anterior) /
+                            aves).toFixed(2));
+                    });
+                } else {
                     $(".leitura-inicial-0").show('fade');
                     $("#consumo_total, #consumo_ave").val(0);
-                    }
+                }
 
-                });
             });
         });
-    // Valida form add semnas
+    });
+
+
+    $(function() {
+        idlote = $("#lote_id").val();
+        idaviario = $("#id_aviario").val();
+        idcontrole = $("#idcontrole").val();
+        leituradb = $("#leituradb").val();
+        leitura_agua = $("#leitura_agua").val();
+        leitura = parseInt(leituradb = leitura_agua);
+        $.ajax({
+            url: "{{ route('controlediarios.editacontrole') }}",
+            type: 'POST',
+            dataType: 'JSON',
+            data: {
+                _token: "{{ csrf_token() }}",
+                idlote: idlote,
+                idaviario: idaviario,
+                idcontrole: idcontrole
+            }
+        }).done(function(response) {
+            if (response.leitura_inicial == '0') {
+                var aves = parseInt(response.aves);
+                var leitura_anterior = parseInt(response.leitura_anterior)
+                $("#leitura_agua").keyup(function(e) {
+                    e.preventDefault();
+
+                    $("#consumo_total").val(leitura - leitura_anterior);
+                    $("#consumo_ave").val(((leitura - leitura_anterior) / aves).toFixed(
+                        2));
+                });
+            } else {
+                $("#formlote :input").attr('disabled', true);
+            }
+        });
+
+    });
+
     $("#formlote").validate({
         rules: {
             data_controle: {

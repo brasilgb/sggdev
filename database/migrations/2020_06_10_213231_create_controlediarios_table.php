@@ -24,6 +24,7 @@ class CreateControlediariosTable extends Migration
             $table->integer('leitura_agua');
             $table->integer('consumo_total');
             $table->decimal('consumo_ave', 10,2);
+            $table->integer('leitura_inicial');
             $table->timestamps();
         });
     }
