@@ -164,10 +164,10 @@ class ControlediarioController extends Controller
         $aviarios = Aviario::orderBy('id_aviario', 'DESC')->where('lote_id', $request->idlote)->where('id_aviario', $request->idaviario)->first();
         if (!empty($controle->leitura_agua)) {
             $leitura_inicial = $controle->leitura_inicial;
-            $leitura_anterior = $controle->leitura_agua;
+            $leitura_anterior = $controle->leitura_agua - $controle->consumo_total;
             $aves = $aviarios->tot_ave;
         } else {
-            $leitura = '0';
+            $leitura_inicial = '0';
             $leitura_anterior = '0';
             $aves = '0';
         }

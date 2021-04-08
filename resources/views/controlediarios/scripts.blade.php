@@ -59,12 +59,11 @@
 
 
     $(function() {
+        $("#leitura_agua").keyup(function(e) {
         idlote = $("#lote_id").val();
         idaviario = $("#id_aviario").val();
         idcontrole = $("#idcontrole").val();
-        leituradb = $("#leituradb").val();
-        leitura_agua = $("#leitura_agua").val();
-        leitura = parseInt(leituradb = leitura_agua);
+        leitura_agua = parseInt($("#leitura_agua").val());
         $.ajax({
             url: "{{ route('controlediarios.editacontrole') }}",
             type: 'POST',
@@ -76,19 +75,17 @@
                 idcontrole: idcontrole
             }
         }).done(function(response) {
-            if (response.leitura_inicial == '0') {
+            if(response.leitura_inicial){
+                $("#formlote :input").attr('disabled', true);
+            }else{
                 var aves = parseInt(response.aves);
                 var leitura_anterior = parseInt(response.leitura_anterior)
-                $("#leitura_agua").keyup(function(e) {
                     e.preventDefault();
-
-                    $("#consumo_total").val(leitura - leitura_anterior);
-                    $("#consumo_ave").val(((leitura - leitura_anterior) / aves).toFixed(
+                    $("#consumo_total").val(leitura_agua - leitura_anterior);
+                    $("#consumo_ave").val(((leitura_agua - leitura_anterior) / aves).toFixed(
                         2));
-                });
-            } else {
-                $("#formlote :input").attr('disabled', true);
             }
+                });
         });
 
     });
