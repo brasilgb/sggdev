@@ -4,6 +4,7 @@ use App\Http\Controllers\AviarioController;
 use App\Http\Controllers\ColetaController;
 use App\Http\Controllers\ConsumoController;
 use App\Http\Controllers\ControlediarioController;
+use App\Http\Controllers\DespesaController;
 use App\Http\Controllers\EnvioController;
 use App\Http\Controllers\GeraltarefaController;
 use App\Http\Controllers\HomeController;
@@ -95,3 +96,7 @@ Route::prefix('controlediarios')->name('controlediarios.')->group(function () {
 });
 Route::resource('controlediarios', ControlediarioController::class);
 
+Route::prefix('despesas')->name('despesas.')->group(function () {
+
+});
+Route::resource('despesas', DespesaController::class);

@@ -75,7 +75,7 @@
                     idcontrole: idcontrole
                 }
             }).done(function(response) {
-                if (response.leitura_inicial) {
+                if (response.leitura_inicial > 0) {
                     $("#formlote :input").attr('disabled', true);
                 } else {
                     var aves = parseInt(response.aves);
