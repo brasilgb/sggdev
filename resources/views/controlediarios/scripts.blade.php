@@ -60,32 +60,32 @@
 
     $(function() {
         $("#leitura_agua").keyup(function(e) {
-        idlote = $("#lote_id").val();
-        idaviario = $("#id_aviario").val();
-        idcontrole = $("#idcontrole").val();
-        leitura_agua = parseInt($("#leitura_agua").val());
-        $.ajax({
-            url: "{{ route('controlediarios.editacontrole') }}",
-            type: 'POST',
-            dataType: 'JSON',
-            data: {
-                _token: "{{ csrf_token() }}",
-                idlote: idlote,
-                idaviario: idaviario,
-                idcontrole: idcontrole
-            }
-        }).done(function(response) {
-            if(response.leitura_inicial){
-                $("#formlote :input").attr('disabled', true);
-            }else{
-                var aves = parseInt(response.aves);
-                var leitura_anterior = parseInt(response.leitura_anterior)
+            idlote = $("#lote_id").val();
+            idaviario = $("#id_aviario").val();
+            idcontrole = $("#idcontrole").val();
+            leitura_agua = parseInt($("#leitura_agua").val());
+            $.ajax({
+                url: "{{ route('controlediarios.editacontrole') }}",
+                type: 'POST',
+                dataType: 'JSON',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    idlote: idlote,
+                    idaviario: idaviario,
+                    idcontrole: idcontrole
+                }
+            }).done(function(response) {
+                if (response.leitura_inicial) {
+                    $("#formlote :input").attr('disabled', true);
+                } else {
+                    var aves = parseInt(response.aves);
+                    var leitura_anterior = parseInt(response.leitura_anterior)
                     e.preventDefault();
                     $("#consumo_total").val(leitura_agua - leitura_anterior);
                     $("#consumo_ave").val(((leitura_agua - leitura_anterior) / aves).toFixed(
                         2));
-            }
-                });
+                }
+            });
         });
 
     });
