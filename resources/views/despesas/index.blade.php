@@ -42,10 +42,9 @@
                     <thead>
                         <tr class="text-left">
                             <th>Descritivo</th>
-                            <th>Início</th>
-                            <th>Previsão</th>
-                            <th>Término</th>
-                            <th>Situação</th>
+                            <th>Valor</th>
+                            <th>Vencimento</th>
+                            <th>Situacao</th>
                             <th style="width: 198px; min-width: 198px;"><i class="fa fa-level-down-alt"></i></th>
                         </tr>
                     </thead>
@@ -53,10 +52,9 @@
                         @forelse ($despesas as $despesa)
                             <tr class="text-left">
                                 <td class="align-middle">{{ $despesa->descritivo }}</td>
-                                <td class="align-middle">{{ date('d/m/Y', strtotime($despesa->data_inicio)) }} {{ date('H:i', strtotime($despesa->hora_inicio)) }}</td>
-                                <td class="align-middle">{{ date('d/m/Y', strtotime($despesa->data_previsao)) }} {{ date('H:i', strtotime($despesa->hora_previsao)) }}</td>
-                                <td class="align-middle">@if($despesa->data_termino){{ date('d/m/Y', strtotime($despesa->data_termino)) }} {{ date('H:i', strtotime($despesa->hora_termino)) }}@endif</td>
-                                <td class="align-middle"><span class="badge @if($despesa->situacao == 'Aberta') badge-dark font-weight-bold p-2 border border-white shadow @elseif($despesa->situacao == 'Fechada') badge-success font-weight-bold p-2 border border-white shadow @else badge-danger font-weight-bold p-2 border border-white shadow @endif">{{ $despesa->situacao }}</span></td>
+                                <td class="align-middle">{{ $despesa->valor }}</td>
+                                <td class="align-middle">{{ date('d/m/Y', strtotime($despesa->data_previsao)) }}</td>
+                                <td class="align-middle"><span class="badge @if($despesa->situacao == 'Aberta') badge-dark font-weight-bold p-2 border border-white shadow @elseif($despesa->situacao == 'Pago') badge-success font-weight-bold p-2 border border-white shadow @else badge-danger font-weight-bold p-2 border border-white shadow @endif">{{ $despesa->situacao }}</span></td>
                                 <td class="align-middle">
 
                                     <button

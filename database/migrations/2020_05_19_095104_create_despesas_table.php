@@ -17,8 +17,10 @@ class CreateDespesasTable extends Migration
             $table->integer('id_despesa')->primary();
             $table->integer('periodo');
             $table->date('vencimento');
-            $table->char('descritivo');
+            $table->string('descritivo');
             $table->decimal('valor', 10,2);
+            $table->string('situacao');
+            $table->text('observacao');
             $table->timestamps();
         });
     }

@@ -39,37 +39,19 @@
                 @csrf
 
                 <div class="form-group row">
-                    <label for="data_inicio" class="col-sm-3 col-form-label text-left">Início tarefa (data/hora) <span
+                    <label for="vencimento" class="col-sm-3 col-form-label text-left">Data vencimento <span
                             class="text-danger">*</span></label>
-                    <div class="col-sm-7 d-flex justify-content-init">
-                        <div class="mr-2 flex-fill">
-                            <input id="data1" type="text" class="form-control" name="data_inicio"
-                                value="{{ old('data_inicio', date('d/m/Y', strtotime(now()))) }}">
-                        </div>
-                        <div class="flex-fill">
-                            <input id="hora1" type="text" class="form-control" name="hora_inicio"
-                                value="{{ old('hora_inicio', date('H:i', strtotime(now()))) }}">
-                        </div>
+                    <div class="col-sm-7">
+                        <input id="data1" type="text" class="form-control" name="data_inicio"
+                            value="{{ old('vencimento', date('d/m/Y', strtotime(now()))) }}">
+                            @error('vencimento')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="data_previsao" class="col-sm-3 col-form-label text-left">Previsão tarefa (data/hora) <span
-                            class="text-danger">*</span></label>
-                    <div class="col-sm-7 d-flex justify-content-init">
-                        <div class="mr-2 flex-fill">
-                            <input id="data1" type="text" class="form-control" name="data_previsao"
-                                value="{{ old('data_previsao', date('d/m/Y', strtotime(now()))) }}">
-                        </div>
-                        <div class="flex-fill">
-                            <input id="hora1" type="text" class="form-control" name="hora_previsao"
-                                value="{{ old('hora_previsao', date('H:i', strtotime(now()))) }}">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="dataform" class="col-sm-3 col-form-label text-left">Descritivo (título)<span
+                    <label for="descritivo" class="col-sm-3 col-form-label text-left">Descritivo<span
                             class="text-danger">*</span></label>
                     <div class="col-sm-7">
                         <input id="descritivo" type="text" class="form-control" name="descritivo"
@@ -81,12 +63,24 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="descricao" class="col-sm-3 col-form-label text-left">Descrição <span
+                    <label for="valor" class="col-sm-3 col-form-label text-left">Valor<span
                             class="text-danger">*</span></label>
                     <div class="col-sm-7">
-                        <textarea rows="3" id="descricao" type="text" class="form-control"
-                            name="descricao">{{ old('descricao') }}</textarea>
-                        @error('descricao')
+                        <input id="valor" type="text" class="form-control" name="valor"
+                            value="{{ old('valor') }}">
+                        @error('valor')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="observacao" class="col-sm-3 col-form-label text-left">Observação <span
+                            class="text-danger">*</span></label>
+                    <div class="col-sm-7">
+                        <textarea rows="3" id="observacao" type="text" class="form-control"
+                            name="descricao">{{ old('observacao') }}</textarea>
+                        @error('observacao')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
