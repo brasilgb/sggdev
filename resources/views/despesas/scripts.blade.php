@@ -1,36 +1,26 @@
 <script>
   // Valida form add semnas
-    $("#formlote").validate({
+    $("#formdespesa").validate({
         rules: {
-            data_inicio: {
-                required: true
-            },
-            hora_inicio: {
-                required: true
-            },
-            data_previsao: {
-                required: true
-            },
-            hora_previsao: {
+            vencimento: {
                 required: true
             },
             descritivo: {
                 required: true
             },
-           descricao: {
-                required: true
+            valor: {
+                required: true,
+                number:true
             }
         },
         messages: {
-            data_inicio: 'Selecione a data de início!',
-            hora_inicio: 'Selecione a hora de início!',
-            data_previsao: 'Selecione a data de início!',
-            hora_previsao: 'Selecione a data de início!',
+            vencimento: 'Selecione a data do vencimento!',
             descritivo: {
                 required: 'Digite um descritivo (título)!'
             },
-            descricao: {
-                required: 'Digite a descrição!'
+            valor: {
+                required: 'Digite o valor!',
+                number: 'Somente números inteiros ou decimais com ponto!'
             }
         }
     });
@@ -38,26 +28,4 @@
         param) { // Adding rules for Amount(Not equal to zero)
         return this.optional(element) || value != '0';
     });
-
-
-    $(".avesfemeas").keyup(function() {
-        var femeas = 0;
-        $(".avesfemeas").each(function(index, element) {
-            if ($(element).val()) {
-                femeas += parseInt($(element).val());
-            }
-        });
-        $("#avesfemeas").val(femeas);
-    });
-
-    $(".avesmachos").keyup(function() {
-        var machos = 0;
-        $(".avesmachos").each(function(index, element) {
-            if ($(element).val()) {
-                machos += parseInt($(element).val());
-            }
-        });
-        $("#avesmachos").val(machos);
-    });
-
 </script>

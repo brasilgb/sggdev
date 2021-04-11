@@ -13,6 +13,7 @@ use App\Http\Controllers\MortalidadeController;
 use App\Http\Controllers\PeriodoController;
 use App\Http\Controllers\PesagemController;
 use App\Http\Controllers\RecebimentoController;
+use App\Models\Despesa;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -97,6 +98,6 @@ Route::prefix('controlediarios')->name('controlediarios.')->group(function () {
 Route::resource('controlediarios', ControlediarioController::class);
 
 Route::prefix('despesas')->name('despesas.')->group(function () {
-
+    Route::post('busca', [DespesaController::class, 'busca'])->name('busca');
 });
 Route::resource('despesas', DespesaController::class);

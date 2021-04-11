@@ -66,7 +66,7 @@
                     <label for="lote" class="col-sm-3 col-form-label text-left">Lote <span
                             class="text-danger">*</span></label>
                     <div class="col-sm-7">
-                        <select id="lote_id" type="text" class="custom-select" name="lote_id">
+                        <select id="lote_id" class="custom-select" name="lote_id">
                             <option value="">Selecione o lote</option>
                                 <option value="{{ $recebimento->lotes->id_lote }}" @if ($recebimento->lotes->id_lote == $recebimento->lote_id) selected @endif>{{ $recebimento->lotes->lote }}</option>
                         </select>

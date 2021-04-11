@@ -6,13 +6,13 @@
         <div class="card-header pb-0 border-bottom border-white" style="background-color: #062142;">
             <div class="row">
                 <div class="col">
-                    <h4 class="text-left text-white mt-1"><i class="fas fa-fw fa-tasks"></i> Tarefas gerais</h4>
+                    <h4 class="text-left text-white mt-1"><i class="fas fa-fw fa-donate"></i> Despesas</h4>
                 </div>
                 <div class="col">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb pt-1 pb-1 float-right bg-transparent">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                            <li class="breadcrumb-item"> <a href="{{ route('lotes.index') }}">Tarefas gerais</a></li>
+                            <li class="breadcrumb-item"> <a href="{{ route('despesas.index') }}">Despesas</a></li>
                             <li class="breadcrumb-item active">Adicionar</a></li>
                         </ol>
                     </nav>
@@ -22,16 +22,16 @@
         <div class="card-header">
             <div class="row">
                 <div class="col text-left">
-                    <button onclick="window.location='{{ route('geraltarefas.index') }}'"
+                    <button onclick="window.location='{{ route('despesas.index') }}'"
                         class="btn btn-primary shadow-sm border-white"><i class="fa fa-angle-left"></i> Voltar</button>
                 </div>
 
                 <div class="col">
-                    @include('geraltarefas/search')
+                    @include('despesas/search')
                 </div>
             </div>
         </div>
-        <form id="formlote" action="{{ route('geraltarefas.store') }}" method="post" autocomplete="off">
+        <form id="formdespesa" action="{{ route('despesas.store') }}" method="post" autocomplete="off">
             <div class="card-body px-4">
                 @include("parts/flash-message")
 
@@ -42,7 +42,7 @@
                     <label for="vencimento" class="col-sm-3 col-form-label text-left">Data vencimento <span
                             class="text-danger">*</span></label>
                     <div class="col-sm-7">
-                        <input id="data1" type="text" class="form-control" name="data_inicio"
+                        <input id="data1" type="text" class="form-control" name="vencimento"
                             value="{{ old('vencimento', date('d/m/Y', strtotime(now()))) }}">
                             @error('vencimento')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -79,7 +79,7 @@
                             class="text-danger">*</span></label>
                     <div class="col-sm-7">
                         <textarea rows="3" id="observacao" type="text" class="form-control"
-                            name="descricao">{{ old('observacao') }}</textarea>
+                            name="observacao">{{ old('observacao') }}</textarea>
                         @error('observacao')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -93,12 +93,12 @@
                         <span class="text-danger">*Obrigatório</span>
                     </div>
                     <div class="col text-right">
-                        <button id="btngeraltarefa" type="submit" class="btn btn-primary border border-white shadow mr-0"><i
+                        <button id="btndespesa" type="submit" class="btn btn-primary border border-white shadow mr-0"><i
                                 class="fa fa-save"></i> Salvar</button>
                     </div>
                 </div>
             </div>
         </form>
     </div>
-    @include('geraltarefas/scripts')
+    @include('despesas/scripts')
 @endsection
