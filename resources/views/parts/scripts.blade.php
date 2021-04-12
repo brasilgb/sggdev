@@ -27,5 +27,12 @@
             $(this).val(toup.toUpperCase());
         });
     });
+    // Enter no preenchimento de campos
+function EnterTab(InputId, Evento) {
 
+if (Evento.keyCode == 13) {
+    document.getElementById(InputId).focus();
+    document.getElementById(InputId).select();
+}
+}
 </script>

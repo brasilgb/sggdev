@@ -33,7 +33,8 @@ class MetaController extends Controller
 
     public function updatemeta(Request $request, Semana $semana)
     {
-        $semana->update([$request->field => $request->meta]);
+        $semana->where('id_semana', $request->idsemana)->update([$request->field => $request->meta]);
+        return response()->json(['semanaid' => $request->idsemana]);
     }
 
 }

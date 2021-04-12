@@ -1,10 +1,13 @@
 <?php
 
 use App\Http\Controllers\AviarioController;
+use App\Http\Controllers\BackupController;
 use App\Http\Controllers\ColetaController;
 use App\Http\Controllers\ConsumoController;
 use App\Http\Controllers\ControlediarioController;
 use App\Http\Controllers\DespesaController;
+use App\Http\Controllers\EmailController;
+use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\EnvioController;
 use App\Http\Controllers\GeraltarefaController;
 use App\Http\Controllers\HomeController;
@@ -108,3 +111,9 @@ Route::prefix('metas')->name('metas.')->group(function () {
     Route::get('producao', [MetaController::class, 'producao'])->name('producao');
     Route::post('updatemeta', [MetaController::class, 'updatemeta'])->name('updatemeta');
 });
+
+Route::resource('empresas', EmpresaController::class);
+
+Route::resource('emails', EmailController::class);
+
+Route::resource('backups', BackupController::class);

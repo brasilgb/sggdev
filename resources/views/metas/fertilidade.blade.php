@@ -20,17 +20,47 @@
         </div>
         <div class="card-body p-2">
             <div class="d-flex align-content-start flex-wrap">
-                @foreach ($semanas as $producao)
+                @foreach ($semanas as $fertilidade)
                 <div class="w-25">
                     <div class="bg-gray-400 m-1 p-2 shadow-sm rounded-lg text-gray-200" style="border:2px solid #fff;">
-                    <div>Semana: <span class="badge badge-primary">{{ $producao->semana }}</span></div>
-                    <div>{{ date("d/m/Y", strtotime($producao->data_inicial)) }} à {{ date("d/m/Y", strtotime($producao->data_final)) }}</div>
-                    <div class=""><input class="form-control" type="text" value="{{ $producao->producao }}"></div>
-                </div>
+                        <div>Semana: <span class="badge badge-primary">{{ $fertilidade->semana }}</span></div>
+                        <div>{{ date("d/m/Y", strtotime($fertilidade->data_inicial)) }} à
+                            {{ date("d/m/Y", strtotime($fertilidade->data_final)) }}</div>
+                        <div class=""><input id="semana{{ $fertilidade->id_semana }}" style=" @if($fertilidade->fertilidade < 1) border: 1px solid rgb(184, 184, 184)!important; @endif"
+                                class="form-control altermeta @if($fertilidade->fertilidade > 0) bg-success border-white @endif"
+                                val-semana="{{ $fertilidade->id_semana }}" val-field="fertilidade" type="text" name=""
+                                value="{{ $fertilidade->fertilidade }}"  onkeydown="javascript:EnterTab('semana{{ $fertilidade->id_semana + 1 }}',event)"></div>
+                    </div>
                 </div>
                 @endforeach
 
             </div>
         </div>
     </div>
+    <script>
+        $(function(){
+                $(".altermeta").keyup(function(e){
+                    e.preventDefault();
+                    field = $(this).attr("val-field");
+                    meta = $(this).val();
+                    idsemana = $(this).attr("val-semana");
+                    $.ajax({
+                        url: "{{ route('metas.updatemeta') }}",
+                        type: "POST",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            idsemana: idsemana,
+                            field: field,
+                            meta: meta
+                        }
+                        }).done(function(response){
+                            if(meta > 0){
+                                $("#semana"+response.semanaid).addClass('bg-success border-white');
+                            }else{
+                                $("#semana"+response.semanaid).removeClass('bg-success');
+                            }
+                    });
+                });
+            });
+    </script>
 @endsection

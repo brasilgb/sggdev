@@ -15,8 +15,8 @@
               Lotes/Aviários
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="{{ route('lotes.index') }}">Lotes</a>
-              <a class="dropdown-item" href="{{ route('aviarios.index') }}">Aviários</a>
+              <a class="dropdown-item" href="{{ route('lotes.index') }}"><i class="fa fa-angle-right"></i> Lotes</a>
+              <a class="dropdown-item" href="{{ route('aviarios.index') }}"><i class="fa fa-angle-right"></i> Aviários</a>
             </div>
           </li>
           <li class="nav-item">
@@ -28,7 +28,7 @@
               Ovos
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="{{ route('envios.index')}}">Envio</a>
+              <a class="dropdown-item" href="{{ route('envios.index')}}"><i class="fa fa-angle-right"></i> Envio</a>
             </div>
           </li>
 
@@ -37,8 +37,8 @@
               Aves
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="{{route('mortalidades.index') }}">Mortalidade</a>
-              <a class="dropdown-item" href="{{route('pesagens.index') }}">Pesagem</a>
+              <a class="dropdown-item" href="{{route('mortalidades.index') }}"><i class="fa fa-angle-right"></i> Mortalidade</a>
+              <a class="dropdown-item" href="{{route('pesagens.index') }}"><i class="fa fa-angle-right"></i> Pesagem</a>
             </div>
           </li>
 
@@ -47,8 +47,8 @@
               Ração
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="{{ route('recebimentos.index') }}">Recebimento</a>
-              <a class="dropdown-item" href="{{ route('consumos.index')}}">Consumo</a>
+              <a class="dropdown-item" href="{{ route('recebimentos.index') }}"><i class="fa fa-angle-right"></i> Recebimento</a>
+              <a class="dropdown-item" href="{{ route('consumos.index')}}"><i class="fa fa-angle-right"></i> Consumo</a>
             </div>
           </li>
 
@@ -57,8 +57,8 @@
               Tarefas
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="{{ route('geraltarefas.index') }}">Tarefas gerais</a>
-              <a class="dropdown-item" href="{{ route('controlediarios.index') }}">Controle diário</a>
+              <a class="dropdown-item" href="{{ route('geraltarefas.index') }}"><i class="fa fa-angle-right"></i> Tarefas gerais</a>
+              <a class="dropdown-item" href="{{ route('controlediarios.index') }}"><i class="fa fa-angle-right"></i> Controle diário</a>
             </div>
           </li>
 
@@ -67,7 +67,7 @@
               Financeiro
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="{{ route('despesas.index') }}">Despesas</a>
+              <a class="dropdown-item" href="{{ route('despesas.index') }}"><i class="fa fa-angle-right"></i> Despesas</a>
             </div>
           </li>
 
@@ -76,9 +76,9 @@
               Metas
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="{{ route('metas.eclosao') }}">Eclosão</a>
-              <a class="dropdown-item" href="{{ route('metas.fertilidade') }}">Fertilidade</a>
-              <a class="dropdown-item" href="{{ route('metas.producao') }}">Produção</a>
+              <a class="dropdown-item" href="{{ route('metas.eclosao') }}"><i class="fa fa-angle-right"></i> Eclosão</a>
+              <a class="dropdown-item" href="{{ route('metas.fertilidade') }}"><i class="fa fa-angle-right"></i> Fertilidade</a>
+              <a class="dropdown-item" href="{{ route('metas.producao') }}"><i class="fa fa-angle-right"></i> Produção</a>
             </div>
           </li>
 
@@ -87,9 +87,9 @@
               Configurações
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+              <a class="dropdown-item" href="{{ route('empresas.index') }}"><i class="fa fa-angle-right"></i> Empresa</a>
+              <a class="dropdown-item" href="{{ route('emails.index') }}"><i class="fa fa-angle-right"></i> E-mail</a>
+              <a class="dropdown-item" href="{{ route('backups.index') }}"><i class="fa fa-angle-right"></i> Backup</a>
             </div>
           </li>
 
