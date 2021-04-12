@@ -31,4 +31,9 @@ class MetaController extends Controller
         return Semana::where('periodo', Periodo::ativo())->orderBy('id_semana', 'ASC')->get();
     }
 
+    public function updatemeta(Request $request, Semana $semana)
+    {
+        $semana->update([$request->field => $request->meta]);
+    }
+
 }

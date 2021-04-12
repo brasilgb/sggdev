@@ -106,4 +106,5 @@ Route::prefix('metas')->name('metas.')->group(function () {
     Route::get('eclosao', [MetaController::class, 'eclosao'])->name('eclosao');
     Route::get('fertilidade', [MetaController::class, 'fertilidade'])->name('fertilidade');
     Route::get('producao', [MetaController::class, 'producao'])->name('producao');
+    Route::post('updatemeta', [MetaController::class, 'updatemeta'])->name('updatemeta');
 });

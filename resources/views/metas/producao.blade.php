@@ -25,7 +25,7 @@
                     <div class="bg-gray-400 m-1 p-2 shadow-sm rounded-lg text-gray-200" style="border:2px solid #fff;">
                     <div>Semana: <span class="badge badge-primary">{{ $producao->semana }}</span></div>
                     <div>{{ date("d/m/Y", strtotime($producao->data_inicial)) }} à {{ date("d/m/Y", strtotime($producao->data_final)) }}</div>
-                    <div class=""><input class="form-control" type="text" value="{{ $producao->producao }}"></div>
+                    <div class=""><input class="form-control altermeta" type="text" value="{{ $producao->producao }}"></div>
                 </div>
                 </div>
                 @endforeach
@@ -33,4 +33,19 @@
             </div>
         </div>
     </div>
+    <script>
+        $(function(){
+            $(".altermeta").keyup(function(e){
+                e.preventDefault();
+                meta = $(this).val();
+                console.log(meta);
+                $.ajax({
+                    url: "{{ route('metas.updatemetas') }}",
+                    type: "POST",
+                    _token: "{{ csrf_token() }}",
+                    data: {}
+                });
+            });
+        });
+    </script>
 @endsection
