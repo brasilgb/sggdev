@@ -19,7 +19,7 @@ class AviarioController extends Controller
      */
     public function index()
     {
-        $aviarios = Aviario::orderBy('id_aviario', 'DESC')->paginate(15);
+        $aviarios = Aviario::where('periodo', Periodo::ativo())->orderBy('id_aviario', 'DESC')->paginate(15);
         return view('aviarios.index', compact('aviarios'));
     }
 

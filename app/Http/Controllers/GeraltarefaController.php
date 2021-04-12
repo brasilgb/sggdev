@@ -17,7 +17,7 @@ class GeraltarefaController extends Controller
      */
     public function index()
     {
-        $geraltarefas = Geraltarefa::orderBy('id_tarefa')->paginate(15);
+        $geraltarefas = Geraltarefa::where('periodo', Periodo::ativo())->orderBy('id_tarefa')->paginate(15);
         return view('geraltarefas.index', compact('geraltarefas'));
     }
 

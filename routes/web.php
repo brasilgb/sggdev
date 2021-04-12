@@ -9,11 +9,11 @@ use App\Http\Controllers\EnvioController;
 use App\Http\Controllers\GeraltarefaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoteController;
+use App\Http\Controllers\MetaController;
 use App\Http\Controllers\MortalidadeController;
 use App\Http\Controllers\PeriodoController;
 use App\Http\Controllers\PesagemController;
 use App\Http\Controllers\RecebimentoController;
-use App\Models\Despesa;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -101,3 +101,9 @@ Route::prefix('despesas')->name('despesas.')->group(function () {
     Route::post('busca', [DespesaController::class, 'busca'])->name('busca');
 });
 Route::resource('despesas', DespesaController::class);
+
+Route::prefix('metas')->name('metas.')->group(function () {
+    Route::get('eclosao', [MetaController::class, 'eclosao'])->name('eclosao');
+    Route::get('fertilidade', [MetaController::class, 'fertilidade'])->name('fertilidade');
+    Route::get('producao', [MetaController::class, 'producao'])->name('producao');
+});

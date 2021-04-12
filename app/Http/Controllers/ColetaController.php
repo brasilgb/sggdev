@@ -18,7 +18,8 @@ class ColetaController extends Controller
      */
     public function index()
     {
-        $coletas = Coleta::orderBy('id_coleta', 'DESC')->paginate(15);
+
+        $coletas = Coleta::where('data_coleta', date("Y-m-d", strtotime(now())))->where('periodo', Periodo::ativo())->orderBy('id_coleta', 'DESC')->paginate(15);
         return view('coletas.index', compact('coletas'));
     }
 

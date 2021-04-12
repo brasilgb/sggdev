@@ -19,7 +19,7 @@ class PesagemController extends Controller
      */
     public function index()
     {
-        $pesagens = Pesagem::orderBy('id_peso')->paginate(15);
+        $pesagens = Pesagem::where('periodo', Periodo::ativo())->orderBy('id_peso')->paginate(15);
         return view('pesagens.index', compact('pesagens'));
     }
 

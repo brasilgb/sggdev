@@ -17,7 +17,7 @@ class DespesaController extends Controller
      */
     public function index()
     {
-        $despesas = Despesa::orderBy('id_despesa', 'DESC')->paginate(15);
+        $despesas = Despesa::where('periodo', Periodo::ativo())->orderBy('id_despesa', 'DESC')->paginate(15);
         return view('despesas.index', compact('despesas'));
     }
 

@@ -18,7 +18,7 @@ class LoteController extends Controller
     public function index()
     {
 
-        $lotes = Lote::orderBy('id_lote', 'DESC')->paginate(15);
+        $lotes = Lote::where('periodo', Periodo::ativo())->orderBy('id_lote', 'DESC')->paginate(15);
         return view('lotes.index', compact('lotes'));
     }
 

@@ -18,7 +18,7 @@ class ConsumoController extends Controller
      */
     public function index()
     {
-        $consumos = Consumo::orderBy('id_consumo', 'DESC')->paginate(15);
+        $consumos = Consumo::where('periodo', Periodo::ativo())->where('periodo', Periodo::ativo())->orderBy('id_consumo', 'DESC')->paginate(15);
 
         return view('consumos.index', compact('consumos'));
     }

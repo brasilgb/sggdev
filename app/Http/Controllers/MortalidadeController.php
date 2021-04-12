@@ -18,7 +18,7 @@ class MortalidadeController extends Controller
      */
     public function index()
     {
-        $mortalidades = Mortalidade::orderBy('id_mortalidade', 'DESC')->paginate(15);
+        $mortalidades = Mortalidade::where('periodo', Periodo::ativo())->orderBy('id_mortalidade', 'DESC')->paginate(15);
 
         return view('mortalidades.index', compact('mortalidades'));
     }

@@ -9,8 +9,7 @@ use Illuminate\Http\Request;
 class SemanaController extends Controller
 {
     public function producao() {
-        $ativo = Periodo::ativo();
-        $producao = Semana::where('periodo', $ativo)->get();
+        $producao = Semana::where('periodo', Periodo::ativo())->get();
 
         return view('semanas.producao', compact('producao'));
     }

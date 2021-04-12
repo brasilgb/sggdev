@@ -19,7 +19,7 @@ class EnvioController extends Controller
      */
     public function index()
     {
-        $envios = Envio::orderBy('id_envio', 'DESC')->paginate(15);
+        $envios = Envio::where('periodo', Periodo::ativo())->orderBy('id_envio', 'DESC')->paginate(15);
         return view('envios.index', compact('envios'));
     }
 

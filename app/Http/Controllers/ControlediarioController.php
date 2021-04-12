@@ -19,7 +19,7 @@ class ControlediarioController extends Controller
      */
     public function index()
     {
-        $controlediarios = Controlediario::orderBy('id_controle', 'DESC')->paginate(15);
+        $controlediarios = Controlediario::where('periodo', Periodo::ativo())->orderBy('id_controle', 'DESC')->paginate(15);
         return view('controlediarios.index', compact('controlediarios'));
     }
 

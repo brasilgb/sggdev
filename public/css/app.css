@@ -6173,46 +6173,6 @@ readers do not read off random characters that represent icons */
   background-color: #062142;
 }
 
-.border-gray-100 {
-  border-color: #f8f9fa !important;
-}
-
-.border-gray-200 {
-  border-color: #e9ecef !important;
-}
-
-.border-gray-300 {
-  border-color: #dee2e6 !important;
-}
-
-.border-gray-400 {
-  border-color: #ced4da !important;
-}
-
-.border-gray-500 {
-  border-color: #adb5bd !important;
-}
-
-.border-gray-600 {
-  border-color: #6c757d !important;
-}
-
-.border-gray-700 {
-  border-color: #495057 !important;
-}
-
-.border-gray-800 {
-  border-color: #343a40 !important;
-}
-
-.border-gray-900 {
-  border-color: #212529 !important;
-}
-
-.border-orange {
-  border-color: #f6993f !important;
-}
-
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors

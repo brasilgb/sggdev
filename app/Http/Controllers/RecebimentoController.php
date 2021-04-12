@@ -18,7 +18,7 @@ class RecebimentoController extends Controller
      */
     public function index()
     {
-        $recebimentos = Recebimento::orderBy('id_recebimento')->paginate(15);
+        $recebimentos = Recebimento::where('periodo', Periodo::ativo())->orderBy('id_recebimento')->paginate(15);
         return view('recebimentos.index', compact('recebimentos'));
     }
 
