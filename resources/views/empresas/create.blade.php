@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <form id="formlote" action="{{ route('empresas.create') }}" method="post" autocomplete="off"
+        <form id="formlote" action="{{ route('empresas.store') }}" method="post" autocomplete="off"
             enctype="multipart/form-data">
             <div class="card-body p-4 ">
 
