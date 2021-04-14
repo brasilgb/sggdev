@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <form id="formlote" action="{{ route('empresas.store') }}" method="post" autocomplete="off"
+        <form id="formempresa" action="{{ route('empresas.store') }}" method="post" autocomplete="off"
             enctype="multipart/form-data">
             <div class="card-body p-4 ">
 
@@ -30,7 +30,7 @@
                             class="text-danger">*</span></label>
                     <div class="col-sm-7">
                         <div class="custom-file">
-                            <input id="logotipo" type="file" class="custom-file-input form-control-file" name="logotipo">
+                            <input id="logotipo" type="file" class="custom-file-input @error('logotipo') is-invalid @enderror" name="logotipo">
                             <label class="custom-file-label" for="logotipo">Selecione a imagem</label>
                         </div>
 
@@ -55,7 +55,7 @@
                     <label for="razao_social" class="col-sm-3 col-form-label text-left">Razão social <span
                             class="text-danger">*</span></label>
                     <div class="col-sm-7">
-                        <input id="razao_social" type="text" class="form-control" name="aviario"
+                        <input id="razao_social" type="text" class="form-control" name="razao_social"
                             value="{{ old('razao_social') }}">
                         @error('razao_social')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -133,13 +133,5 @@
             </div>
         </form>
     </div>
-    <script>
-
-        $(document).ready(function() {
-            $('.custom-file-input').on('change', function(e) {
-                e.target.nextElementSibling.innerHTML = e.target.files[0].name;
-            });
-        });
-
-    </script>
+    @include('empresas/scripts')
 @endsection

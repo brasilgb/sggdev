@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Empresa;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Validator;
 
 class EmpresaController extends Controller
 {
@@ -33,9 +35,50 @@ class EmpresaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Empresa $empresa)
     {
-        //
+
+        $data = $request->all();
+
+        $rules = [
+            'logotipo' => 'required|image|mimes:jpeg,png,jpg,gif|max:1024',
+            'cnpj' => 'required',
+            'razao_social' => 'required',
+            'endereco' => 'required',
+            'cidade' => 'required',
+            'uf' => 'required',
+            'telefone' => 'required',
+            'email' => 'required|email'
+        ];
+
+        $messages = [
+            'required' => 'O campo :attribute deve ser preenchido!',
+            'integer' => 'O campo :attribute só aceita inteiros!',
+            'date_format' => 'O campo data do lote só aceita datas!',
+            'unique' => 'O nome do :attribute já existe na base de dados!',
+            'email' => 'Digite um e-mail válido',
+            'image' => 'Arquivo de imagem não é válido, Arquivos: jpg, png ou gif, Tamanho: 1MB!'
+        ];
+        $validator = Validator::make($data, $rules, $messages)->validate();
+        if (!is_dir(public_path('/storage/thumbnail')) && !is_dir(public_path('/storage/images'))):
+            mkdir(public_path('/storage/thumbnail'), 0777);
+            mkdir(public_path('/storage/images'), 0777);
+        endif;
+        $image = $request->file('logotipo');
+        $nomeimagem = time() . '.' . $image->extension();
+        $destinationPath = public_path('/storage/thumbnail');
+        $img = Image::make($image->path());
+        $img->resize(100, 100, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($destinationPath . '/' . $nomeimagem);
+        $destinationPath = public_path('/storage/images');
+        $image->move($destinationPath, $nomeimagem);
+        unlink(public_path('/storage/images/' . $nomeimagem));
+
+        $data['logotipo'] = $nomeimagem;
+        $data['id_empresa'] = Empresa::idempresa();
+        $empresa->create($data);
+        return redirect()->route('empresas.edit', ['empresa' => Empresa::idempresa()])->with('success', 'Dados da empresa cadastrados com sucesso!');
     }
 
     /**
@@ -82,35 +125,4 @@ class EmpresaController extends Controller
     {
         //
     }
-
-    public function uploadimage($image)
-{
-    // Define o valor default para a variável que contém o nome da imagem
-    $nameFile = null;
-
-    // Verifica se informou o arquivo e se é válido
-    if ($request->hasFile('image') && $request->file('image')->isValid()) {
-
-        // Define um aleatório para o arquivo baseado no timestamps atual
-        $name = uniqid(date('HisYmd'));
-
-        // Recupera a extensão do arquivo
-        $extension = $request->image->extension();
-
-        // Define finalmente o nome
-        $nameFile = "{$name}.{$extension}";
-
-        // Faz o upload:
-        $upload = $request->image->storeAs('categories', $nameFile);
-        // Se tiver funcionado o arquivo foi armazenado em storage/app/public/categories/nomedinamicoarquivo.extensao
-
-        // Verifica se NÃO deu certo o upload (Redireciona de volta)
-        if ( !$upload )
-            return redirect()
-                        ->back()
-                        ->with('error', 'Falha ao fazer upload')
-                        ->withInput();
-
-    }
-}
 }
