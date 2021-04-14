@@ -35,7 +35,16 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->hasFile('logotipo')) {
+            $filenameWithExt = $request->file('logotipo')->getClientOriginalName ();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('logotipo')->getClientOriginalExtension();
+            $fileNameToStore = $filename. '_'. time().'.'.$extension;
+            $path = $request->file('logotipo')->storeAs('public/empresa', $fileNameToStore);
+            }
+            else {
+            $fileNameToStore = 'noimage.jpg';
+            }
     }
 
     /**

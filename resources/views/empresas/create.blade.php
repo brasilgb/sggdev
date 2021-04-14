@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <form id="formlote" action="{{ route('empresas.store') }}" method="post" autocomplete="off"
+        <form id="formempresa" action="{{ route('empresas.store') }}" method="post" autocomplete="off"
             enctype="multipart/form-data">
             <div class="card-body p-4 ">
 
@@ -133,13 +133,5 @@
             </div>
         </form>
     </div>
-    <script>
-
-        $(document).ready(function() {
-            $('.custom-file-input').on('change', function(e) {
-                e.target.nextElementSibling.innerHTML = e.target.files[0].name;
-            });
-        });
-
-    </script>
+@include('empresas/scripts')
 @endsection
