@@ -9,9 +9,6 @@
     // Valida form
     $("#formempresa").validate({
         rules: {
-            logotipo: {
-                required: true
-            },
             cnpj: {
                 required: true
             },
@@ -36,9 +33,6 @@
             }
         },
         messages: {
-            logotipo: {
-                required: 'Selecione a imagem!'
-            },
             cnpj: 'Selecione a hora!',
             razao_social: {
                 required: 'Digite a razão social!'

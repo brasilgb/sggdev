@@ -21,7 +21,7 @@ class CreateEmailsTable extends Migration
             $table->char('usuario', 50);
             $table->char('senha', 50);
             $table->char('remetente', 50);
-            $table->text('destino_coleta');
+            $table->text('destinatario');
             $table->char('assunto', 50);
             $table->text('mensagem');
             $table->timestamps();

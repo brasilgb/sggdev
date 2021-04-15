@@ -16,12 +16,7 @@ class EmpresaController extends Controller
      */
     public function index()
     {
-        $empresas = Empresa::first();
-        if ($empresas):
-            return redirect()->route('empresas.show', ['empresa' => $empresas->id_empresa]);
-        else:
-            return redirect()->route('empresas.create');
-        endif;
+       //
     }
 
     /**
@@ -83,7 +78,7 @@ class EmpresaController extends Controller
         $data['logotipo'] = $nomeimagem;
         $data['id_empresa'] = Empresa::idempresa();
         $empresa->create($data);
-        return redirect()->route('empresas.edit', ['empresa' => $empresa->id_empresa])->with('success', 'Dados da empresa salvos com sucesso!');
+        return redirect()->route('empresas.edit', ['empresa' => 1]);
     }
 
     /**
@@ -164,7 +159,7 @@ class EmpresaController extends Controller
             }
             $data['logotipo'] = $request->has('logotipo') ? $nomeimagem : $request->logotipodb;
             $empresa->update($data);
-            return redirect()->route('empresas.show', ['empresa' => $empresa->id_empresa])->with('success', 'Configurações da empresa salva com sucesso!');
+            return redirect()->route('empresas.edit', ['empresa' => 1]);
         }
     }
 

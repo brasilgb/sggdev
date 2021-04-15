@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Email;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class EmailController extends Controller
 {
@@ -14,7 +15,12 @@ class EmailController extends Controller
      */
     public function index()
     {
-        return view('emails.index');
+        $emails = Email::first();
+        if ($emails):
+            return redirect()->route('emails.show', ['email' => $emails->id_email]);
+        else:
+            return redirect()->route('emails.create');
+        endif;
     }
 
     /**
@@ -24,7 +30,7 @@ class EmailController extends Controller
      */
     public function create()
     {
-        //
+        return view('emails.create');
     }
 
     /**
@@ -33,9 +39,31 @@ class EmailController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Email $email)
     {
-        //
+        $data = $request->all();
+        $rules = [
+            'smtp' => 'required',
+            'porta' => 'required',
+            'seguranca' => 'required',
+            'usuario' => 'required',
+            'senha' => 'required',
+            'remetente' => 'required',
+            'destinatario' => 'required',
+            'assunto' => 'required',
+            'mensagem' => 'required'
+        ];
+        $messages = [
+            'required' => 'O campo :attribute deve ser preenchido!',
+            'integer' => 'O campo :attribute só aceita inteiros!',
+            'date_format' => 'O campo data do aviário só aceita datas!',
+            'unique' => 'O nome do :attribute já existe na base de dados!'
+        ];
+        $validator = Validator::make($data, $rules, $messages)->validate();
+
+        $data['id_email'] = Email::idemail();
+        $email->create($data);
+        return redirect()->route('emails.edit', ['email' => $email->id_email])->with('success', 'Configurações de e-mail salva com sucesso!');
     }
 
     /**
@@ -46,7 +74,7 @@ class EmailController extends Controller
      */
     public function show(Email $email)
     {
-        //
+        return view('emails.edit', compact('email'));
     }
 
     /**
@@ -57,7 +85,7 @@ class EmailController extends Controller
      */
     public function edit(Email $email)
     {
-        //
+        return redirect()->route('emails.show', ['email' => $email->id_email]);
     }
 
     /**
@@ -69,7 +97,28 @@ class EmailController extends Controller
      */
     public function update(Request $request, Email $email)
     {
-        //
+        $data = $request->all();
+        $rules = [
+            'smtp' => 'required',
+            'porta' => 'required',
+            'seguranca' => 'required',
+            'usuario' => 'required',
+            'senha' => 'required',
+            'remetente' => 'required',
+            'destinatario' => 'required',
+            'assunto' => 'required',
+            'mensagem' => 'required'
+        ];
+        $messages = [
+            'required' => 'O campo :attribute deve ser preenchido!',
+            'integer' => 'O campo :attribute só aceita inteiros!',
+            'date_format' => 'O campo data do aviário só aceita datas!',
+            'unique' => 'O nome do :attribute já existe na base de dados!'
+        ];
+        $validator = Validator::make($data, $rules, $messages)->validate();
+
+        $email->update($data);
+        return redirect()->route('emails.show', ['email' => $email->id_email])->with('success', 'Configurações de e-mail salva com sucesso!');
     }
 
     /**

@@ -21,7 +21,7 @@
         <form id="formempresa" action="{{ route('empresas.store') }}" method="post" autocomplete="off"
             enctype="multipart/form-data">
             <div class="card-body p-4 ">
-
+                @include("parts/flash-message")
                 @method('POST')
                 @csrf
 
@@ -44,7 +44,7 @@
                     <label for="cnpj" class="col-sm-3 col-form-label text-left">CNPJ <span
                             class="text-danger">*</span></label>
                     <div class="col-sm-7">
-                        <input id="cnpj" type="text" class="form-control" name="cnpj" value="{{ old('cnpj') }}">
+                        <input id="cnpj" type="text" class="form-control @error('cnpj') is-invalid @enderror" name="cnpj" value="{{ old('cnpj') }}">
                         @error('cnpj')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -55,7 +55,7 @@
                     <label for="razao_social" class="col-sm-3 col-form-label text-left">Razão social <span
                             class="text-danger">*</span></label>
                     <div class="col-sm-7">
-                        <input id="razao_social" type="text" class="form-control" name="razao_social"
+                        <input id="razao_social" type="text" class="form-control @error('razao_social') is-invalid @enderror" name="razao_social"
                             value="{{ old('razao_social') }}">
                         @error('razao_social')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -67,7 +67,7 @@
                     <label for="endereco" class="col-sm-3 col-form-label text-left">Endereço <span
                             class="text-danger">*</span></label>
                     <div class="col-sm-7">
-                        <input id="endereco" type="text" class="form-control" name="endereco"
+                        <input id="endereco" type="text" class="form-control @error('endereco') is-invalid @enderror" name="endereco"
                             value="{{ old('endereco') }}">
                         @error('endereco')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -79,7 +79,7 @@
                     <label for="cidade" class="col-sm-3 col-form-label text-left">Cidade <span
                             class="text-danger">*</span></label>
                     <div class="col-sm-7">
-                        <input id="cidade" type="text" class="form-control" name="cidade" value="{{ old('cidade') }}">
+                        <input id="cidade" type="text" class="form-control @error('cidade') is-invalid @enderror" name="cidade" value="{{ old('cidade') }}">
                         @error('cidade')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -89,7 +89,7 @@
                 <div class="form-group row">
                     <label for="uf" class="col-sm-3 col-form-label text-left">UF <span class="text-danger">*</span></label>
                     <div class="col-sm-7">
-                        <input id="uf" type="text" class="form-control" name="uf" value="{{ old('uf') }}">
+                        <input id="uf" type="text" class="form-control @error('uf') is-invalid @enderror" name="uf" value="{{ old('uf') }}">
                         @error('uf')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -100,7 +100,7 @@
                     <label for="telefone" class="col-sm-3 col-form-label text-left">Telefone <span
                             class="text-danger">*</span></label>
                     <div class="col-sm-7">
-                        <input id="telefone" type="text" class="form-control" name="telefone"
+                        <input id="telefone" type="text" class="form-control @error('telefone') is-invalid @enderror" name="telefone"
                             value="{{ old('telefone') }}">
                         @error('telefone')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -112,7 +112,7 @@
                     <label for="email" class="col-sm-3 col-form-label text-left">E-mail <span
                             class="text-danger">*</span></label>
                     <div class="col-sm-7">
-                        <input id="email" type="text" class="form-control" name="email" value="{{ old('email') }}">
+                        <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}">
                         @error('email')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror

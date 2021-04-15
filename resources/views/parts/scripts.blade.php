@@ -19,7 +19,10 @@
     });
 
     $('#data_inicial, #datafcap, #datamcap, #dataform, #datasearch, #data1, #data2').inputmask('99/99/9999');
-    $("#hora_coleta, #hora_envio, #hora_recebimento, #hora1, #hora2").inputmask("99:99");
+    $("#cnpj").inputmask("99.999.999/9999-99");
+    $("#telefone").inputmask("(99)9999-9999");
+    $("#celular").inputmask("(99)9999-99999");
+
     // Maiúsculas
     $(function() {
         $("#lote, #lote_search").keyup(function() {
