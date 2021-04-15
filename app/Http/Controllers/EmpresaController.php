@@ -78,7 +78,7 @@ class EmpresaController extends Controller
         $data['logotipo'] = $nomeimagem;
         $data['id_empresa'] = Empresa::idempresa();
         $empresa->create($data);
-        return redirect()->route('empresas.edit', ['empresa' => Empresa::idempresa()])->with('success', 'Dados da empresa cadastrados com sucesso!');
+        return redirect()->route('empresas.edit', ['empresa' => Empresa::idempresa()-1])->with('success', 'Dados da empresa cadastrados com sucesso!');
     }
 
     /**
@@ -100,7 +100,7 @@ class EmpresaController extends Controller
      */
     public function edit(Empresa $empresa)
     {
-        //
+        return view('empresas.edit', compact('empresa'));
     }
 
     /**
