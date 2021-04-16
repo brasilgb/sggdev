@@ -2,77 +2,49 @@
 
 @section('content')
 
-<div class="card shadow-sm">
-    <div class="card-header pb-0 border-bottom border-white" style="background-color: #062142;">
-        <div class="row">
-            <div class="col">
-                <h4 class="text-left text-white mt-1"><i class="fas fa-at"></i> E-mail</h4>
-            </div>
-            <div class="col">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb pt-1 pb-1 float-right bg-transparent">
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                        <li class="breadcrumb-item active"> E-mail</li>
-                    </ol>
-                </nav>
+    <div class="card shadow-sm">
+        <div class="card-header pb-0 border-bottom border-white" style="background-color: #062142;">
+            <div class="row">
+                <div class="col">
+                    <h4 class="text-left text-white mt-1"><i class="fas fa-server"></i> Backup</h4>
+                </div>
+                <div class="col">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb pt-1 pb-1 float-right bg-transparent">
+                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                            <li class="breadcrumb-item active"> Backup</li>
+                        </ol>
+                    </nav>
+                </div>
             </div>
         </div>
-    </div>
-    <form id="formemail" action="{{ route('emails.update', ['email' => $email->id_email]) }}" method="post" autocomplete="off">
+    <form id="formemail" action="{{ route('backups.update', ['backup' => $backup->id_backup]) }}" method="post" autocomplete="off">
         <div class="card-body p-4 ">
-            @include("parts/flash-message")
 
+            @include("parts/flash-message")
             @method('PUT')
             @csrf
 
-            <div class="card-header pl-0 pb-0 mb-4">
-                <h4 class="text-left mt-1 ml-0"><i class="fas fa-server"></i> Configurações do servidor de envio</h4>
-            </div>
-
             <div class="form-group row">
-                <label for="smtp" class="col-sm-3 col-form-label text-left">Servidor SMTP <span
+                <label for="basedados" class="col-sm-3 col-form-label text-left">Base de dados <span
                         class="text-danger">*</span></label>
                 <div class="col-sm-7">
                     <div class="custom-file">
-                        <input id="smtp" type="text" class="form-control @error('smtp') is-invalid @enderror"
-                            name="smtp" value="{{ old('smtp', $email->smtp) }}">
+                        <input id="basedados" type="text" class="form-control @error('basedados') is-invalid @enderror"
+                            name="basedados" value="{{ old('basedados', $backup->basedados) }}">
                     </div>
-                    @error('smtp')
+                    @error('basedados')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
 
             <div class="form-group row">
-                <label for="porta" class="col-sm-3 col-form-label text-left">Porta <span
+                <label for="usuario" class="col-sm-3 col-form-label text-left">Usuario <span
                         class="text-danger">*</span></label>
                 <div class="col-sm-7">
-                    <input id="porta" type="text" class="form-control @error('porta') is-invalid @enderror" name="porta"
-                        value="{{ old('porta', $email->porta) }}">
-                    @error('porta')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="seguranca" class="col-sm-3 col-form-label text-left">Segurança <span
-                        class="text-danger">*</span></label>
-                <div class="col-sm-7">
-                    <input id="seguranca" type="text" class="form-control @error('seguranca') is-invalid @enderror"
-                        name="seguranca" value="{{ old('seguranca', $email->seguranca) }}">
-                    @error('seguranca')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="usuario" class="col-sm-3 col-form-label text-left">Usuário <span
-                        class="text-danger">*</span></label>
-                <div class="col-sm-7">
-                    <input id="usuario" type="text" class="form-control @error('usuario') is-invalid @enderror"
-                        name="usuario" value="{{ old('usuario', $email->usuario) }}">
+                    <input id="usuario" type="text" class="form-control @error('usuario') is-invalid @enderror" name="usuario"
+                        value="{{ old('usuario', $backup->usuario) }}">
                     @error('usuario')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -83,66 +55,33 @@
                 <label for="senha" class="col-sm-3 col-form-label text-left">Senha <span
                         class="text-danger">*</span></label>
                 <div class="col-sm-7">
-                    <input id="senha" type="text" class="form-control @error('senha') is-invalid @enderror" name="senha"
-                        value="{{ old('senha', $email->senha) }}">
+                    <input id="senha" type="text" class="form-control @error('senha') is-invalid @enderror"
+                        name="senha" value="{{ old('senha', $backup->senha) }}">
                     @error('senha')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
 
-            <div class="card-header pl-0 pb-0 mb-4">
-                <h4 class="text-left mt-1 ml-0"><i class="fas fa-inbox"></i> Informações do envio</h4>
-            </div>
-
             <div class="form-group row">
-                <label for="remetente" class="col-sm-3 col-form-label text-left">Remetente <span
+                <label for="local" class="col-sm-3 col-form-label text-left">Local <span
                         class="text-danger">*</span></label>
                 <div class="col-sm-7">
-                    <input id="remetente" type="text" class="form-control @error('remetente') is-invalid @enderror"
-                        name="remetente" value="{{ old('remetente', $email->remetente) }}">
-                    @error('remetente')
+                    <input id="local" type="text" class="form-control @error('local') is-invalid @enderror"
+                        name="local" value="{{ old('local', $backup->local) }}" placeholder="G:\backup">
+                    @error('local')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
 
             <div class="form-group row">
-                <label for="destinatario" class="col-sm-3 col-form-label text-left">Destinatários <span
-                        class="text-danger">*</span></label>
+                <label for="agendamento" class="col-sm-3 col-form-label text-left">Agendamento <small class="text-secondary"><i>(intervalo de tempo)</i></small></label>
                 <div class="col-sm-7">
-                    <textarea rows="3" id="destinatario" type="text"
-                        class="form-control @error('destinatario') is-invalid @enderror" name="destinatario">{{ old('destinatario', $email->destinatario) }}</textarea>
-                    @error('destinatario')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
+                    <input id="agendamento" type="text" class="form-control @error('agendamento') is-invalid @enderror" name="agendamento"
+                        value="{{ old('agendamento', $backup->agendamento) }}">
                 </div>
             </div>
-
-            <div class="form-group row">
-                <label for="assunto" class="col-sm-3 col-form-label text-left">Assunto <span
-                        class="text-danger">*</span></label>
-                <div class="col-sm-7">
-                    <input id="assunto" type="text" class="form-control @error('assunto') is-invalid @enderror"
-                        name="assunto" value="{{ old('assunto', $email->assunto) }}">
-                    @error('assunto')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="mensagem" class="col-sm-3 col-form-label text-left">Mensagem <span
-                        class="text-danger">*</span></label>
-                <div class="col-sm-7">
-                    <textarea id="mensagem" type="text" class="form-control @error('mensagem') is-invalid @enderror"
-                        name="mensagem">{{ old('mensagem', $email->mensagem) }}</textarea>
-                    @error('mensagem')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-
         </div>
 
         <div class="card-footer">
@@ -158,5 +97,5 @@
         </div>
     </form>
 </div>
-@include('emails/scripts')
+@include('backups/scripts')
 @endsection

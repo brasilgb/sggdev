@@ -2,14 +2,7 @@
 // Valida form
     $("#formemail").validate({
         rules: {
-            smtp: {
-                required: true
-            },
-            porta: {
-                required: true,
-                number: true
-            },
-            seguranca: {
+            basedados: {
                 required: true
             },
             usuario: {
@@ -18,45 +11,20 @@
             senha: {
                 required: true
             },
-            remetente: {
-                required: true
-            },
-            destinatario: {
-                required: true
-            },
-            assunto: {
-                required: true
-            },
-            mensagem: {
+            local: {
                 required: true
             }
         },
         messages: {
-            smtp: 'Digite o servidor SMTP!',
-            porta: {
-                required: 'Digite a porta!',
-                number: 'Somente números'
-            },
-            seguranca: {
-                required: 'Digite o tipo de segurança!'
-            },
+            basedados: 'Digite a base de dados!',
             usuario: {
                 required: 'Digite o usuário!'
             },
             senha: {
                 required: 'Digite a senha!'
             },
-            remetente: {
-                required: 'Digite o remetente!'
-            },
-            destinatario: {
-                required: 'Digite o destinatário!'
-            },
-            assunto: {
-                required: 'Digite o assunto!'
-            },
-            mensagem: {
-                required: 'Digite a mensagem!'
+            local: {
+                required: 'Digite o local do backup!'
             }
         }
     });

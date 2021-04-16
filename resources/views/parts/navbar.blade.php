@@ -1,16 +1,24 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-blue-nav border-bottom border-white shadow-sm mx-auto">
-    <div class="container">
-    <a class="navbar-brand" href="{{ route('home') }}">Home</a>
+    
+    <div class="container ">
+    <a class="navbar-brand" href="{{ route('home') }}">
+        <div class="brand-image">
+            <img src="{{ url("storage/thumbnail/{$empresa->logotipo}") }}" alt="" class="rounded">
+        </div>
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link {{ (request()->is('periodos*')) ? 'active' : '' }}" href="{{ route('periodos.index') }}">Períodos</a>
-        </li>
-        <li class="nav-item dropdown">
+            <a class="nav-link {{ (request()->is('/')) ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ (request()->is('periodos*')) ? 'active' : '' }}" href="{{ route('periodos.index') }}">Períodos</a>
+          </li>
+          <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle {{ (request()->is('lotes*', 'aviarios*')) ? 'active' : '' }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Lotes/Aviários
             </a>

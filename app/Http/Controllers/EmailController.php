@@ -63,7 +63,7 @@ class EmailController extends Controller
 
         $data['id_email'] = Email::idemail();
         $email->create($data);
-        return redirect()->route('emails.edit', ['email' => $email->id_email])->with('success', 'Configurações de e-mail salva com sucesso!');
+        return redirect()->route('emails.show', ['email' => Email::idemail()-1])->with('success', 'Configurações de e-mail salva com sucesso!');
     }
 
     /**

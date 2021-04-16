@@ -22,6 +22,7 @@
     $("#cnpj").inputmask("99.999.999/9999-99");
     $("#telefone").inputmask("(99)9999-9999");
     $("#celular").inputmask("(99)9999-99999");
+    $("#agendamento").inputmask("99:99");
 
     // Maiúsculas
     $(function() {

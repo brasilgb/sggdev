@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Backup;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class BackupController extends Controller
 {
@@ -14,7 +15,12 @@ class BackupController extends Controller
      */
     public function index()
     {
-        return view('backups.index');
+        $backups = backup::first();
+        if ($backups):
+            return redirect()->route('backups.show', ['backup' => $backups->id_backup]);
+        else:
+            return redirect()->route('backups.create');
+        endif;
     }
 
     /**
@@ -24,7 +30,7 @@ class BackupController extends Controller
      */
     public function create()
     {
-        //
+        return view('backups.create');
     }
 
     /**
@@ -33,9 +39,26 @@ class BackupController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Backup $backup)
     {
-        //
+        $data = $request->all();
+        $rules = [
+            'basedados' => 'required',
+            'usuario' => 'required',
+            'senha' => 'required',
+            'local' => 'required'
+        ];
+        $messages = [
+            'required' => 'O campo :attribute deve ser preenchido!',
+            'integer' => 'O campo :attribute só aceita inteiros!',
+            'date_format' => 'O campo data do aviário só aceita datas!',
+            'unique' => 'O nome do :attribute já existe na base de dados!'
+        ];
+        $validator = Validator::make($data, $rules, $messages)->validate();
+
+        $data['id_backup'] = Backup::idbackup();
+        $backup->create($data);
+        return redirect()->route('backups.show', ['backup' => Backup::idbackup()-1])->with('success', 'Configurações de backup salva com sucesso!');
     }
 
     /**
@@ -46,7 +69,7 @@ class BackupController extends Controller
      */
     public function show(Backup $backup)
     {
-        //
+        return view('backups.edit', compact('backup'));
     }
 
     /**
@@ -57,7 +80,7 @@ class BackupController extends Controller
      */
     public function edit(Backup $backup)
     {
-        //
+        return redirect()->route('backups.show', ['backup' => $backup->id_backup])->with('success', 'Configurações de Backup salvas com sucesso!');
     }
 
     /**
@@ -69,7 +92,23 @@ class BackupController extends Controller
      */
     public function update(Request $request, Backup $backup)
     {
-        //
+        $data = $request->all();
+        $rules = [
+            'basedados' => 'required',
+            'usuario' => 'required',
+            'senha' => 'required',
+            'local' => 'required'
+        ];
+        $messages = [
+            'required' => 'O campo :attribute deve ser preenchido!',
+            'integer' => 'O campo :attribute só aceita inteiros!',
+            'date_format' => 'O campo data do aviário só aceita datas!',
+            'unique' => 'O nome do :attribute já existe na base de dados!'
+        ];
+        $validator = Validator::make($data, $rules, $messages)->validate();
+
+        $backup->update($data);
+        return redirect()->route('backups.show', ['backup' => Backup::idbackup()-1])->with('success', 'Configurações de backup salva com sucesso!');
     }
 
     /**

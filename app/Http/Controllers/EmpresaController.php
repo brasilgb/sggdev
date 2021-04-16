@@ -83,7 +83,7 @@ class EmpresaController extends Controller
         $data['logotipo'] = $nomeimagem;
         $data['id_empresa'] = Empresa::idempresa();
         $empresa->create($data);
-        return redirect()->route('empresas.edit', ['empresa' => $empresa->id_empresa])->with('success', 'Dados da empresa salvos com sucesso!');
+        return redirect()->route('empresas.show', ['empresa' => Empresa::idempresa()-1])->with('success', 'Dados da empresa salvos com sucesso!');
     }
 
     /**

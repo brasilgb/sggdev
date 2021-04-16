@@ -15,11 +15,11 @@ class CreateBackupsTable extends Migration
     {
         Schema::create('backups', function (Blueprint $table) {
             $table->integer('id_backup')->primary();
-            $table->char('base_dados', 50);
+            $table->char('basedados', 50);
             $table->char('usuario', 50);
             $table->char('senha', 50);
-            $table->char('diretorio', 50);
-            $table->time('agendamento');
+            $table->string('local');
+            $table->time('agendamento')->nullable();
             $table->timestamps();
         });
     }
