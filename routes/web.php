@@ -112,6 +112,9 @@ Route::prefix('metas')->name('metas.')->group(function () {
     Route::post('updatemeta', [MetaController::class, 'updatemeta'])->name('updatemeta');
 });
 
+Route::prefix('empresas')->name('empresas.')->group(function () {
+    Route::post('delimagem', [EmpresaController::class, 'delimagem'])->name('delimagem');
+});
 Route::resource('empresas', EmpresaController::class);
 
 Route::resource('emails', EmailController::class);

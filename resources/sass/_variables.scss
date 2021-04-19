@@ -17,7 +17,7 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
-$blue-nav: #062142;
+$blue-nav: #083264;
 
 $gray-100: #f8f9fa;
 $gray-200: #e9ecef;
@@ -39,5 +39,15 @@ $gray-900: #212529;
 .bg-gray-700 { background-color: $gray-700; }
 .bg-gray-800 { background-color: $gray-800; }
 .bg-gray-900 { background-color: $gray-900; }
-.bg-orange { background-color: $orange; }
 .bg-blue-nav {background-color: $blue-nav;}
+.bg-blue {background-color: $blue;}
+.bg-indigo {background-color: $indigo;}
+.bg-purple {background-color: $purple;}
+.bg-pink {background-color: $pink;}
+.bg-red {background-color: $red;}
+.bg-orange {background-color: $orange;}
+.bg-yellow {background-color: $yellow;}
+.bg-green {background-color: $green;}
+.bg-teal {background-color: $teal;}
+.bg-cyan {background-color: $cyan;}
+

@@ -174,6 +174,14 @@ class EmpresaController extends Controller
      * @param  \App\Models\Empresa  $empresa
      * @return \Illuminate\Http\Response
      */
+    public function delimagem(Request $request, Empresa $empresa)
+    {
+        if(is_file(public_path('/storage/thumbnail/' . $request->thumbnail))){
+            unlink(public_path('/storage/thumbnail/' . $request->thumbnail));
+        }
+        $empresa->where('id_empresa', $request->idempresa)->update(['logotipo' => '']);
+    }
+
     public function destroy(Empresa $empresa)
     {
         //

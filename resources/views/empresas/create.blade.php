@@ -24,7 +24,9 @@
                 @include("parts/flash-message")
                 @method('POST')
                 @csrf
-
+                <div class="card-header bg-light pl-0 pb-0 mb-4">
+                    <h4 class="text-left mt-1 ml-0"><i class="fas fa-industry"></i> Informações da empresa</h4>
+                </div>
                 <div class="form-group row">
                     <label for="logotipo" class="col-sm-3 col-form-label text-left">Logotipo <span
                             class="text-danger">*</span></label>

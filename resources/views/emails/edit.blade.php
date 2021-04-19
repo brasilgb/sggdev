@@ -25,7 +25,7 @@
             @method('PUT')
             @csrf
 
-            <div class="card-header pl-0 pb-0 mb-4">
+            <div class="card-header bg-light pl-0 pb-0 mb-4">
                 <h4 class="text-left mt-1 ml-0"><i class="fas fa-server"></i> Configurações do servidor de envio</h4>
             </div>
 
@@ -91,7 +91,7 @@
                 </div>
             </div>
 
-            <div class="card-header pl-0 pb-0 mb-4">
+            <div class="card-header bg-light pl-0 pb-0 mb-4">
                 <h4 class="text-left mt-1 ml-0"><i class="fas fa-inbox"></i> Informações do envio</h4>
             </div>
 

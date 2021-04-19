@@ -1,11 +1,13 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-blue-nav border-bottom border-white shadow-sm mx-auto">
-    
+
     <div class="container ">
     <a class="navbar-brand" href="{{ route('home') }}">
-        <div class="brand-image">
-            <img src="{{ url("storage/thumbnail/{$empresa->logotipo}") }}" alt="" class="rounded">
-        </div>
+        @if($empresa->logotipo)
+            <img src="{{ url("storage/thumbnail/{$empresa->logotipo}") }}"  height="30" alt="" class="rounded">
+            @else
+            <img src="{{ url("storage/empresa/sggaicon.png") }}"  height="30" alt="" class="rounded">
+            @endif
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

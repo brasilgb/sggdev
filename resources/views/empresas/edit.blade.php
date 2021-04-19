@@ -26,10 +26,21 @@
 
                 @method('PUT')
                 @csrf
+                <div class="card-header bg-light pl-0 pb-0 mb-4">
+                    <h4 class="text-left mt-1 ml-0"><i class="fas fa-industry"></i> Informações da empresa</h4>
+                </div>
+                
                 <div class="form-group row">
                     <div class="col-sm-3 text-left"></div>
                         <div class="col-sm-7">
-                        <img src="{{ url("storage/thumbnail/{$empresa->logotipo}")}}" alt="" class="thumbnail">
+                            @if ($empresa->logotipo)
+                            <img id="thumbnail" value="{{ $empresa->logotipo }}" class="thumbnail" src="{{ asset("storage/thumbnail/{$empresa->logotipo}")}}" alt="{{ $empresa->empresa }}">
+                            <a class="text-danger font-weight-bold text-jg" id="delimagem" href="#" value="{{ $empresa->id_empresa }}" title="Excluir imagem">&times;</a>
+                            @else
+                            <img height="80" id="thumbnail" value="{{ $empresa->logotipo }}" class="thumbnail" src="{{ asset("storage/empresa/sggaicon.png")}}" alt="">
+                            @endif
+
+
                         <input type="hidden" name="logotipodb" value="{{ $empresa->logotipo }}">
                     </div>
                 </div>
@@ -42,7 +53,6 @@
                             <input id="logotipo" type="file" class="custom-file-input @error('logotipo') is-invalid @enderror" name="logotipo" value="{{ old('logotipo', $empresa->logotipo) }}">
                             <label class="custom-file-label" for="logotipo">Selecione a imagem</label>
                         </div>
-
                         @error('logotipo')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -143,4 +153,24 @@
         </form>
     </div>
     @include('empresas/scripts')
+    <script>
+        $(function(){
+            $("#delimagem").click(function(e){
+                e.preventDefault();
+                idempresa = $(this).attr('value');
+                thumbnail = $("#thumbnail").attr('value');
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('empresas.delimagem') }}",
+                    data:{
+                        _token: "{{ csrf_token() }}",
+                        idempresa: idempresa,
+                        thumbnail: thumbnail
+                        }
+                }).done(function(Response){
+                    location.reload();
+                });
+            })
+        });
+    </script>
 @endsection
