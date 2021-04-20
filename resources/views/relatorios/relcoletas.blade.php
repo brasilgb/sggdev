@@ -3,21 +3,30 @@
 @section('content')
 
 <div class="row">
-    <table>
+    <table class="table table-bordered  table-dark">
+        <tr>
+            <td colspan="{{$numcoletas->count()+2}}"><h1>Movimento diário de granjas</h1></td>
+        </tr>
         <tr>
             <th class="text-center">Postura</th>
-            @foreach ($numcoletas as $num)
-                <td>{{ $num->coleta }}</td>
+            @foreach ($numcoletas as $coleta)
+                <td>{{ $coleta->coleta }}ª col.</td>
             @endforeach
+            <th>Totais</th>
         </tr>
         <tr>
             <td>Limpos do Ninho</td>
-            @foreach ($coletas as $coleta)
-            <td>{{ $coleta->limpos_ninho }}</td>
-        @endforeach
+            @foreach ($numcoletas as $coleta)
+            <td>{{ $coleta->where('data_coleta', $datarelatorio)->where('coleta', $coleta->coleta)->sum('limpos_ninho') }}</td>
+            @endforeach
+            <td>{{ $coleta->where('data_coleta', $datarelatorio)->sum('limpos_ninho') }}</td>
         </tr>
         <tr>
             <td>Sujos Ninho</td>
+            @foreach ($numcoletas as $coleta)
+            <td>{{ $coleta->where('data_coleta', $datarelatorio)->where('coleta', $coleta->coleta)->sum('sujos_ninho') }}</td>
+            @endforeach
+            <td>{{ $coleta->where('data_coleta', $datarelatorio)->sum('sujos_ninho') }}</td>
         </tr>
         <tr>
             <th>Totais de Incubáveis Bons <small>Limpos do ninho + Sujos do ninho</small></th>
