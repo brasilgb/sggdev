@@ -17,6 +17,8 @@ use App\Http\Controllers\MortalidadeController;
 use App\Http\Controllers\PeriodoController;
 use App\Http\Controllers\PesagemController;
 use App\Http\Controllers\RecebimentoController;
+use App\Http\Controllers\RelatorioController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -120,3 +122,9 @@ Route::resource('empresas', EmpresaController::class);
 Route::resource('emails', EmailController::class);
 
 Route::resource('backups', BackupController::class);
+
+Route::prefix('relatorios')->name('relatorios.')->group(function(){
+    Route::get('relcoletas', [RelatorioController::class, 'relcoletas'])->name('relatorios.relcoletas');
+});
+
+

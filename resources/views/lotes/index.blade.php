@@ -77,7 +77,7 @@
                                     @endif
 
                                 </td>
-                                <td class="align-middle">{{ $lotes->sum('femea') + $lotes->sum('macho') }}</td>
+                                <td class="align-middle">{{ $lote->femea + $lote->macho }}</td>
                                 <td class="align-middle">{{ $lote->aviarios->count() }}</td>
                                 <td class="align-middle">{{ date('d/m/Y', strtotime($lote->data_lote)) }}</td>
                                 <td class="align-middle">
