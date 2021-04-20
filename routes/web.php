@@ -124,7 +124,7 @@ Route::resource('emails', EmailController::class);
 Route::resource('backups', BackupController::class);
 
 Route::prefix('relatorios')->name('relatorios.')->group(function(){
-    Route::get('relcoletas', [RelatorioController::class, 'relcoletas'])->name('relatorios.relcoletas');
+    Route::get('relcoletas', [RelatorioController::class, 'relcoletas'])->name('relcoletas');
 });
 
 

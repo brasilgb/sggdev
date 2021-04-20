@@ -3,68 +3,300 @@
 @section('content')
 
 <div class="row">
-    <table class="table table-bordered  table-dark">
-        <tr>
-            <td colspan="{{$numcoletas->count()+2}}"><h1>Movimento diário de granjas</h1></td>
-        </tr>
-        <tr>
-            <th class="text-center">Postura</th>
-            @foreach ($numcoletas as $coleta)
-                <td>{{ $coleta->coleta }}ª col.</td>
-            @endforeach
-            <th>Totais</th>
-        </tr>
-        <tr>
-            <td>Limpos do Ninho</td>
-            @foreach ($numcoletas as $coleta)
-            <td>{{ $coleta->where('data_coleta', $datarelatorio)->where('coleta', $coleta->coleta)->sum('limpos_ninho') }}</td>
-            @endforeach
-            <td>{{ $coleta->where('data_coleta', $datarelatorio)->sum('limpos_ninho') }}</td>
-        </tr>
-        <tr>
-            <td>Sujos Ninho</td>
-            @foreach ($numcoletas as $coleta)
-            <td>{{ $coleta->where('data_coleta', $datarelatorio)->where('coleta', $coleta->coleta)->sum('sujos_ninho') }}</td>
-            @endforeach
-            <td>{{ $coleta->where('data_coleta', $datarelatorio)->sum('sujos_ninho') }}</td>
-        </tr>
-        <tr>
-            <th>Totais de Incubáveis Bons <small>Limpos do ninho + Sujos do ninho</small></th>
-        </tr>
-        <tr>
-            <td>Ovos de Cama</td>
-        </tr>
-        <tr>
-            <th>Total de incubáveis <small>Limpos do ninho + sujos de ninho + ovos de cama</small></th>
-        </tr>
-        <tr>
-            <td>Duas Gemas</td>
-        </tr>
-        <tr>
-            <td>Refugos</td>
-        </tr>
-        <tr>
-            <td>Deformados</td>
-        </tr>
-        <tr>
-            <td>Sujos</td>
-        </tr>
-        <tr>
-            <td>Trincados</td>
-        </tr>
-        <tr>
-            <th>Total de Comerciais</th>
-        </tr>
-        <tr>
-            <td>Eliminados</td>
-        </tr>
-        <tr>
-            <th class="text-center">Postura do dia</th>
-        </tr>
+    <div class="card">
+        <div class="card-body">
 
-    </table>
+
+            @foreach ($lotes as $lote)
+            @php $numcoletas = App\Models\Coleta::where('lote_id', $lote->id_lote)->distinct()->get('coleta') @endphp
+            <table class="table table-bordered text-uppercase">
+                <tr>
+                    <td colspan="4" class="text-center">
+                        <h5>Movimento diário de granjas</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Logo</td>
+                    <td>Data: {{ date("d/m/Y", strtotime($datarelatorio)) }}</td>
+                    <td>Lote: {{ $lote->lote }}</td>
+                    <td>Granja:</td>
+                </tr>
+            </table>
+            <table class="table table-bordered text-uppercase">
+                <tr>
+                    <th class="text-center">Postura</th>
+                    @foreach ($numcoletas as $num)
+                    <td>{{ $num->coleta }}ª col.</td>
+                    @endforeach
+                    <th>Totais</th>
+                </tr>
+                <tr>
+                    <td>Limpos do Ninho</td>
+                    @foreach ($numcoletas as $num)
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->where('data_coleta', $datarelatorio)->where('coleta', $num->coleta)->sum('limpos_ninho') }}
+                    </td>
+                    @endforeach
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->where('data_coleta', $datarelatorio)->sum('limpos_ninho') }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Sujos Ninho</td>
+                    @foreach ($numcoletas as $num)
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->where('data_coleta', $datarelatorio)->where('coleta', $num->coleta)->sum('sujos_ninho') }}
+                    </td>
+                    @endforeach
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->where('data_coleta', $datarelatorio)->sum('sujos_ninho') }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Incubáveis Bons <small>(LIMPOS DO NINHO + SUJOS DO NINHO)</small></th>
+                    @foreach ($numcoletas as $num)
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->where('data_coleta', $datarelatorio)->where('coleta', $num->coleta)->sum('incubaveis_bons') }}
+                    </td>
+                    @endforeach
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->where('data_coleta', $datarelatorio)->sum('incubaveis_bons') }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ovos de Cama</td>
+                    @foreach ($numcoletas as $num)
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->where('data_coleta', $datarelatorio)->where('coleta', $num->coleta)->sum('ovos_cama') }}
+                    </td>
+                    @endforeach
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->where('data_coleta', $datarelatorio)->sum('ovos_cama') }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Incubáveis <small>(LIMPOS DO NINHO + SUJOS DO NINHO + OVOS DE CAMA)</small></th>
+                    @foreach ($numcoletas as $num)
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->where('data_coleta', $datarelatorio)->where('coleta', $num->coleta)->sum('incubaveis') }}
+                    </td>
+                    @endforeach
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->where('data_coleta', $datarelatorio)->sum('incubaveis') }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Duas Gemas</td>
+                    @foreach ($numcoletas as $num)
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->where('data_coleta', $datarelatorio)->where('coleta', $num->coleta)->sum('duas_gemas') }}
+                    </td>
+                    @endforeach
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->where('data_coleta', $datarelatorio)->sum('duas_emas') }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Refugos</td>
+                    @foreach ($numcoletas as $num)
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->where('data_coleta', $datarelatorio)->where('coleta', $num->coleta)->sum('refugos') }}
+                    </td>
+                    @endforeach
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->where('data_coleta', $datarelatorio)->sum('refugos') }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Deformados</td>
+                    @foreach ($numcoletas as $num)
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->where('data_coleta', $datarelatorio)->where('coleta', $num->coleta)->sum('deformados') }}
+                    </td>
+                    @endforeach
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->where('data_coleta', $datarelatorio)->sum('deformados') }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Sujos</td>
+                    @foreach ($numcoletas as $num)
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->where('data_coleta', $datarelatorio)->where('coleta', $num->coleta)->sum('sujos') }}
+                    </td>
+                    @endforeach
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->where('data_coleta', $datarelatorio)->sum('sujos') }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Trincados</td>
+                    @foreach ($numcoletas as $num)
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->where('data_coleta', $datarelatorio)->where('coleta', $num->coleta)->sum('trincados') }}
+                    </td>
+                    @endforeach
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->where('data_coleta', $datarelatorio)->sum('trincados') }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Comerciais <small>(DUAS GEMAS + REFUGO + DEFORMADOS +SUJOS + TRINCADOS)</small></th>
+                    @foreach ($numcoletas as $num)
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->where('data_coleta', $datarelatorio)->where('coleta', $num->coleta)->sum('comerciais') }}
+                    </td>
+                    @endforeach
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->where('data_coleta', $datarelatorio)->sum('comerciais') }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Eliminados</td>
+                    @foreach ($numcoletas as $num)
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->where('data_coleta', $datarelatorio)->where('coleta', $num->coleta)->sum('eliminados') }}
+                    </td>
+                    @endforeach
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->where('data_coleta', $datarelatorio)->sum('eliminados') }}
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="{{ $numcoletas->count() + 1 }}" class="text-left">Postura do dia
+                        <small>(LIMPOS DO NINHO + SUJOS DO NINHO + OVOS DE CAMA + DUAS GEMAS + REFUGOS + DEFORMADOS +
+                            SUJOS +
+                            TRINCADOS + ELIMINADOS)</small></th>
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->where('data_coleta', $datarelatorio)->sum('postura_dia') }}
+                    </td>
+                </tr>
+
+            </table>
+            <table class="table table-bordered">
+                <tr>
+                    <th>Aviários</th>
+                    @php
+                        $runaviarios = $aviarios->where('lote_id', $lote->id_lote);
+                    @endphp
+                    @foreach ($runaviarios as $aviario)
+                    <td>{{ $aviario->aviario }}</td>
+                    @endforeach
+                    <td>Totais</td>
+                </tr>
+                <tr>
+                    <th>N° Fêmeas</th>
+                    @foreach ($runaviarios as $aviario)
+                    <td>{{ $aviario->femea }}</td>
+                    @endforeach
+                    <td>{{ $aviarios->where('lote_id', $lote->id_lote)->sum->femea }}</td>
+                </tr>
+                <tr>
+                    <th>Ovos Totais</th>
+                    @foreach ($runaviarios as $aviario)
+                    <td>{{ $coletas->where('id_aviario', $aviario->id_aviario)->sum->postura_dia }}</td>
+                    @endforeach
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->sum->postura_dia }}</td>
+                </tr>
+                <tr>
+                    <th>Produção%</th>
+                    @foreach ($runaviarios as $aviario)
+                    <td>{{ number_format(($coletas->where('id_aviario', $aviario->id_aviario)->sum->postura_dia * 100) / $aviarios->sum->femea, 2, ',', '.') }}</td>
+                    @endforeach
+                    <td>{{ number_format(($coletas->where('lote_id', $lote->id_lote)->sum->postura_dia * 100) / $aviarios->sum->femea, 2, ',', '.') }}</td>
+                </tr>
+                <tr>
+                    <th>Ovos Incubáveis</th>
+                    @foreach ($runaviarios as $aviario)
+                    <td>{{ $coletas->where('id_aviario', $aviario->id_aviario)->sum->incubaveis }}</td>
+                    @endforeach
+                    <td>{{ $coletas->where('lote_id', $lote->id_lote)->sum->incubaveis }}</td>
+                </tr>
+                <tr>
+                    <th>Aproveitamento%</th>
+                    @foreach ($runaviarios as $aviario)
+                    <td>{{ number_format(($coletas->where('id_aviario', $aviario->id_aviario)->sum->incubaveis * 100) / $aviarios->sum->femea, 2, ',', '.') }}</td>
+                    @endforeach
+                    <td>{{ number_format(($coletas->where('lote_id', $lote->id_lote)->sum->incubaveis * 100) / $aviarios->sum->femea, 2, ',', '.') }}</td>
+                </tr>
+
+            </table>
+            <div class="row">
+                <div class="col">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Mortalidades</th>
+                            <th>Machos</th>
+                            <th>Fêmeas</th>
+                            <th>Totais</th>
+                        </tr>
+
+                        <tr>
+                            <th>Aves anteriores</th>
+                            <td>{{ $estoqueaves->where('lote', $lote->id_lote)->sum->macho + $mortalidades->where('lote', $lote->id_lote)->sum->macho }}</td>
+                            <td>{{ $estoqueaves->where('lote', $lote->id_lote)->sum->femea + $mortalidades->where('lote', $lote->id_lote)->sum->femea}}</td>
+                            <td>{{ $estoqueaves->where('lote', $lote->id_lote)->sum->tot_ave + $mortalidades->where('lote', $lote->id_lote)->sum->tot_ave }}</td>
+                        </tr>
+                        <tr>
+                            <th>Arranhado</th>
+                            <td>{{ $mortalidades->where('lote', $lote->id_lote)->sum->macho }}</td>
+                            <td>{{ $mortalidades->where('lote', $lote->id_lote)->sum->feme }}</td>
+                            <td>{{ $mortalidades->where('lote', $lote->id_lote)->sum->macho }}</td>
+                        </tr>
+                        <tr>
+                            <th>Calor</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Inprodutivas</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Prolapso</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Refugo</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Outros</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Total Mortas</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Aves atuais</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Controle de estoque de ovos</th>
+                            <th>Comerciais</th>
+                            <th>Incubáveis</th>
+                        </tr>
+
+                        <tr>
+                            <th>SALDO ANTERIOR
+                                <small>SALDO ATUAL EM ESTOQUE</small> </th>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Produzidos <small>TOTAL DO MOVIMENTO DIÁRIO</small></th>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Enviado para o incubatório</th>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Saldo atual</th>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
 </div>
 
 @endsection
-
-
