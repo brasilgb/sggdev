@@ -12,7 +12,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb pt-1 pb-1 float-right bg-transparent">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                            <li class="breadcrumb-item"> <a href="{{ route('lotes.index') }}">Controle diário</a></li>
+                            <li class="breadcrumb-item"> <a href="{{ route('controlediarios.index') }}">Controle diário</a></li>
                             <li class="breadcrumb-item active">Editar</a></li>
                         </ol>
                     </nav>

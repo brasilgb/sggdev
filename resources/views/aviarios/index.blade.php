@@ -57,7 +57,7 @@
                                 <td class="align-middle">{{ $aviario->femea }}</td>
 
                                 <td class="align-middle">{{ $aviario->macho }}</td>
-                                <td class="align-middle">{{ $aviarios->sum('femea') + $aviarios->sum('macho') }}</td>
+                                <td class="align-middle">{{ $aviario->femea + $aviario->macho }}</td>
                                 <td class="align-middle">{{ date('d/m/Y', strtotime($aviario->data_aviario)) }}</td>
                                 <td class="align-middle">
 

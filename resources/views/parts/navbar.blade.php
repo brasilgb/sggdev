@@ -109,7 +109,7 @@
               Relatórios
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="{{ route('relatorios.relcoletas') }}"><i class="fa fa-caret-right"></i> Coletas</a>
+              <a class="dropdown-item" href="{{ route('relatorios.coletas') }}"><i class="fa fa-caret-right"></i> Coletas</a>
               <a class="dropdown-item" href="#">Another action</a>
               <a class="dropdown-item" href="#">Something else here</a>
             </div>
