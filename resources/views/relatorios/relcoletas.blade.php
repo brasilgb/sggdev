@@ -2,6 +2,7 @@
     <div class="card">
         <div class="card-body">
             @foreach ($lotes as $lote)
+            <div class="relatorio">
                 <div class="row">
                     <div class="col">
                         @php
@@ -335,6 +336,7 @@
                         </table>
                     </div>
                 </div>
+            </div>
             @endforeach
         </div>
     </div>

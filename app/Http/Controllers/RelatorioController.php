@@ -48,6 +48,7 @@ class RelatorioController extends Controller
 
     public function pdfcoletas()
     {
+        $datarelatorio = date("Y-m-d", strtotime(Carbon::now()));
         $data = [
             'datarelatorio' => date("Y-m-d", strtotime(Carbon::now())),
             'lotes' => Lote::where('periodo', Periodo::ativo())->get(),
@@ -60,7 +61,15 @@ class RelatorioController extends Controller
             'envios' => Envio::get()
         ];
 
-        $pdf = PDF::loadView('relatorios.pdfcoletas', $data);
+        $relatoriodir = 'Relatorios';
+        if(!is_dir(public_path(DIRECTORY_SEPARATOR . $relatoriodir))){
+            mkdir(public_path(DIRECTORY_SEPARATOR . $relatoriodir));
+        }
+        $relatoriodir = 'Relatorios';
+        $nomerelatorio = date("d_m_Y", strtotime($datarelatorio));
+        $pdf_name = "relatorio-coletas-diario-$nomerelatorio.pdf";
+        $path = public_path(DIRECTORY_SEPARATOR . $relatoriodir . DIRECTORY_SEPARATOR . $pdf_name);
+        $pdf = PDF::loadView('relatorios.pdfcoletas', $data)->setPaper('a4', 'landscape')/*->save($path)*/;
 
         return $pdf->download('relatorio-coletas.pdf');
     }
