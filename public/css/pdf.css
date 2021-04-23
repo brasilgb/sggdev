@@ -21,21 +21,19 @@ tr{
 }
 td, th{
     padding: 2px!important;
-    border: 1px solid #666
+    border: 1px solid #666;
+    text-align: left;
 }
-.text-center{text-align: center;}
 
 .col-left{
-    float: left;
     width: 49%;
     padding: 0;
-    clear: both;
+    margin: 0;
 }
 .col-right{
-    float: right;
     width: 49%;
     padding: 0;
-    clear: both
+    margin: 0;
 }
 .col-full{
     width: 100%;
@@ -70,3 +68,13 @@ small{
 .text-center{
     text-align: center;
 }
+.text-left{
+    text-align: left;
+}
+.border-0{
+    border:none;
+}
+
+
+
+
