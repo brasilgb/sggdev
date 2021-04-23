@@ -31,22 +31,38 @@ class RelatorioController extends Controller
 
         return view('relatorios.coletas', compact('lotes', 'aviarios', 'coletas', 'datarelatorio','mortalidades', 'estoqueaves', 'envioovos', 'estoqueovos', 'envios'));
     }
+    // public function pdfcoletas()
+    // {
+    //     $datarelatorio = date("Y-m-d", strtotime(Carbon::now()));
+    //     $lotes = Lote::where('periodo', Periodo::ativo())->get();
+    //     $coletas = Coleta::get();
+    //     $mortalidades = Mortalidade::get();
+    //     $estoqueaves = Estoque_ave::get();
+    //     $envioovos = Envio::get();
+    //     $estoqueovos = Estoque_ovo::get();
+    //     $aviarios = Aviario::get();
+    //     $envios = Envio::get();
 
-    public function pdfcoleta()
+    //     return view('relatorios.pdfcoletas', compact('lotes', 'aviarios', 'coletas', 'datarelatorio','mortalidades', 'estoqueaves', 'envioovos', 'estoqueovos', 'envios'));
+    // }
+
+    public function pdfcoletas()
     {
-        $datarelatorio = date("Y-m-d", strtotime(Carbon::now()));
-        $lotes = Lote::where('periodo', Periodo::ativo())->get();
-        $coletas = Coleta::get();
-        $mortalidades = Mortalidade::get();
-        $estoqueaves = Estoque_ave::get();
-        $envioovos = Envio::get();
-        $estoqueovos = Estoque_ovo::get();
-        $aviarios = Aviario::get();
-        $envios = Envio::get();
+        $data = [
+            'datarelatorio' => date("Y-m-d", strtotime(Carbon::now())),
+            'lotes' => Lote::where('periodo', Periodo::ativo())->get(),
+            'coletas' => Coleta::get(),
+            'mortalidades' => Mortalidade::get(),
+            'estoqueaves' => Estoque_ave::get(),
+            'envioovos' => Envio::get(),
+            'estoqueovos' => Estoque_ovo::get(),
+            'aviarios' => Aviario::get(),
+            'envios' => Envio::get()
+        ];
 
-        $pdf = PDF::loadView('relatorios.relatorio-pdf-coleta', $datarelatorio, $lotes,$coletas,$mortalidades,$estoqueaves,$envioovos,$estoqueovos,$aviarios,$envios);
+        $pdf = PDF::loadView('relatorios.pdfcoletas', $data);
 
-        return $pdf->download('coletas.pdf');
+        return $pdf->download('relatorio-coletas.pdf');
     }
 
 }
