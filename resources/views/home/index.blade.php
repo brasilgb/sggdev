@@ -86,7 +86,20 @@
     </div>
     {{-- KPI estoque --}}
     <div class="row mt-3">
-        <div class="col">
+
+        <div class="col-2">
+            <div class="pt-2 bg-gray-200 rounded shadow-sm border border-white">
+                <div class="">
+                    <h5 class="px-2 pb-1 text-danger text-uppercase font-kpi font-weight-bold border-bottom border-secondary">
+                        Enviar Relatório</h5>
+                </div>
+                <div class="p-0">
+                    <h1 class="text-danger text-center font-weight-bold" style="font-size: 2.8rem;"><a class="text-danger" href="{{ route('relatorios.pdfcoletas') }}" title="Enviar relatório diário"><i class="fa fa-file-alt shadow-sm"></i></a></h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
             <div class=" pt-2 bg-indigo rounded shadow-sm border border-white">
                 <div class="">
                     <h5 class="px-2 pb-1 text-white text-uppercase font-kpi font-weight-bold border-bottom border-white">
@@ -101,7 +114,7 @@
             </div>
         </div>
 
-        <div class="col">
+        <div class="col-4">
             <div class=" pt-2 bg-orange rounded shadow-sm border border-white">
                 <div class="">
                     <h5 class="px-2 pb-1 text-white text-uppercase font-kpi font-weight-bold border-bottom border-white">
@@ -116,7 +129,7 @@
             </div>
         </div>
 
-        <div class="col">
+        <div class="col-2">
             <div class=" pt-2 bg-info rounded shadow-sm border border-white">
                 <div class="">
                     <h5 class="px-2 pb-1 text-white text-uppercase font-kpi font-weight-bold border-bottom border-white">
@@ -127,6 +140,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
     {{-- KPI produção --}}

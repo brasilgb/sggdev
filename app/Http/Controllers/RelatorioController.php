@@ -53,6 +53,7 @@ class RelatorioController extends Controller
         $datarelatorio = date("Y-m-d", strtotime(Carbon::now()));
         $data = [
             'datarelatorio' => date("Y-m-d", strtotime(Carbon::now())),
+            'empresa' => Empresa::first(),
             'lotes' => Lote::where('periodo', Periodo::ativo())->get(),
             'coletas' => Coleta::get(),
             'mortalidades' => Mortalidade::get(),

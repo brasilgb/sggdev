@@ -8,7 +8,7 @@
     <table>
         <tr>
             <td colspan="4" class="border-0 text-center">
-                <h3 style="padding-bottom: 20px;">Movimento diário de granjas</h3>
+                <h3 style="padding-bottom: 10px;">Movimento diário de granjas</h3>
             </td>
         </tr>
         <tr>
@@ -20,11 +20,11 @@
     </table>
     <table>
         <tr class="bg-gray-light">
-            <th class="text-center" style="width: 15%;">Postura</th>
+            <th class="text-center" style="width: 20%;">Postura</th>
             @foreach ($numcoletas as $num)
             <td>{{ $num->coleta }}ª col.</td>
             @endforeach
-            <th>Totais</th>
+            <th style="width: 70px;">Totais</th>
         </tr>
         <tr>
             <td>Limpos do Ninho</td>
@@ -353,8 +353,6 @@
 </div>
 <div style="page-break-before: always;"> </div>
 @endforeach
-
-
 <div class="relatorio">
     <table>
         <tr><td class="bg-gray-light" colspan="{{ $aviarios->count() + 2 }}"><h3>Produção e aproveitamento total do dia</h3></td></tr>
@@ -408,6 +406,5 @@
             <td>{{ number_format(($coletas->where('data_coleta', $datarelatorio)->sum->incubaveis * 100) / $aviarios->sum->femea, 2, ',', '.') }}
             </td>
         </tr>
-
     </table>
 </div>

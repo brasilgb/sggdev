@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ url('css/pdf.css') }}">
 
     <div class="card shadow-sm">
-        <div class="card-header pb-0 border-bottom border-white">
+        <div class="card-header pb-0 border-bottom border-white" style="background-color: #083264;">
             <div class="row">
                 <div class="col">
                     <h4 class="text-left text-white mt-1"><i class="fas fa-file-alt"></i> Relatório</h4>
