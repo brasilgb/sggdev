@@ -24,10 +24,10 @@ class HomeController extends Controller
     public function index()
     {
         // KPI Home
-        $lotes = Lote::count();
-        $aviarios = Aviario::count();
-        $coletas = Coleta::sum('postura_dia');
-        $mortalidades = Mortalidade::sum('tot_ave');
+        $lotes = Lote::get();
+        $aviarios = Aviario::get();
+        $coletas = Coleta::get();
+        $mortalidades = Mortalidade::get();
         $consumos = Consumo::get();
         $lotesperiodo = Lote::where('periodo', Periodo::ativo())->get();
         $semanaatual = Semana::where('data_inicial', '<=', Carbon::now())->where('data_final', '>=', Carbon::now())->first();

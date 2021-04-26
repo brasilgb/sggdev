@@ -77,7 +77,8 @@
               Financeiro
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="{{ route('despesas.index') }}"><i class="fa fa-angle-right"></i> Despesas</a>
+                <a class="dropdown-item" href="{{ route('despesas.index') }}"><i class="fa fa-angle-right"></i> Despesas</a>
+                <a class="dropdown-item" href="{{ route('despesas.index') }}"><i class="fa fa-angle-right"></i> Unidade ovo (R$)</a>
             </div>
           </li>
 
@@ -110,7 +111,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="{{ route('relatorios.movimentodiario') }}"><i class="fa fa-caret-right"></i> Movimento diário</a>
-              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Coleta</a>
               <a class="dropdown-item" href="#">Something else here</a>
             </div>
           </li>
