@@ -8,19 +8,19 @@
     <table>
         <tr>
             <td colspan="4" class="border-0 text-center">
-                <h5>Movimento diário de granjas</h5>
+                <h3 style="padding-bottom: 20px;">Movimento diário de granjas</h3>
             </td>
         </tr>
         <tr>
-            <td class="border-0">Logo</td>
+            <td class="border-0"><img class="logo" src="{{ asset('storage/images/logo-jbs.png') }}" alt="JBS"></td>
             <td class="border-0">Data: {{ date('d/m/Y', strtotime($datarelatorio)) }}</td>
             <td class="border-0">Lote: {{ $lote->lote }}</td>
-            <td class="border-0">Granja:</td>
+            <td class="border-0">Granja: {{ $empresa->razao_social }}</td>
         </tr>
     </table>
     <table>
         <tr class="bg-gray-light">
-            <th class="text-center">Postura</th>
+            <th class="text-center" style="width: 15%;">Postura</th>
             @foreach ($numcoletas as $num)
             <td>{{ $num->coleta }}ª col.</td>
             @endforeach
@@ -351,40 +351,39 @@
         </tr>
     </table>
 </div>
-@endforeach
 <div style="page-break-before: always;"> </div>
-@php
-    $disaviario = App\Models\Aviario::distinct()->get('aviario');
-@endphp
+@endforeach
+
+
 <div class="relatorio">
     <table>
-        <tr><td>Produção e aproveitamento totais do dia</td></tr>
+        <tr><td class="bg-gray-light" colspan="{{ $aviarios->count() + 2 }}"><h3>Produção e aproveitamento total do dia</h3></td></tr>
         <tr class="bg-gray">
             <th>Aviários</th>
-            @foreach ($disaviario as $aviario)
+            @foreach ($aviarios as $aviario)
             <td>{{ $aviario->aviario }}</td>
             @endforeach
             <td>Totais</td>
         </tr>
         <tr>
             <th>N° Fêmeas</th>
-            @foreach ($disaviario as $aviario)
-            <td>{{ $aviarios->femea }}</td>
+            @foreach ($aviarios as $aviario)
+            <td>{{ $aviarios->where('aviario', $aviario->id_aviario)->sum->femea }}</td>
             @endforeach
-            <td>{{ $disaviario->sum->femea }}</td>
+            <td>{{ $aviarios->sum->femea }}</td>
         </tr>
         <tr>
             <th>Ovos Totais</th>
-            @foreach ($disaviario as $aviario)
+            @foreach ($aviarios as $aviario)
             <td>{{ $coletas->where('data_coleta', $datarelatorio)->where('id_aviario', $aviario->id_aviario)->sum->postura_dia }}
             </td>
             @endforeach
-            <td>{{ $disaviario->where('data_coleta', $datarelatorio)->sum->postura_dia }}
+            <td>{{ $coletas->where('data_coleta', $datarelatorio)->sum->postura_dia }}
             </td>
         </tr>
         <tr>
             <th>Produção%</th>
-            @foreach ($disaviario as $aviario)
+            @foreach ($aviarios as $aviario)
             <td>{{ number_format(($coletas->where('data_coleta', $datarelatorio)->where('id_aviario', $aviario->id_aviario)->sum->postura_dia * 100) / $aviarios->sum->femea, 2, ',', '.') }}
             </td>
             @endforeach
@@ -393,7 +392,7 @@
         </tr>
         <tr>
             <th>Ovos Incubáveis</th>
-            @foreach ($disaviario as $aviario)
+            @foreach ($aviarios as $aviario)
             <td>{{ $coletas->where('data_coleta', $datarelatorio)->where('id_aviario', $aviario->id_aviario)->sum->incubaveis }}
             </td>
             @endforeach
@@ -402,7 +401,7 @@
         </tr>
         <tr>
             <th>Aproveitamento%</th>
-            @foreach ($disaviario as $aviario)
+            @foreach ($aviarios as $aviario)
             <td>{{ number_format(($coletas->where('data_coleta', $datarelatorio)->where('id_aviario', $aviario->id_aviario)->sum->incubaveis * 100) / $aviarios->sum->femea, 2, ',', '.') }}
             </td>
             @endforeach

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Aviario;
 use App\Models\Coleta;
+use App\Models\Empresa;
 use App\Models\Envio;
 use App\Models\Estoque_ave;
 use App\Models\Estoque_ovo;
@@ -17,9 +18,10 @@ use Illuminate\Http\Request;
 class RelatorioController extends Controller
 {
 
-    public function coletas()
+    public function movimentodiario()
     {
         $datarelatorio = date("Y-m-d", strtotime(Carbon::now()));
+        $empresa = Empresa::first();
         $lotes = Lote::where('periodo', Periodo::ativo())->get();
         $coletas = Coleta::get();
         $mortalidades = Mortalidade::get();
@@ -29,7 +31,7 @@ class RelatorioController extends Controller
         $aviarios = Aviario::get();
         $envios = Envio::get();
 
-        return view('relatorios.coletas', compact('lotes', 'aviarios', 'coletas', 'datarelatorio','mortalidades', 'estoqueaves', 'envioovos', 'estoqueovos', 'envios'));
+        return view('relatorios.movimentodiario', compact('lotes', 'aviarios', 'coletas', 'datarelatorio','mortalidades', 'estoqueaves', 'envioovos', 'estoqueovos', 'envios', 'empresa'));
     }
     // public function pdfcoletas()
     // {
