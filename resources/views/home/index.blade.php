@@ -206,7 +206,7 @@
                 text: 'Produção da Semana'
             },
             subtitle: {
-                text: 'Comparativo diário de produção total'
+                text: 'Comparativo diário de produção semanal'
             },
             xAxis: {
                 categories: datasemana

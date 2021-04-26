@@ -3,10 +3,10 @@
 @section('content')
 
 <div class="card shadow-sm">
-    <div class="card-header pb-0 border-bottom border-white" style="background-color: #062142;">
+    <div class="card-header pb-0 border-bottom border-white">
         <div class="row">
             <div class="col">
-                <h4 class="text-left text-white mt-1"><i class="fas fa-egg"></i> Eclosão <span
+                <h4 class="text-left text-body mt-1"><i class="fas fa-egg"></i> Eclosão <span
                         class="badge badge-warning"><small>{{ $semanas->count() }} Semanas</small></span></h4>
             </div>
             <div class="col">

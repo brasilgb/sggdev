@@ -6166,7 +6166,7 @@ readers do not read off random characters that represent icons */
 }
 
 .bg-blue-nav {
-  background-color: #083264;
+  background-color: #083264 !important;
 }
 
 .bg-blue {
