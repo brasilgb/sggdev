@@ -83,7 +83,7 @@
                 <label for="senha" class="col-sm-3 col-form-label text-left">Senha <span
                         class="text-danger">*</span></label>
                 <div class="col-sm-7">
-                    <input id="senha" type="text" class="form-control @error('senha') is-invalid @enderror" name="senha"
+                    <input id="senha" type="password" class="form-control @error('senha') is-invalid @enderror" name="senha"
                         value="{{ old('senha', $email->senha) }}">
                     @error('senha')
                     <div class="alert alert-danger">{{ $message }}</div>
