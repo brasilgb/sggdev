@@ -30,10 +30,10 @@
                         @method('POST')
                         @csrf
                         <div class="input-group mb-0">
-                            <input type="text" name="termo" class="form-control shadow-sm" placeholder="Buscar período"required>
+                            <input id="datasearch" type="text" name="search" class="form-control shadow-sm"
+                                placeholder="Buscar periodo por data de início" required>
                             <div class="input-group-append">
-                                <button type="submit" class="btn btn-search shadow-sm"><i
-                                        class="fa fa-search"></i></button>
+                                <button type="submit" class="btn btn-search shadow-sm"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
                     </form>

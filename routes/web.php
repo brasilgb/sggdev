@@ -125,7 +125,7 @@ Route::resource('backups', BackupController::class);
 
 Route::prefix('relatorios')->name('relatorios.')->group(function(){
     Route::get('movimentodiario', [RelatorioController::class, 'movimentodiario'])->name('movimentodiario');
-    Route::get('pdfmovimentodiario', [RelatorioController::class, 'pdfmovimentodiario'])->name('pdfmovimentodiario');
+    Route::post('pdfmovimentodiario', [RelatorioController::class, 'pdfmovimentodiario'])->name('pdfmovimentodiario');
     Route::post('enviarelatorio', [RelatorioController::class, 'enviarelatorio'])->name('enviarelatorio');
 });
 

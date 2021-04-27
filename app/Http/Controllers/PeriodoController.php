@@ -25,11 +25,14 @@ class PeriodoController extends Controller
 
     public function busca(Request $request)
     {
-        $periodos = Periodo::where('id_periodo', $request->termo)->paginate('10');
+        $datainicial = Carbon::createFromFormat('d/m/Y', $request->search)->format('Y-m-d');
+
+        $periodos = Periodo::where('data_inicial', $datainicial)->paginate('10');
         $busca = true;
         return view('periodos.index', compact('periodos', 'busca'));
     }
-    /**
+
+     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

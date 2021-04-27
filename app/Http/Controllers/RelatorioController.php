@@ -38,6 +38,11 @@ class RelatorioController extends Controller
         return view('relatorios.movimentodiario', compact('lotes', 'aviarios', 'coletas', 'datarelatorio', 'mortalidades', 'estoqueaves', 'envioovos', 'estoqueovos', 'envios', 'empresa'));
     }
 
+    public function pdfmovimentodiario(Request $request)
+    {
+        $datarelatorio = Carbon::createFromFormat('d/m/Y', $request->datarelatorio)->format('Y-m-d');
+        return response()->file($this->pdfcoletas($datarelatorio));
+    }
     public function pdfcoletas($datarelatorio)
     {
         $data = [
