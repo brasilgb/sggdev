@@ -22,7 +22,7 @@
             <div class="py-2 px-4">
                 <h1 class="text-light font-weight-bold">{{ $lotes->count() }}</h1>
             </div>
-            <p class="border-top border-white text-white p-2 m-0"><a class="text-white"
+            <p class="border-top border-white text-white p-2 m-0 text-center"><a class="text-white"
                     href="{{ route('lotes.index') }}">Acessar lotes</a> <i class="fa fa-arrow-alt-circle-right"></i>
             </p>
         </div>
@@ -37,7 +37,7 @@
             <div class="py-2 px-4">
                 <h1 class="text-light font-weight-bold">{{ $aviarios->count() }}</h1>
             </div>
-            <p class="border-top border-white text-white p-2 m-0"><a class="text-white"
+            <p class="border-top border-white text-white p-2 m-0 text-center"><a class="text-white"
                     href="{{ route('aviarios.index') }}">Acessar aviários</a> <i
                     class="fa fa-arrow-alt-circle-right"></i></p>
         </div>
@@ -53,7 +53,7 @@
                 <h1 class="text-light font-weight-bold">
                     {{ $coletas->where('data_coleta', \Carbon\Carbon::now())->sum('postura_dia') }}</h1>
             </div>
-            <p class="border-top border-white text-white p-2 m-0"><a class="text-white"
+            <p class="border-top border-white text-white p-2 m-0 text-center"><a class="text-white"
                     href="{{ route('coletas.index') }}">Acessar coletas</a> <i class="fa fa-arrow-alt-circle-right"></i>
             </p>
         </div>
@@ -69,7 +69,7 @@
                 <h1 class="text-light font-weight-bold">
                     {{ $mortalidades->where('data_coleta', \Carbon\Carbon::now())->sum('tot_ave') }}</h1>
             </div>
-            <p class="border-top border-white text-white p-2 m-0"><a class="text-white"
+            <p class="border-top border-white text-white p-2 m-0 text-center"><a class="text-white"
                     href="{{ route('lotes.index') }}">Acessar mortalidades</a> <i
                     class="fa fa-arrow-alt-circle-right"></i></p>
         </div>
@@ -86,7 +86,7 @@
                     {{ $consumos->where('data_coleta', \Carbon\Carbon::now())->sum('femea') + $consumos->where('data_coleta', \Carbon\Carbon::now())->sum('macho') }}<span
                         style="font-size: 0.8rem;">Kg</span></h1>
             </div>
-            <p class="border-top border-white text-white p-2 m-0"><a class="text-white"
+            <p class="border-top border-white text-white p-2 m-0 text-center"><a class="text-white"
                     href="{{ route('lotes.index') }}">Acessar cons. ração</a> <i
                     class="fa fa-arrow-alt-circle-right"></i></p>
         </div>
