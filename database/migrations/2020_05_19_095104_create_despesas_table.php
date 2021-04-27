@@ -20,7 +20,7 @@ class CreateDespesasTable extends Migration
             $table->string('descritivo');
             $table->decimal('valor', 10,2);
             $table->string('situacao');
-            $table->text('observacao');
+            $table->text('observacao')->nullable();
             $table->timestamps();
         });
     }

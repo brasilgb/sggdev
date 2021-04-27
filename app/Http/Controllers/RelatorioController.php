@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Aviario;
 use App\Models\Coleta;
+use App\Models\Despesa;
 use App\Models\Email;
 use App\Models\Empresa;
 use App\Models\Envio;
 use App\Models\Estoque_ave;
 use App\Models\Estoque_ovo;
+use App\Models\Financeiro;
 use App\Models\Lote;
 use App\Models\Mortalidade;
 use App\Models\Periodo;
@@ -18,10 +20,15 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RelatorioController extends Controller
 {
 
+
+    /**
+     * Relatório movimento diário
+     */
     public function movimentodiario()
     {
         $datarelatorio = date("Y-m-d", strtotime(Carbon::now()));
@@ -35,15 +42,15 @@ class RelatorioController extends Controller
         $aviarios = Aviario::get();
         $envios = Envio::get();
 
-        return view('relatorios.movimentodiario', compact('lotes', 'aviarios', 'coletas', 'datarelatorio', 'mortalidades', 'estoqueaves', 'envioovos', 'estoqueovos', 'envios', 'empresa'));
+        return view('relatorios.movimento.movimentodiario', compact('lotes', 'aviarios', 'coletas', 'datarelatorio', 'mortalidades', 'estoqueaves', 'envioovos', 'estoqueovos', 'envios', 'empresa'));
     }
 
     public function pdfmovimentodiario(Request $request)
     {
         $datarelatorio = Carbon::createFromFormat('d/m/Y', $request->datarelatorio)->format('Y-m-d');
-        return response()->file($this->pdfcoletas($datarelatorio));
+        return response()->file($this->pdfmovimento($datarelatorio));
     }
-    public function pdfcoletas($datarelatorio)
+    public function pdfmovimento($datarelatorio)
     {
         $data = [
             'datarelatorio' => $datarelatorio,
@@ -66,7 +73,7 @@ class RelatorioController extends Controller
         $nomerelatorio = date("d_m_Y", strtotime($datarelatorio));
         $pdf_name = "relatorio-coletas-diario-$nomerelatorio.pdf";
         $path = public_path(DIRECTORY_SEPARATOR . $relatoriodir . DIRECTORY_SEPARATOR . $pdf_name);
-        $pdf = PDF::loadView('relatorios.pdfcoletas', $data)->setPaper('a4', 'landscape')->save($path);
+        $pdf = PDF::loadView('relatorios.movimento.pdfmovimento', $data)->setPaper('a4', 'landscape')->save($path);
 
         return $path;
         //return $pdf->download('relatorio-coletas.pdf');
@@ -75,7 +82,7 @@ class RelatorioController extends Controller
     public function enviarelatorio(Request $request)
     {
         $datarelatorio = Carbon::createFromFormat('d/m/Y', $request->datarelatorio)->format('Y-m-d');
-        $attachment = $this->pdfcoletas($datarelatorio);
+        $attachment = $this->pdfmovimento($datarelatorio);
         $emaildata = Email::orderBy('id_email')->first();
 
         require base_path("vendor/autoload.php");
@@ -115,12 +122,80 @@ class RelatorioController extends Controller
             // $mail->AltBody = plain text version of email body;
 
             if (!$mail->send()) {
-                return back()->with("failed", "Relatório não enviado não enviado.")->withErrors($mail->ErrorInfo);
+                return back()->with("failed", "Relatório do movimento diário não enviado.")->withErrors($mail->ErrorInfo);
             } else {
-                return back()->with("success", "Relatório enviado com sucesso.");
+                return back()->with("success", "Relatório do movimento diário enviado com sucesso.");
             }
         } catch (Exception $e) {
             return back()->with('error', 'O relatório não foi enviado corretamente Verifique as configurações do servidor de e-mail e tente novamente!');
         }
+    }
+    /**
+     * Fim relatório movimento diário
+     */
+
+    /**
+     * Relatório de Coletas
+     */
+
+    public function coleta()
+    {
+        $datarelatorio = date("Y-m-d", strtotime(Carbon::now()));
+        $lotes = Lote::where('periodo', Periodo::ativo())->get();
+        $aviarios = Aviario::get();
+        $coletas = Coleta::where('data_coleta', $datarelatorio)->get();
+
+        return view('relatorios.coleta.coleta', compact('datarelatorio','lotes', 'aviarios', 'coletas'));
+    }
+
+    public function pdfcoleta(Request $request)
+    {
+        $datarelatorio = Carbon::createFromFormat('d/m/Y', $request->datarelatorio)->format('Y-m-d');
+        $data = [
+            'datarelatorio' => $datarelatorio,
+            'lotes' => Lote::where('periodo', Periodo::ativo())->get(),
+            'coletas' => Coleta::where('data_coleta', $datarelatorio)->get(),
+            'aviarios' => Aviario::get()
+        ];
+
+        $pdf = PDF::loadView('relatorios.coleta.pdfcoleta', $data)->setPaper('a4', 'landscape');
+        return $pdf->stream('relatorio-coletas.pdf');
+    }
+/**
+ * Fim relatório de Coletas
+ */
+
+ /**
+  * Relatório financeiro
+  */
+    public function financeiro()
+    {
+        $datarelatorio = date("Y-m-d", strtotime(Carbon::now()));
+        $mesrelatorio = date("m", strtotime(now()));
+        $coletas = Coleta::get();
+        $despesas = DB::table('despesas')
+        ->whereMonth('created_at', $mesrelatorio)
+        ->get();
+        $receitas = Financeiro::first();
+        return view('relatorios.financeiro.financeiro', compact('datarelatorio', 'coletas', 'despesas', 'receitas'));
+    }
+
+
+    public function pdffinanceiro(Request $request)
+    {
+        $datarelatorio = Carbon::createFromFormat('d/m/Y', $request->datarelatorio)->format('Y-m-d');
+        $mesrelatorio = date("m", strtotime($datarelatorio));
+        $despesas = DB::table('despesas')
+        ->whereMonth('created_at', $mesrelatorio)
+        ->get();
+        $data = [
+            'datarelatorio' => $datarelatorio,
+            'coletas' => Coleta::get(),
+            'receitas' => Financeiro::first(),
+            'despesas' => $despesas
+        ];
+
+        $pdf = PDF::loadView('relatorios.financeiro.pdffinanceiro', $data)->setPaper('a4', 'landscape');
+        return $pdf->stream('relatorio-financeiro.pdf');
     }
 }

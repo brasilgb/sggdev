@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Backup;
+use App\Models\Financeiro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class BackupController extends Controller
+class FinanceiroController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +15,11 @@ class BackupController extends Controller
      */
     public function index()
     {
-        $backups = backup::first();
-        if ($backups):
-            return redirect()->route('backups.show', ['backup' => $backups->id_backup]);
+        $financeiros = Financeiro::first();
+        if ($financeiros):
+            return redirect()->route('financeiros.show', ['financeiro' => $financeiros->id_financeiro]);
         else:
-            return redirect()->route('backups.create');
+            return redirect()->route('financeiros.create');
         endif;
     }
 
@@ -30,7 +30,7 @@ class BackupController extends Controller
      */
     public function create()
     {
-        return view('backups.create');
+        return view('financeiros.create');
     }
 
     /**
@@ -39,14 +39,11 @@ class BackupController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Backup $backup)
+    public function store(Request $request, Financeiro $financeiro)
     {
         $data = $request->all();
         $rules = [
-            'basedados' => 'required',
-            'usuario' => 'required',
-            'senha' => 'required',
-            'local' => 'required'
+            'valor_ovo' => 'required'
         ];
         $messages = [
             'required' => 'O campo :attribute deve ser preenchido!',
@@ -56,48 +53,45 @@ class BackupController extends Controller
         ];
         $validator = Validator::make($data, $rules, $messages)->validate();
 
-        $data['id_backup'] = Backup::idbackup();
-        $backup->create($data);
-        return redirect()->route('backups.show', ['backup' => Backup::idbackup()-1])->with('success', 'Configurações de backup salva com sucesso!');
+        $data['id_financeiro'] = Financeiro::idfinanceiro();
+        $financeiro->create($data);
+        return redirect()->route('financeiros.show', ['financeiro' => Financeiro::idfinanceiro()-1])->with('success', 'Dados do financeiro salvo com sucesso!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Backup  $backup
+     * @param  \App\Models\Financeiro  $financeiro
      * @return \Illuminate\Http\Response
      */
-    public function show(Backup $backup)
+    public function show(Financeiro $financeiro)
     {
-        return view('backups.edit', compact('backup'));
+        return view('financeiros.edit', compact('financeiro'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Backup  $backup
+     * @param  \App\Models\Financeiro  $financeiro
      * @return \Illuminate\Http\Response
      */
-    public function edit(Backup $backup)
+    public function edit(Financeiro $financeiro)
     {
-        return redirect()->route('backups.show', ['backup' => $backup->id_backup])->with('success', 'Configurações de Backup salvas com sucesso!');
+        return redirect()->route('financeiros.show', ['financeiro' => $financeiro->id_financeiro]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Backup  $backup
+     * @param  \App\Models\Financeiro  $financeiro
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Backup $backup)
+    public function update(Request $request, Financeiro $financeiro)
     {
         $data = $request->all();
         $rules = [
-            'basedados' => 'required',
-            'usuario' => 'required',
-            'senha' => 'required',
-            'local' => 'required'
+            'valor_ovo' => 'required'
         ];
         $messages = [
             'required' => 'O campo :attribute deve ser preenchido!',
@@ -107,28 +101,18 @@ class BackupController extends Controller
         ];
         $validator = Validator::make($data, $rules, $messages)->validate();
 
-        $backup->update($data);
-        return redirect()->route('backups.show', ['backup' => Backup::idbackup()-1])->with('success', 'Configurações de backup salva com sucesso!');
+        $financeiro->update($data);
+        return redirect()->route('financeiros.show', ['financeiro' => $financeiro->id_financeiro])->with('success', 'Dados do financeiro salvo com sucesso!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Backup  $backup
+     * @param  \App\Models\Financeiro  $financeiro
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Backup $backup)
+    public function destroy(Financeiro $financeiro)
     {
         //
-    }
-
-    public function createbackup()
-    {
-        $backup = Backup::first();
-        if(!is_dir($backup->local)){
-            mkdir($backup->local, '0777', true);
-        }
-        $dump = "C:\webserver\mariadb\bin\mysqldump.exe -u {$backup->usuario} -p{$backup->senha} -h localhost {$backup->basededados} > {$backup->local}backup-sgga.sql";
-        system($dump);
     }
 }

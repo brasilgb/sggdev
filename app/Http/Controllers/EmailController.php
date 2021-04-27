@@ -21,6 +21,7 @@ class EmailController extends Controller
         else:
             return redirect()->route('emails.create');
         endif;
+        
     }
 
     /**

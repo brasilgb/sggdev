@@ -110,15 +110,13 @@ thead > tr{
     max-height: 40px!important;
     width: auto;
 }
+
 .brand-image img {
     margin: 0!important;
     padding: 0!important;
     max-height: 40px!important;
     width: 50px!important;
     border:1px solid #fff
-}
-.navbar-nav{
-    max-height: 60px!important;
 }
 
 .font-kpi{

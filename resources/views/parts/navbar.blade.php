@@ -9,7 +9,15 @@
             <img src="{{ url("storage/empresa/sggaicon.png") }}"  height="30" alt="" class="rounded">
             @endif
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -78,7 +86,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="{{ route('despesas.index') }}"><i class="fa fa-angle-right"></i> Despesas</a>
-                <a class="dropdown-item" href="{{ route('despesas.index') }}"><i class="fa fa-angle-right"></i> Unidade ovo (R$)</a>
+                <a class="dropdown-item" href="{{ route('financeiros.index') }}"><i class="fa fa-angle-right"></i> Entradas</a>
             </div>
           </li>
 
@@ -111,8 +119,8 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="{{ route('relatorios.movimentodiario') }}"><i class="fa fa-caret-right"></i> Movimento diário</a>
-              <a class="dropdown-item" href="#">Coleta</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+              <a class="dropdown-item" href="{{ route('relatorios.coleta') }}"><i class="fa fa-caret-right"></i> Coleta</a>
+              <a class="dropdown-item" href="{{ route('relatorios.financeiro') }}"><i class="fa fa-caret-right"></i> Financeiro</a>
             </div>
           </li>
           <li class="nav-item dropdown">

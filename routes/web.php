@@ -9,6 +9,7 @@ use App\Http\Controllers\DespesaController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\EnvioController;
+use App\Http\Controllers\FinanceiroController;
 use App\Http\Controllers\GeraltarefaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoteController;
@@ -107,6 +108,8 @@ Route::prefix('despesas')->name('despesas.')->group(function () {
 });
 Route::resource('despesas', DespesaController::class);
 
+Route::resource('financeiros', FinanceiroController::class);
+
 Route::prefix('metas')->name('metas.')->group(function () {
     Route::get('eclosao', [MetaController::class, 'eclosao'])->name('eclosao');
     Route::get('fertilidade', [MetaController::class, 'fertilidade'])->name('fertilidade');
@@ -121,12 +124,20 @@ Route::resource('empresas', EmpresaController::class);
 
 Route::resource('emails', EmailController::class);
 
+Route::prefix('backups')->name('backups.')->group(function () {
+    Route::get('createbackup', [BackupController::class, 'createbackup'])->name('createbackup');
+});
 Route::resource('backups', BackupController::class);
 
 Route::prefix('relatorios')->name('relatorios.')->group(function(){
     Route::get('movimentodiario', [RelatorioController::class, 'movimentodiario'])->name('movimentodiario');
     Route::post('pdfmovimentodiario', [RelatorioController::class, 'pdfmovimentodiario'])->name('pdfmovimentodiario');
     Route::post('enviarelatorio', [RelatorioController::class, 'enviarelatorio'])->name('enviarelatorio');
+    Route::get('coleta', [RelatorioController::class, 'coleta'])->name('coleta');
+    Route::post('pdfcoleta', [RelatorioController::class, 'pdfcoleta'])->name('pdfcoleta');
+    Route::get('financeiro', [RelatorioController::class, 'financeiro'])->name('financeiro');
+    Route::post('pdffinanceiro', [RelatorioController::class, 'pdffinanceiro'])->name('pdffinanceiro');
+
 });
 
 
