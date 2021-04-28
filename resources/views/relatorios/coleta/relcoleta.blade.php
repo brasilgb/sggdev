@@ -1,6 +1,6 @@
 <div class="row mb-4">
     <div class="col-12">
-        <div style="font: bold italic 1rem sans-serif" class="bg-gray-400 p-2 text-center">Data do relatório: {{ date("d/m/Y", strtotime($datarelatorio)) }}</div>
+        <div style="font-size: 1rem;" class="bg-gray-400 p-2 text-center">Data do relatório: {{ date("d/m/Y", strtotime($datarelatorio)) }}</div>
     </div>
 </div>
 @php

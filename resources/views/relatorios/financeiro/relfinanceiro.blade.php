@@ -1,13 +1,15 @@
 <div class="row mb-4">
     <div class="col-12">
-        <div style="font: bold italic 1rem sans-serif" class="bg-gray-400 p-2 text-center">Relatório financeiro - data do
+        <div style="font-size: 1rem;" class="bg-gray-400 p-2 text-center">Relatório financeiro - data do
             relatório: {{ $datarelatorio }}</div>
     </div>
 </div>
 
+@if (is_object($receitas))
+
 <table class="table table-bordered table-condensed mb2">
     <tr>
-        <th style="font: bold italic 1rem sans-serif" colspan="4" class="bg-gray-400 text-center">Resumo financeiro geral</th>
+        <th style="font-size: 1rem;" colspan="4" class="bg-gray-400 text-center">Resumo financeiro geral</th>
     </tr>
     <tr class="bg-gray-200">
         <th>Despesas</th>
@@ -31,7 +33,7 @@
 
 <table class="table table-bordered table-condensed mb2">
     <tr>
-        <th colspan="3" style="font: bold italic 1rem sans-serif" class="text-center bg-gray-400">Fonte de receita</th>
+        <th colspan="3" style="font-size: 1rem;" class="text-center bg-gray-400">Fonte de receita</th>
     </tr>
     <tr>
         <th>Ovos totais</th>
@@ -45,10 +47,16 @@
     </tr>
 
 </table>
-
+@else
+<div class="alert alert-danger alert-block text-left">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong><i class="fa fa-exclamation-triangle"></i> Para vizualizar outros dados do financeiro insira o valor unitário dos ovos 
+    <a href="{{ route('financeiros.index') }}"> aqui</a></strong>!
+</div>
+@endif
 <table class="table table-bordered table-condensed mb2">
     <tr>
-        <th colspan="4" style="font: bold italic 1rem sans-serif" class="text-center bg-gray-400">Despesas Mês
+        <th colspan="4" style="font-size: 1rem;" class="text-center bg-gray-400">Despesas Mês
             ({{ strftime('%B', strtotime('today')) }})</th>
     </tr>
     <tr>
