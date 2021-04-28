@@ -30,9 +30,13 @@
 </head>
 
 <body class="d-flex flex-column h-100">
-
+@php
+    $segmento = \App\Models\Empresa::first()
+@endphp
     <header>
-        @include('parts/navbar')
+        @if ($segmento->segmento > 0)
+            @include('parts/navbar')
+        @endif
     </header>
 
     <div id="main" class="flex-shrink-0">
@@ -40,7 +44,10 @@
             @yield('content')
         </div>
     </div><!-- /.container -->
+    @if ($segmento->segmento > 0)
     @include('parts/footer')
+    @endif
+    
     @include('parts/scripts')
 </body>
 

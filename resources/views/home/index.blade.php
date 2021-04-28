@@ -13,6 +13,7 @@
 </div>
 
 <div class="row">
+    @if ($segmento->segmento > 0)
     <div class="col">
         <div class=" pt-2 bg-blue rounded shadow-sm border border-white">
             <div class="">
@@ -107,37 +108,56 @@
                     @method('POST')
                     @csrf
                     <input type="hidden" name="datarelatorio" value="{{ date("d/m/Y", strtotime(now())) }}">
-                    <button type="submit" class="btn btn-lg btn-danger shadow-sm border border-white"><i class="fa fa-file-alt"></i></button>
+                    <button type="submit" class="btn btn-lg btn-danger shadow-sm border border-white"><i
+                            class="fa fa-file-alt"></i></button>
                 </form>
             </div>
         </div>
     </div>
 
-    <div class="col-4">
+    <div class="col-2">
+        <div class="pt-2 bg-gray-200 rounded shadow-sm border border-white">
+            <div class="">
+                <h5
+                    class="px-2 pb-1 text-danger text-uppercase font-kpi font-weight-bold border-bottom border-secondary">
+                    Gerar backup</h5>
+            </div>
+            <div class="p-2 text-center">
+                <form action="{{ route('backups.gerabackup') }}" method="get" class="inline">
+                    @method('PUT')
+                    @csrf
+                    <button type="submit" class="btn btn-lg btn-danger shadow-sm border border-white"><i
+                            class="fa fa-database"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-3">
         <div class=" pt-2 bg-indigo rounded shadow-sm border border-white">
             <div class="">
                 <h5 class="px-2 pb-1 text-white text-uppercase font-kpi font-weight-bold border-bottom border-white">
                     Estoque Ovos</h5>
             </div>
-            <div class="py-2 px-2 row">
-                <div class="col text-light font-weight-bold">Comerciais: {{ $estoqueovos->sum->comerciais }} <br>
+            <div class="p-2 row">
+                <div class="col-7 text-light font-weight-bold">Comerciais: {{ $estoqueovos->sum->comerciais }} <br>
                     Incubáveis: {{ $estoqueovos->sum->incubaveis }}</div>
-                <div style="font-size: 1.5rem;" class="col text-light font-weight-bold">Total:
+                <div style="font-size: 1.5rem;" class="col-5 text-light font-weight-bold text-center">
                     {{ $estoqueovos->sum->comerciais + $estoqueovos->sum->incubaveis }}</div>
             </div>
         </div>
     </div>
 
-    <div class="col-4">
+    <div class="col-3">
         <div class=" pt-2 bg-orange rounded shadow-sm border border-white">
             <div class="">
                 <h5 class="px-2 pb-1 text-white text-uppercase font-kpi font-weight-bold border-bottom border-white">
                     Aves totais</h5>
             </div>
-            <div class="py-2 px-2 row">
-                <div class="col text-light font-weight-bold">Fêmeas: {{ $estoqueaves->sum->femea }} <br> Machos:
+            <div class="p-2 row">
+                <div class="col-7 text-light font-weight-bold">Fêmeas: {{ $estoqueaves->sum->femea }} <br> Machos:
                     {{ $estoqueaves->sum->macho }}</div>
-                <div style="font-size: 1.5rem;" class="col text-light font-weight-bold">Total:
+                <div style="font-size: 1.5rem;" class="col-5 text-light font-weight-bold text-center">
                     {{ $estoqueaves->sum->femea + $estoqueaves->sum->macho }}</div>
             </div>
         </div>
@@ -211,7 +231,6 @@
     </div>
 </div>
 
-
 <script>
     // Gráfico produção semanal
         var producaosemana = <?php echo json_encode($producaosemana,
@@ -253,7 +272,17 @@
         // Gráfico Média semanal *********************************************************
 
 </script>
+@else
+<div class="container">
+    <div class="row">
+    <div class="col-12">
+        <div class="alert alert-danger" style="font-size: 1rem">
+            <i class="fa fa-lightbulb"> Para prosseguir será necessário preencher os dados corretamente. <a href="{{ route('empresas.index') }}"> Quero prosseguir e preencher os dados</a>.</i>
+        </div>
+    </div>
+</div>
+</div>
 
-
+@endif
 
 @endsection

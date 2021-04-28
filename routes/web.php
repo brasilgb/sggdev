@@ -125,7 +125,8 @@ Route::resource('empresas', EmpresaController::class);
 Route::resource('emails', EmailController::class);
 
 Route::prefix('backups')->name('backups.')->group(function () {
-    Route::get('createbackup', [BackupController::class, 'createbackup'])->name('createbackup');
+    Route::get('gerabackup', [BackupController::class, 'gerabackup'])->name('gerabackup');
+    Route::get('executabackup', [BackupController::class, 'executabackup'])->name('executabackup');
 });
 Route::resource('backups', BackupController::class);
 

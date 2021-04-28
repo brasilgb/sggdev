@@ -66,6 +66,24 @@
                 </div>
 
                 <div class="form-group row">
+                    <label for="segmento" class="col-sm-3 col-form-label text-left">Segmento <span
+                            class="text-danger">*</span></label>
+                    <div class="col-sm-7">
+                        <div class="form-check form-check-inline">
+                            <input name="segmento" class="form-check-input" type="radio" id="inlineRadio1" value="1" {{(old('geckoHatchling') == '1') ? 'checked' : ''}}>
+                            <label class="form-check-label" for="inlineRadio1">Frangos</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input name="segmento" class="form-check-input" type="radio" id="inlineRadio2" value="2" {{(old('geckoHatchling') == '2') ? 'checked' : ''}}>
+                            <label class="form-check-label" for="inlineRadio2">Perus</label>
+                          </div>
+                        @error('segmento')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <label for="endereco" class="col-sm-3 col-form-label text-left">Endereço <span
                             class="text-danger">*</span></label>
                     <div class="col-sm-7">

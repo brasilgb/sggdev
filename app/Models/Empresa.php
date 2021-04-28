@@ -16,6 +16,7 @@ class Empresa extends Model
         'logotipo',
         'cnpj',
         'razao_social',
+        'segmento',
         'endereco',
         'cidade',
         'uf',

@@ -27,7 +27,7 @@
             <div class="card-header bg-light pl-0 pb-0 mb-4">
                 <h4 class="text-left mt-1 ml-0"><i class="fas fa-upload"></i> Informações de backup</h4>
             </div>
-            <div class="form-group row">
+            {{-- <div class="form-group row">
                 <label for="basedados" class="col-sm-3 col-form-label text-left">Base de dados <span
                         class="text-danger">*</span></label>
                 <div class="col-sm-7">
@@ -57,13 +57,13 @@
                 <label for="senha" class="col-sm-3 col-form-label text-left">Senha <span
                         class="text-danger">*</span></label>
                 <div class="col-sm-7">
-                    <input id="senha" type="text" class="form-control @error('senha') is-invalid @enderror"
+                    <input id="senha" type="password" class="form-control @error('senha') is-invalid @enderror"
                         name="senha" value="{{ old('senha', $backup->senha) }}">
                     @error('senha')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-            </div>
+            </div> --}}
 
             <div class="form-group row">
                 <label for="local" class="col-sm-3 col-form-label text-left">Local <span
@@ -78,7 +78,7 @@
             </div>
 
             <div class="form-group row">
-                <label for="agendamento" class="col-sm-3 col-form-label text-left">Agendamento <small class="text-secondary"><i>(intervalo de tempo)</i></small></label>
+                <label for="agendamento" class="col-sm-3 col-form-label text-left">Agendamento <small class="text-secondary"><i>(Inserir hora)</i></small></label>
                 <div class="col-sm-7">
                     <input id="agendamento" type="text" class="form-control @error('agendamento') is-invalid @enderror" name="agendamento"
                         value="{{ old('agendamento', $backup->agendamento) }}">

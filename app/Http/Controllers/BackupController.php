@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Backup;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,9 +17,9 @@ class BackupController extends Controller
     public function index()
     {
         $backups = backup::first();
-        if ($backups):
+        if ($backups) :
             return redirect()->route('backups.show', ['backup' => $backups->id_backup]);
-        else:
+        else :
             return redirect()->route('backups.create');
         endif;
     }
@@ -43,9 +44,6 @@ class BackupController extends Controller
     {
         $data = $request->all();
         $rules = [
-            'basedados' => 'required',
-            'usuario' => 'required',
-            'senha' => 'required',
             'local' => 'required'
         ];
         $messages = [
@@ -58,7 +56,7 @@ class BackupController extends Controller
 
         $data['id_backup'] = Backup::idbackup();
         $backup->create($data);
-        return redirect()->route('backups.show', ['backup' => Backup::idbackup()-1])->with('success', 'Configurações de backup salva com sucesso!');
+        return redirect()->route('backups.show', ['backup' => Backup::idbackup() - 1])->with('success', 'Configurações de backup salva com sucesso!');
     }
 
     /**
@@ -94,9 +92,6 @@ class BackupController extends Controller
     {
         $data = $request->all();
         $rules = [
-            'basedados' => 'required',
-            'usuario' => 'required',
-            'senha' => 'required',
             'local' => 'required'
         ];
         $messages = [
@@ -108,7 +103,7 @@ class BackupController extends Controller
         $validator = Validator::make($data, $rules, $messages)->validate();
 
         $backup->update($data);
-        return redirect()->route('backups.show', ['backup' => Backup::idbackup()-1])->with('success', 'Configurações de backup salva com sucesso!');
+        return redirect()->route('backups.show', ['backup' => Backup::idbackup() - 1])->with('success', 'Configurações de backup salva com sucesso!');
     }
 
     /**
@@ -122,13 +117,33 @@ class BackupController extends Controller
         //
     }
 
+    public function executabackup()
+    {
+        $horaatual = date("H:i", strtotime(Carbon::now()));
+        $horaagendada = date("H:i", strtotime(Backup::first()->agendamento));
+        if ($horaatual == $horaagendada) {
+            $this->createbackup();
+        }
+    }
+    public function gerabackup()
+    {
+        $this->createbackup();
+        return back();
+    }
+    
     public function createbackup()
     {
         $backup = Backup::first();
-        if(!is_dir($backup->local)){
-            mkdir($backup->local, '0777', true);
+        $host = env('DB_HOST');
+        $username = env('DB_USERNAME');
+        $password = env('DB_PASSWORD');
+        $database = env('DB_DATABASE');
+        $file = $backup->local . 'backup-sgga.sql';
+
+        if (!is_dir($backup->local)) {
+            mkdir($backup->local, 0777, true);
         }
-        $dump = "C:\webserver\mariadb\bin\mysqldump.exe -u {$backup->usuario} -p{$backup->senha} -h localhost {$backup->basededados} > {$backup->local}backup-sgga.sql";
-        system($dump);
+        $dump = "C:\webserver\mariadb\bin\mysqldump -u {$username} -p{$password} -h {$host} {$database} > {$file}";
+        shell_exec($dump);
     }
 }

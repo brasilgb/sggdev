@@ -18,6 +18,7 @@ class CreateEmpresasTable extends Migration
             $table->text('logotipo');
             $table->char('cnpj', 50);
             $table->char('razao_social', 50);
+            $table->integer('segmento')->nullable();
             $table->char('endereco', 50);
             $table->char('cidade', 50);
             $table->string('uf');

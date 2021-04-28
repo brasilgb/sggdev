@@ -39,4 +39,13 @@ if (Evento.keyCode == 13) {
     document.getElementById(InputId).select();
 }
 }
+
+$(function(){
+    setInterval(function(){
+        $.ajax({
+        url: "{{ route('backups.executabackup') }}",
+        type: "GET"
+       })
+     }, 1000);
+});
 </script>

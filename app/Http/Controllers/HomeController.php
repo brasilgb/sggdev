@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Aviario;
 use App\Models\Coleta;
 use App\Models\Consumo;
+use App\Models\Empresa;
 use App\Models\Envio;
 use App\Models\Estoque_ave;
 use App\Models\Estoque_ovo;
@@ -59,6 +60,8 @@ class HomeController extends Controller
         // Tarefas gerais
         $tarefas = Geraltarefa::where('periodo', Periodo::ativo())->get();
 
-        return view('home.index', compact('lotes', 'aviarios', 'coletas', 'mortalidades', 'consumos', 'semanaatual', 'datasemana', 'producaosemana', 'media', 'alcancada', 'estoqueovos', 'estoqueaves', 'tarefas', 'capitalizadas'));
+        $segmento = Empresa::first();
+
+        return view('home.index', compact('segmento', 'lotes', 'aviarios', 'coletas', 'mortalidades', 'consumos', 'semanaatual', 'datasemana', 'producaosemana', 'media', 'alcancada', 'estoqueovos', 'estoqueaves', 'tarefas', 'capitalizadas'));
     }
 }
