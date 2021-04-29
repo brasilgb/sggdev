@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Empresa;
 use App\Models\Periodo;
 use App\Models\Semana;
 use Illuminate\Http\Request;
 
 class MetaController extends Controller
 {
+    public function __construct()
+    {
+        if(Empresa::first()->segmento == 0){
+            return redirect()->route('home')->send();
+        }
+    }
     public function eclosao()
     {
         $semanas = $this->semanas();

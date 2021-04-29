@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Empresa;
 use App\Models\Financeiro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class FinanceiroController extends Controller
 {
+    public function __construct()
+    {
+        if(Empresa::first()->segmento == 0){
+            return redirect()->route('home')->send();
+        }
+    }
     /**
      * Display a listing of the resource.
      *

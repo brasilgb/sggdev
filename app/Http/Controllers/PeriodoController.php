@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Empresa;
 use App\Models\Checklist;
 use App\Models\Periodo;
 use App\Models\Semana;
@@ -12,6 +13,12 @@ use Illuminate\Http\Request;
 
 class PeriodoController extends Controller
 {
+    public function __construct()
+    {
+        if(Empresa::first()->segmento == 0){
+            return redirect()->route('home')->send();
+        }
+    }
     /**
      * Display a listing of the resource.
      *

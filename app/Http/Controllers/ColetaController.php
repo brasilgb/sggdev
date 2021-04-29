@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Empresa;
 use App\Models\Coleta;
 use App\Models\Lote;
 use App\Models\Periodo;
@@ -11,6 +12,12 @@ use Illuminate\Support\Facades\Validator;
 
 class ColetaController extends Controller
 {
+    public function __construct()
+    {
+        if(Empresa::first()->segmento == 0){
+            return redirect()->route('home')->send();
+        }
+    }
     /**
      * Display a listing of the resource.
      *

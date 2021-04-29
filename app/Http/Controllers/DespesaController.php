@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Empresa;
 use App\Models\Despesa;
 use App\Models\Periodo;
 use Carbon\Carbon;
@@ -10,6 +11,12 @@ use Illuminate\Support\Facades\Validator;
 
 class DespesaController extends Controller
 {
+    public function __construct()
+    {
+        if(Empresa::first()->segmento == 0){
+            return redirect()->route('home')->send();
+        }
+    }
     /**
      * Display a listing of the resource.
      *

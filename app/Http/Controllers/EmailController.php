@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Empresa;
 use App\Models\Email;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class EmailController extends Controller
 {
+    public function __construct()
+    {
+        if(Empresa::first()->segmento == 0){
+            return redirect()->route('home')->send();
+        }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +28,7 @@ class EmailController extends Controller
         else:
             return redirect()->route('emails.create');
         endif;
-        
+
     }
 
     /**

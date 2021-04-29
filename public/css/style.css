@@ -130,3 +130,11 @@ thead > tr{
 .border-gray-600{
     border-color: #6c757d!important;
 }
+.frango-img {
+    background: url('../storage/images/galinhacomovos.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 250px;
+    width: 300px;
+}

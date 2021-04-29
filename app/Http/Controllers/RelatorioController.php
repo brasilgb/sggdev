@@ -18,13 +18,18 @@ use PDF;
 use Carbon\Carbon;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class RelatorioController extends Controller
 {
 
+    public function __construct()
+    {
+        if(Empresa::first()->segmento == 0){
+            return redirect()->route('home')->send();
+        }
+    }
 
     /**
      * Relatório movimento diário

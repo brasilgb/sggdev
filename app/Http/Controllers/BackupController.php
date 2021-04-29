@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Empresa;
 use App\Models\Backup;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -9,6 +10,12 @@ use Illuminate\Support\Facades\Validator;
 
 class BackupController extends Controller
 {
+    public function __construct()
+    {
+        if(Empresa::first()->segmento == 0){
+            return redirect()->route('home')->send();
+        }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -130,7 +137,7 @@ class BackupController extends Controller
         $this->createbackup();
         return back();
     }
-    
+
     public function createbackup()
     {
         $backup = Backup::first();

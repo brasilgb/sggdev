@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Empresa;
 use App\Models\Envio;
 use App\Models\Estoque_ovo;
 use App\Models\Lote;
@@ -12,6 +13,12 @@ use Illuminate\Support\Facades\Validator;
 
 class EnvioController extends Controller
 {
+    public function __construct()
+    {
+        if(Empresa::first()->segmento == 0){
+            return redirect()->route('home')->send();
+        }
+    }
     /**
      * Display a listing of the resource.
      *
