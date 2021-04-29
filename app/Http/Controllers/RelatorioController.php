@@ -173,34 +173,92 @@ class RelatorioController extends Controller
  /**
   * Relatório financeiro
   */
-    public function financeiro()
-    {
-        $datarelatorio = date("Y-m-d", strtotime(Carbon::now()));
-        $mesrelatorio = date("m", strtotime(now()));
-        $coletas = Coleta::get();
-        $despesas = DB::table('despesas')
-        ->whereMonth('created_at', $mesrelatorio)
-        ->get();
-        $receitas = Financeiro::first();
-        return view('relatorios.financeiro.financeiro', compact('datarelatorio', 'coletas', 'despesas', 'receitas'));
-    }
+  public function financeiro()
+  {
+      $datarelatorio = date("Y-m-d", strtotime(Carbon::now()));
+      $mesrelatorio = date("m", strtotime(now()));
+      $coletas = Coleta::get();
+      $despesas = DB::table('despesas')
+      ->whereMonth('created_at', $mesrelatorio)
+      ->get();
+      $receitas = Financeiro::first();
+      return view('relatorios.financeiro.financeiro', compact('datarelatorio', 'coletas', 'despesas', 'receitas'));
+  }
 
 
-    public function pdffinanceiro(Request $request)
-    {
-        $datarelatorio = Carbon::createFromFormat('d/m/Y', $request->datarelatorio)->format('Y-m-d');
-        $mesrelatorio = date("m", strtotime($datarelatorio));
-        $despesas = DB::table('despesas')
-        ->whereMonth('created_at', $mesrelatorio)
-        ->get();
-        $data = [
-            'datarelatorio' => $datarelatorio,
-            'coletas' => Coleta::get(),
-            'receitas' => Financeiro::first(),
-            'despesas' => $despesas
-        ];
+  public function pdffinanceiro(Request $request)
+  {
+      $datarelatorio = Carbon::createFromFormat('d/m/Y', $request->datarelatorio)->format('Y-m-d');
+      $mesrelatorio = date("m", strtotime($datarelatorio));
+      $despesas = DB::table('despesas')
+      ->whereMonth('created_at', $mesrelatorio)
+      ->get();
+      $data = [
+          'datarelatorio' => $datarelatorio,
+          'coletas' => Coleta::get(),
+          'receitas' => Financeiro::first(),
+          'despesas' => $despesas
+      ];
 
-        $pdf = PDF::loadView('relatorios.financeiro.pdffinanceiro', $data)->setPaper('a4', 'landscape');
-        return $pdf->stream('relatorio-financeiro.pdf');
-    }
+      $pdf = PDF::loadView('relatorios.financeiro.pdffinanceiro', $data)->setPaper('a4', 'landscape');
+      return $pdf->stream('relatorio-financeiro.pdf');
+  }
+  /**
+ * Fim relatório financeiro
+ */
+
+ /**
+  * Relatório estoque de ave
+  */
+  public function estoqueave()
+  {
+      $datarelatorio = date("Y-m-d", strtotime(Carbon::now()));
+      $aviarios = Aviario::get();
+      $mortalidades = Mortalidade::where('data_mortalidade', $datarelatorio)->get();
+      return view('relatorios.estoqueave.estoqueave', compact('datarelatorio', 'aviarios', 'mortalidades'));
+  }
+
+
+  public function pdfestoqueave(Request $request)
+  {
+      $datarelatorio = Carbon::createFromFormat('d/m/Y', $request->datarelatorio)->format('Y-m-d');
+      $data = [
+          'datarelatorio' => $datarelatorio,
+          'aviarios' => Aviario::get(),
+          'mortalidades' => Mortalidade::where('data_mortalidade', $datarelatorio)->get()
+      ];
+
+      $pdf = PDF::loadView('relatorios.estoqueave.pdfestoqueave', $data)->setPaper('a4', 'landscape');
+      return $pdf->stream('relatorio-estoque-aves.pdf');
+  }
+/**
+ * Fim relatório estoque ave
+ */
+
+ /**
+  * Relatório estoque de ovo
+  */
+  public function estoqueovo()
+  {
+      $datarelatorio = date("Y-m-d", strtotime(Carbon::now()));
+      $coletas = Coleta::get();
+      $envios = Envio::where('data_envio', $datarelatorio)->get();
+      return view('relatorios.estoqueovo.estoqueovo', compact('datarelatorio', 'coletas', 'envios'));
+  }
+
+
+  public function pdfestoqueovo(Request $request)
+  {
+      $datarelatorio = Carbon::createFromFormat('d/m/Y', $request->datarelatorio)->format('Y-m-d');
+      $data = [
+          'datarelatorio' => $datarelatorio,
+          'coletas' => Coleta::get(),
+          'envios' => Envio::where('data_envio', $datarelatorio)->get()
+      ];
+
+      $pdf = PDF::loadView('relatorios.estoqueovo.pdfestoqueovo', $data)->setPaper('a4', 'landscape');
+      return $pdf->stream('relatorio-estoque-ovos.pdf');
+  }
+
+
 }

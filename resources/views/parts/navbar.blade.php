@@ -121,6 +121,8 @@
               <a class="dropdown-item" href="{{ route('relatorios.movimentodiario') }}"><i class="fa fa-caret-right"></i> Movimento diário</a>
               <a class="dropdown-item" href="{{ route('relatorios.coleta') }}"><i class="fa fa-caret-right"></i> Coleta</a>
               <a class="dropdown-item" href="{{ route('relatorios.financeiro') }}"><i class="fa fa-caret-right"></i> Financeiro</a>
+              <a class="dropdown-item" href="{{ route('relatorios.estoqueave') }}"><i class="fa fa-caret-right"></i> Estoque aves</a>
+              <a class="dropdown-item" href="{{ route('relatorios.estoqueovo') }}"><i class="fa fa-caret-right"></i> Estoque ovos</a>
             </div>
           </li>
           <li class="nav-item dropdown">

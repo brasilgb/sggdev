@@ -137,4 +137,8 @@ use Illuminate\Support\Facades\Route;
         Route::post('pdfcoleta', [RelatorioController::class, 'pdfcoleta'])->name('pdfcoleta');
         Route::get('financeiro', [RelatorioController::class, 'financeiro'])->name('financeiro');
         Route::post('pdffinanceiro', [RelatorioController::class, 'pdffinanceiro'])->name('pdffinanceiro');
+        Route::get('estoqueave', [RelatorioController::class, 'estoqueave'])->name('estoqueave');
+        Route::post('pdfestoqueave', [RelatorioController::class, 'pdfestoqueave'])->name('pdfestoqueave');
+        Route::get('estoqueovo', [RelatorioController::class, 'estoqueovo'])->name('estoqueovo');
+        Route::post('pdfestoqueovo', [RelatorioController::class, 'pdfestoqueovo'])->name('pdfestoqueovo');
     });

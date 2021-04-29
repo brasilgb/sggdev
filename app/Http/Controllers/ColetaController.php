@@ -46,8 +46,9 @@ class ColetaController extends Controller
      */
     public function create()
     {
+        $segmento = Empresa::first();
         $lotes = Lote::orderBy('id_lote', 'ASC')->get();
-        return view('coletas.create', compact('lotes'));
+        return view('coletas.create', compact('lotes', 'segmento'));
     }
 
     /**
@@ -103,7 +104,8 @@ class ColetaController extends Controller
      */
     public function show(Coleta $coleta)
     {
-        return view('coletas.edit', compact('coleta'));
+        $segmento = Empresa::first();
+        return view('coletas.edit', compact('coleta', 'segmento'));
     }
 
     /**
