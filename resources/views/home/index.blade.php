@@ -12,6 +12,77 @@
         </div>
     </div>
 
+        <div class="row">
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-cyan shadow-sm border border-white rounded">
+                    <div class="inner">
+                        <h3>{{ $lotes->count() }}</h3>
+
+                        <p>Lotes</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-cubes"></i>
+                    </div>
+                    <a href="{{ route('lotes.index') }}" class="small-box-footer">
+                        Acessar lotes <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-green shadow-sm border border-white rounded">
+                    <div class="inner">
+                        <h3>{{ $aviarios->count() }}</h3>
+
+                        <p>Aviários</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-cubes"></i>
+                    </div>
+                    <a href="{{ route('aviarios.index') }}" class="small-box-footer">
+                        Acessar aviários <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-yellow shadow-sm border border-white rounded">
+                    <div class="inner">
+                        <h3>{{ $mortalidades->where('data_coleta', \Carbon\Carbon::now())->sum('tot_ave') }}</h3>
+
+                        <p>Mortalidade dia</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-memory"></i>
+                    </div>
+                    <a href="{{ route('mortalidades.index') }}" class="small-box-footer">
+                        Acessar mortalidade <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-red shadow-sm border border-white rounded">
+                    <div class="inner">
+                        <h3>{{ $consumos->where('data_coleta', \Carbon\Carbon::now())->sum('femea') + $consumos->where('data_coleta', \Carbon\Carbon::now())->sum('macho') }} <small>Kg</small></h3>
+
+                        <p>Consumo ração</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-fw fa-leaf"></i>
+                    </div>
+                    <a href="{{ route('consumos.index') }}" class="small-box-footer">
+                        Acessar consumo <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- ./col -->
+        </div>
+
     <div class="row">
         @if ($segmento->segmento > 0)
             <div class="col">
