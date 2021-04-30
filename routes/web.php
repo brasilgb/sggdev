@@ -19,6 +19,7 @@ use App\Http\Controllers\PeriodoController;
 use App\Http\Controllers\PesagemController;
 use App\Http\Controllers\RecebimentoController;
 use App\Http\Controllers\RelatorioController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -142,3 +143,5 @@ use Illuminate\Support\Facades\Route;
         Route::get('estoqueovo', [RelatorioController::class, 'estoqueovo'])->name('estoqueovo');
         Route::post('pdfestoqueovo', [RelatorioController::class, 'pdfestoqueovo'])->name('pdfestoqueovo');
     });
+
+Auth::routes();

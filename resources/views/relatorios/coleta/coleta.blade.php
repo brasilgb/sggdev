@@ -43,8 +43,11 @@
                 </div>
 
             </div>
-
-            @include('relatorios/coleta/relcoleta')
+            @if ($segmento->segmento == 1)
+            @include('relatorios/coleta/frangos/relcoleta')
+            @else
+            @include('relatorios/coleta/perus/relcoleta')
+            @endif
 
         </div>
     </div>

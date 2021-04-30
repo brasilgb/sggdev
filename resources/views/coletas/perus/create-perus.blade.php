@@ -182,7 +182,7 @@
                     <label for="sujos_cama" class="col-sm-5 col-form-label text-left">Sujos não aproveitaveis <span
                             class="text-danger">*</span></label>
                     <div class="col-sm-7">
-                        <input id="sujos_cama" type="text" class="form-control cleanzero nosubmit comerciais posturadia" name="sujos_cama"
+                        <input id="sujos_cama" type="text" class="form-control cleanzero nosubmit posturadia" name="sujos_cama"
                             value="{{ old('sujos_cama', '0') }}" onkeydown="javascript:EnterTab('esmagados_quebrados',event)">
                         @error('sujos_cama')
                             <div class="alert alert-danger">{{ $message }}</div>

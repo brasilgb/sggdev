@@ -15,7 +15,7 @@
 <div class="row">
     <div class="col-12">
         <div class="p-2 mb-2 bg-gray-200 border border-white rounded shadow-sm">
-            <h3 style="font: bold 1rem Sans-serif; text-shadow: 1px 1px #ffffff;" class="text-black-50 text-uppercase pt-2"><i class="fa fa-kiwi-bird"></i> SGGA - Sistema de Gerenciamento de Granjas Aviárias - Segmento
+            <h3 style="font: bold 1rem Sans-serif; text-shadow: 1px 1px #ffffff;" class="text-black-50 text-uppercase pt-2 text-center"><i class="fa fa-kiwi-bird"></i> SGGA - Sistema de Gerenciamento de Granjas Aviárias - Segmento
                 @if ($segmento->segmento == 1)
                 Frangos
                 @else

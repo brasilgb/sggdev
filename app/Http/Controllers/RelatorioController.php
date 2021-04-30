@@ -46,7 +46,7 @@ class RelatorioController extends Controller
         $estoqueovos = Estoque_ovo::get();
         $aviarios = Aviario::get();
         $envios = Envio::get();
-
+        
         return view('relatorios.movimento.movimentodiario', compact('lotes', 'aviarios', 'coletas', 'datarelatorio', 'mortalidades', 'estoqueaves', 'envioovos', 'estoqueovos', 'envios', 'empresa'));
     }
 
@@ -145,12 +145,13 @@ class RelatorioController extends Controller
 
     public function coleta()
     {
+        $segmento = Empresa::first();
         $datarelatorio = date("Y-m-d", strtotime(Carbon::now()));
         $lotes = Lote::where('periodo', Periodo::ativo())->get();
         $aviarios = Aviario::get();
         $coletas = Coleta::where('data_coleta', $datarelatorio)->get();
 
-        return view('relatorios.coleta.coleta', compact('datarelatorio','lotes', 'aviarios', 'coletas'));
+        return view('relatorios.coleta.coleta', compact('datarelatorio','lotes', 'aviarios', 'coletas', 'segmento'));
     }
 
     public function pdfcoleta(Request $request)
@@ -160,7 +161,8 @@ class RelatorioController extends Controller
             'datarelatorio' => $datarelatorio,
             'lotes' => Lote::where('periodo', Periodo::ativo())->get(),
             'coletas' => Coleta::where('data_coleta', $datarelatorio)->get(),
-            'aviarios' => Aviario::get()
+            'aviarios' => Aviario::get(),
+            'segmento' => Empresa::first()
         ];
 
         $pdf = PDF::loadView('relatorios.coleta.pdfcoleta', $data)->setPaper('a4', 'landscape');

@@ -67,9 +67,11 @@
                 </div>
 
             </div>
-
-            @include('relatorios/movimento/relmovimento')
-
+            @if ($empresa->segmento == 1)
+            @include('relatorios/movimento/frangos/relmovimento')
+            @else
+            @include('relatorios/movimento/perus/relmovimento')
+            @endif
         </div>
     </div>
 

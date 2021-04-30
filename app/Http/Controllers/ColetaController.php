@@ -14,7 +14,7 @@ class ColetaController extends Controller
 {
     public function __construct()
     {
-        if(Empresa::first()->segmento == 0){
+        if (Empresa::first()->segmento == 0) {
             return redirect()->route('home')->send();
         }
     }
@@ -60,27 +60,53 @@ class ColetaController extends Controller
     public function store(Request $request, Coleta $coleta)
     {
         $data = $request->all();
-
-        $rules = [
-            'data_coleta' => 'date_format:"d/m/Y"|required',
-            'hora_coleta' => 'date_format:"H:i"|required',
-            'lote_id' => 'required|integer',
-            'id_aviario' => 'required|integer',
-            'coleta' => 'required|integer',
-            'limpos_ninho' => 'required|integer',
-            'sujos_ninho' => 'required|integer',
-            'ovos_cama' => 'required|integer',
-            'duas_gemas' => 'required|integer',
-            'refugos' => 'required|integer',
-            'deformados' => 'required|integer',
-            'sujos_cama' => 'required|integer',
-            'trincados' => 'required|integer',
-            'eliminados' => 'required|integer',
-            'incubaveis_bons' => 'required|integer',
-            'incubaveis' => 'required|integer',
-            'comerciais' => 'required|integer',
-            'postura_dia' => 'required|integer'
-        ];
+        $segmento = Empresa::first()->segmento;
+        if ($segmento == 1) {
+            $rules = [
+                'data_coleta' => 'date_format:"d/m/Y"|required',
+                'hora_coleta' => 'date_format:"H:i"|required',
+                'lote_id' => 'required|integer',
+                'id_aviario' => 'required|integer',
+                'coleta' => 'required|integer',
+                'limpos_ninho' => 'required|integer',
+                'sujos_ninho' => 'required|integer',
+                'ovos_cama' => 'required|integer',
+                'duas_gemas' => 'required|integer',
+                'refugos' => 'required|integer',
+                'deformados' => 'required|integer',
+                'sujos_cama' => 'required|integer',
+                'trincados' => 'required|integer',
+                'eliminados' => 'required|integer',
+                'incubaveis_bons' => 'required|integer',
+                'incubaveis' => 'required|integer',
+                'comerciais' => 'required|integer',
+                'postura_dia' => 'required|integer'
+            ];
+        } else {
+            $rules = [
+                'data_coleta' => 'date_format:"d/m/Y"|required',
+                'hora_coleta' => 'date_format:"H:i"|required',
+                'lote_id' => 'required|integer',
+                'id_aviario' => 'required|integer',
+                'coleta' => 'required|integer',
+                'limpos_ninho' => 'required|integer',
+                'sujos_ninho' => 'required|integer',
+                'ovos_cama' => 'required|integer',
+                'duas_gemas' => 'required|integer',
+                'deformados' => 'required|integer',
+                'sujos_cama' => 'required|integer',
+                'pequenos' => 'required|integer',
+                'casca_fina' => 'required|integer',
+                'frios' => 'required|integer',
+                'esmagados_quebrados' => 'required|integer',
+                'cama_nao_incubaveis' => 'required|integer',
+                'trincados' => 'required|integer',
+                'incubaveis_bons' => 'required|integer',
+                'incubaveis' => 'required|integer',
+                'comerciais' => 'required|integer',
+                'postura_dia' => 'required|integer'
+            ];
+        }
         $messages = [
             'required' => 'O campo :attribute deve ser preenchido!',
             'integer' => 'O campo :attribute só aceita inteiros!',
@@ -129,26 +155,53 @@ class ColetaController extends Controller
     public function update(Request $request, Coleta $coleta)
     {
         $data = $request->all();
-        $rules = [
-            'data_coleta' => 'date_format:"d/m/Y"|required',
-            'hora_coleta' => 'date_format:"H:i"|required',
-            'lote_id' => 'required|integer',
-            'id_aviario' => 'required|integer',
-            'coleta' => 'required|integer',
-            'limpos_ninho' => 'required|integer',
-            'sujos_ninho' => 'required|integer',
-            'ovos_cama' => 'required|integer',
-            'duas_gemas' => 'required|integer',
-            'refugos' => 'required|integer',
-            'deformados' => 'required|integer',
-            'sujos_cama' => 'required|integer',
-            'trincados' => 'required|integer',
-            'eliminados' => 'required|integer',
-            'incubaveis_bons' => 'required|integer',
-            'incubaveis' => 'required|integer',
-            'comerciais' => 'required|integer',
-            'postura_dia' => 'required|integer'
-        ];
+        $segmento = Empresa::first()->segmento;
+        if ($segmento == 1) {
+            $rules = [
+                'data_coleta' => 'date_format:"d/m/Y"|required',
+                'hora_coleta' => 'date_format:"H:i"|required',
+                'lote_id' => 'required|integer',
+                'id_aviario' => 'required|integer',
+                'coleta' => 'required|integer',
+                'limpos_ninho' => 'required|integer',
+                'sujos_ninho' => 'required|integer',
+                'ovos_cama' => 'required|integer',
+                'duas_gemas' => 'required|integer',
+                'refugos' => 'required|integer',
+                'deformados' => 'required|integer',
+                'sujos_cama' => 'required|integer',
+                'trincados' => 'required|integer',
+                'eliminados' => 'required|integer',
+                'incubaveis_bons' => 'required|integer',
+                'incubaveis' => 'required|integer',
+                'comerciais' => 'required|integer',
+                'postura_dia' => 'required|integer'
+            ];
+        } else {
+            $rules = [
+                'data_coleta' => 'date_format:"d/m/Y"|required',
+                'hora_coleta' => 'date_format:"H:i"|required',
+                'lote_id' => 'required|integer',
+                'id_aviario' => 'required|integer',
+                'coleta' => 'required|integer',
+                'limpos_ninho' => 'required|integer',
+                'sujos_ninho' => 'required|integer',
+                'ovos_cama' => 'required|integer',
+                'duas_gemas' => 'required|integer',
+                'deformados' => 'required|integer',
+                'sujos_cama' => 'required|integer',
+                'trincados' => 'required|integer',
+                'incubaveis_bons' => 'required|integer',
+                'incubaveis' => 'required|integer',
+                'comerciais' => 'required|integer',
+                'postura_dia' => 'required|integer',
+                'pequenos' => 'required|integer',
+                'casca_fina' => 'required|integer',
+                'frios' => 'required|integer',
+                'esmagados_quebrados' => 'required|integer',
+                'cama_nao_incubaveis' => 'required|integer'
+            ];
+        }
         $messages = [
             'required' => 'O campo :attribute deve ser preenchido!',
             'integer' => 'O campo :attribute só aceita inteiros!',

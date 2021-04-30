@@ -220,7 +220,7 @@
                 digits: true
             },
             ovos_cama: {
-                required: 'Insira os ovos de cama!',
+                required: 'Insira os ovos de cama incubáveis!',
                 digits: true
             },
             duas_gemas: {
@@ -248,7 +248,7 @@
                 digits: true
             },
             sujos_cama: {
-                required: 'Insira os ovos sujos de cama!',
+                required: 'Insira os ovos sujos não aproveitáveis!',
                 digits: true
             },
             esmagados_quebrados: {
@@ -256,7 +256,7 @@
                 digits: true
             },
             cama_nao_incubaveis: {
-                required: 'Insira os ovos cama não incubaveis!',
+                required: 'Insira os ovos cama não incubáveis!',
                 digits: true
             },
             incubaveis_bons: {
