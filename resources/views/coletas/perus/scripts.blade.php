@@ -147,15 +147,7 @@
                 required: true,
                 digits: true
             },
-            refugos: {
-                required: true,
-                digits: true
-            },
-            deformados: {
-                required: true,
-                digits: true
-            },
-            sujos_cama: {
+            pequenos: {
                 required: true,
                 digits: true
             },
@@ -163,7 +155,27 @@
                 required: true,
                 digits: true
             },
-            eliminados: {
+            casca_fina: {
+                required: true,
+                digits: true
+            },
+            deformados: {
+                required: true,
+                digits: true
+            },
+            frios: {
+                required: true,
+                digits: true
+            },
+            sujos_cama: {
+                required: true,
+                digits: true
+            },
+            esmagados_quebrados: {
+                required: true,
+                digits: true
+            },
+            cama_nao_incubaveis: {
                 required: true,
                 digits: true
             },
@@ -215,24 +227,36 @@
                 required: 'Insira os ovos com duas gemas!',
                 digits: true
             },
-            refugos: {
-                required: 'Insira os ovos de refugo!',
-                digits: true
-            },
-            deformados: {
-                required: 'Insira os ovos deformados!',
-                digits: true
-            },
-            sujos_cama: {
-                required: 'Insira os ovos sujos de cama!',
+            pequenos: {
+                required: 'Insira os ovos de pequenos!',
                 digits: true
             },
             trincados: {
                 required: 'Insira os ovos trincados!',
                 digits: true
             },
-            eliminados: {
-                required: 'Insira os ovos eliminados!',
+            casca_fina: {
+                required: 'Insira os ovos casca fina!',
+                digits: true
+            },
+            deformados: {
+                required: 'Insira os ovos deformados!',
+                digits: true
+            },
+            frios: {
+                required: 'Insira os ovos frios!',
+                digits: true
+            },
+            sujos_cama: {
+                required: 'Insira os ovos sujos de cama!',
+                digits: true
+            },
+            esmagados_quebrados: {
+                required: 'Insira os ovos esmagados quebrados!',
+                digits: true
+            },
+            cama_nao_incubaveis: {
+                required: 'Insira os ovos cama não incubaveis!',
                 digits: true
             },
             incubaveis_bons: {

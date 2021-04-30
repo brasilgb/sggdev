@@ -215,10 +215,10 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="incubaveisbons" class="col-sm-5 col-form-label text-left">Incubáveis bons <span
+                    <label for="incubaveis_bons" class="col-sm-5 col-form-label text-left">Incubáveis bons <span
                             class="text-danger">*</span></label>
                     <div class="col-sm-7">
-                        <input id="incubaveisbons" type="text" class="form-control" name="incubaveis_bons"
+                        <input id="incubaveis_bons" type="text" class="form-control" name="incubaveis_bons"
                             value="{{ old('incubaveis_bons', '0') }}" readonly>
                         @error('incubaveis_bons')
                             <div class="alert alert-danger">{{ $message }}</div>
