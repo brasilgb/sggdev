@@ -24,11 +24,16 @@ class CreateColetasTable extends Migration
             $table->integer('sujos_ninho');
             $table->integer('ovos_cama');
             $table->integer('duas_gemas');
-            $table->integer('refugos');
+            $table->integer('refugos')->nullable();
+            $table->integer('pequenos')->nullable();
+            $table->integer('casca_fina')->nullable();
+            $table->integer('frios')->nullable();
+            $table->integer('esmagados_quebrados')->nullable();
+            $table->integer('cama_nao_incubaveis')->nullable();
             $table->integer('deformados');
             $table->integer('sujos_cama');
             $table->integer('trincados');
-            $table->integer('eliminados');
+            $table->integer('eliminados')->nullable();
             $table->integer('incubaveis_bons');
             $table->integer('incubaveis');
             $table->integer('comerciais');
