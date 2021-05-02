@@ -16,11 +16,28 @@ class User extends Authenticatable
      *
      * @var array
      */
+    protected $primaryKey = 'id';
+    public $incrementing = false;
     protected $fillable = [
+        'id',
         'name',
+        'username',
         'email',
         'password',
+        'funcao'
     ];
+
+    public function scopeIdusuario() {
+        $users = User::orderBy('id', 'desc')->get();
+
+        if ($users->count() > 0):
+            foreach ($users as $user):
+                return $user->id + 1;
+            endforeach;
+        else:
+            return 1;
+        endif;
+    }
 
     /**
      * The attributes that should be hidden for arrays.

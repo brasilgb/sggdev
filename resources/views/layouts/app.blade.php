@@ -19,6 +19,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('js/additional-methods.min.js') }}"></script>
     <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('js/jquery.inputmask.min.js') }}"></script>
 
@@ -30,25 +31,32 @@
 </head>
 
 <body class="d-flex flex-column h-100">
-@php
-    $segmento = \App\Models\Empresa::first()
-@endphp
-    <header>
-        @if ($segmento->segmento > 0)
-            @include('parts/navbar')
-        @endif
-    </header>
 
-    <div id="main" class="flex-shrink-0">
-        <div class="container fadeIn">
+    @guest
+        <div class="container">
             @yield('content')
         </div>
-    </div><!-- /.container -->
-    @if ($segmento->segmento > 0)
-    @include('parts/footer')
-    @endif
-    
-    @include('parts/scripts')
+    @else
+        @php
+            $segmento = \App\Models\Empresa::first();
+        @endphp
+        <header>
+            @if ($segmento->segmento > 0)
+                @include('parts/navbar')
+            @endif
+        </header>
+
+        <div id="main" class="flex-shrink-0">
+            <div class="container fadeIn">
+                @yield('content')
+            </div>
+        </div><!-- /.container -->
+        @if ($segmento->segmento > 0)
+            @include('parts/footer')
+        @endif
+
+        @include('parts/scripts')
+    @endguest
 </body>
 
 </html>

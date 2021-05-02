@@ -18,6 +18,7 @@
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
+
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -109,7 +110,7 @@
               <a class="dropdown-item" href="{{ route('empresas.index') }}"><i class="fa fa-angle-right"></i> Empresa</a>
               <a class="dropdown-item" href="{{ route('emails.index') }}"><i class="fa fa-angle-right"></i> E-mail</a>
               <a class="dropdown-item" href="{{ route('backups.index') }}"><i class="fa fa-angle-right"></i> Backup</a>
-              <a class="dropdown-item" href="#"><i class="fa fa-angle-right"></i> Usuários</a>
+              <a class="dropdown-item" href="{{ route('usuarios.index') }}"><i class="fa fa-angle-right"></i> Usuários</a>
             </div>
           </li>
 
@@ -130,8 +131,13 @@
               <i class="fa fa-user"></i>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Perfil</a>
-              <a class="dropdown-item" href="#">Sair</a>
+              <a class="dropdown-item" href="{{ route('usuarios.edit', ['usuario' => Auth::user()->id]) }}"><i class="fa fa-caret-right"></i> {{ Auth::user()->name }}</a>
+              <a class="dropdown-item" href="{{ route('logout') }}"
+              onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();"><i class="fa fa-caret-right"></i> Sair</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
             </div>
           </li>
 
