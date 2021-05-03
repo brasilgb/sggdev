@@ -96,6 +96,7 @@
             e.preventDefault;
             idaviario = $(this).val();
             idlote = $("#lote_id").val();
+            datacoleta = FormataStringData($('#dataform').val());
             $.ajax({
                 type: "POST",
                 dataType: "JSON",
@@ -103,7 +104,8 @@
                 data: {
                     _token: "{{ csrf_token() }}",
                     idaviario: idaviario,
-                    idlote: idlote
+                    idlote: idlote,
+                    datacoleta: datacoleta
                 }
             }).done(function(response) {
                 $("#coleta").val(response);

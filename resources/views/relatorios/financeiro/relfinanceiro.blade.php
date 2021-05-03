@@ -1,7 +1,7 @@
 <div class="row mb-4">
     <div class="col-12">
         <div style="font-size: 1rem;" class="bg-gray-400 p-2 text-center">Relatório financeiro - data do
-            relatório: {{ $datarelatorio }}</div>
+            relatório: {{ date("d/m/Y", strtotime($datarelatorio)) }}</div>
     </div>
 </div>
 
@@ -50,7 +50,7 @@
 @else
 <div class="alert alert-danger alert-block text-left">
     <button type="button" class="close" data-dismiss="alert">×</button>
-    <strong><i class="fa fa-exclamation-triangle"></i> Para vizualizar outros dados do financeiro insira o valor unitário dos ovos 
+    <strong><i class="fa fa-exclamation-triangle"></i> Para vizualizar outros dados do financeiro insira o valor unitário dos ovos
     <a href="{{ route('financeiros.index') }}"> aqui</a></strong>!
 </div>
 @endif

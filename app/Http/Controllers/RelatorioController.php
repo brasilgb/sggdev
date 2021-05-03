@@ -24,13 +24,6 @@ use Illuminate\Support\Facades\DB;
 class RelatorioController extends Controller
 {
 
-    public function __construct()
-    {
-        if(Empresa::first()->segmento == 0){
-            return redirect()->route('home')->send();
-        }
-    }
-
     /**
      * Relatório movimento diário
      */
@@ -46,7 +39,7 @@ class RelatorioController extends Controller
         $estoqueovos = Estoque_ovo::get();
         $aviarios = Aviario::get();
         $envios = Envio::get();
-        
+
         return view('relatorios.movimento.movimentodiario', compact('lotes', 'aviarios', 'coletas', 'datarelatorio', 'mortalidades', 'estoqueaves', 'envioovos', 'estoqueovos', 'envios', 'empresa'));
     }
 

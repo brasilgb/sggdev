@@ -229,7 +229,7 @@ class ColetaController extends Controller
 
     public function numcoleta(Request $request)
     {
-        $coleta = Coleta::where('lote_id', $request->idlote)->where('id_aviario', $request->idaviario)->orderBy('coleta', 'DESC')->first();
+        $coleta = Coleta::where('lote_id', $request->idlote)->where('id_aviario', $request->idaviario)->where('data_coleta', $request->datacoleta)->orderBy('coleta', 'DESC')->first();
         if ($coleta) {
             $response = $coleta->coleta + 1;
         } else {
