@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    @if ($empresa->logotipo)
+    @if (!empty($empresa->logotipo))
         <link rel="shortcut icon" href="{{ asset("storage/thumbnail/{$empresa->logotipo}") }}">
     @else
         <link rel="shortcut icon" href="{{ asset('storage/empresa/sggaicon.png') }}">
@@ -14,7 +14,7 @@
 
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>SGGA - {{ $empresa->razao_social }}</title>
+    <title>SGGA - {{ empty($empresa->razao_social) ?: $empresa->razao_social}}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
@@ -41,7 +41,7 @@
             $segmento = \App\Models\Empresa::first();
         @endphp
         <header>
-            @if ($segmento->segmento > 0)
+            @if (!empty($segmento->segmento) and $segmento->segmento > 0)
                 @include('parts/navbar')
             @endif
         </header>
@@ -51,7 +51,7 @@
                 @yield('content')
             </div>
         </div><!-- /.container -->
-        @if ($segmento->segmento > 0)
+        @if (!empty($segmento->segmento) and $segmento->segmento > 0)
             @include('parts/footer')
         @endif
 

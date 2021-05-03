@@ -10,7 +10,7 @@
                         @php
                             $empresa = \App\Models\Empresa::first();
                         @endphp
-                        @if ($empresa->logotipo)
+                        @if (!empty($empresa->logotipo))
                             <img src="{{ asset('storage/thumbnail/' . $empresa->logotipo) }}" class="brand_logo"
                                 alt="Logo">
                         @else

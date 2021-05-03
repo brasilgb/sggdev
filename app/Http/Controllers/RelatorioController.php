@@ -40,6 +40,7 @@ class RelatorioController extends Controller
         $aviarios = Aviario::get();
         $envios = Envio::get();
 
+
         return view('relatorios.movimento.movimentodiario', compact('lotes', 'aviarios', 'coletas', 'datarelatorio', 'mortalidades', 'estoqueaves', 'envioovos', 'estoqueovos', 'envios', 'empresa'));
     }
 

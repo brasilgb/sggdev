@@ -31,9 +31,10 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
+        if(Periodo::ativo() > 0){
         // KPI Home
         $lotes = Lote::get();
         $aviarios = Aviario::get();
@@ -69,9 +70,42 @@ class HomeController extends Controller
         $estoqueaves = Estoque_ave::where('periodo', Periodo::ativo())->get();
         // Tarefas gerais
         $tarefas = Geraltarefa::where('periodo', Periodo::ativo())->get();
-
         $segmento = Empresa::first();
 
-        return view('home.index', compact('segmento', 'lotes', 'aviarios', 'coletas', 'mortalidades', 'consumos', 'semanaatual', 'datasemana', 'producaosemana', 'media', 'alcancada', 'estoqueovos', 'estoqueaves', 'tarefas', 'capitalizadas'));
+    }else{
+            $segmento = $segmento = Empresa::first();
+            $lotes = Lote::get();
+            $aviarios = Aviario::get();
+            $coletas = Coleta::get();
+            $mortalidades = Mortalidade::get();
+            $consumos = Consumo::get();
+            $semanaatual = Semana::get();
+            $datasemana = 0;
+            $producaosemana = 0;
+            $media = 0;
+            $alcancada = 0;
+            $estoqueovos = Estoque_ovo::get();
+            $estoqueaves = Estoque_ave::get();
+            $tarefas = Geraltarefa::get();
+            $capitalizadas = 0;
+
+    }
+        return view('home.index', compact(
+        'segmento',
+        'lotes',
+        'aviarios',
+        'coletas',
+        'mortalidades',
+        'consumos',
+        'semanaatual',
+        'datasemana',
+        'producaosemana',
+        'media',
+        'alcancada',
+        'estoqueovos',
+        'estoqueaves',
+        'tarefas',
+        'capitalizadas'
+    ));
     }
 }

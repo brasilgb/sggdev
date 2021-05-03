@@ -44,9 +44,13 @@
                 </div>
 
             </div>
-
+@if($coletas->count() > 0)
             @include('relatorios/estoqueovo/relestoqueovo')
-
+            @else
+            <div class="alert alert-danger">
+                <i class="fa fa-exclamation-triangle"></i> Não há dados a serem mostrados!
+            </div>
+            @endif
         </div>
     </div>
 

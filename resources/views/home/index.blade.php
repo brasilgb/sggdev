@@ -5,25 +5,38 @@
 <script src="{{ asset('js/exporting.js') }}"></script>
 <script src="{{ asset('js/export-data.js') }}"></script>
 <script src="{{ asset('js/accessibility.js') }}"></script>
+<script>
+    jQuery(window).on('load', function($){
+        atualizaRelogio();
+    });
+</script>
 {{-- KPI Tabelas --}}
 <div class="row">
     <div class="col-12">
         @include("parts/flash-message")
     </div>
 </div>
-@if ($segmento->segmento > 0)
-<div class="row">
-    <div class="col-12">
-        <div class="p-2 mb-2 bg-gray-200 border border-white rounded shadow-sm">
-            <h3 style="font: bold 1rem Sans-serif; text-shadow: 1px 1px #ffffff;" class="text-black-50 text-uppercase pt-2 text-center"><i class="fa fa-kiwi-bird"></i> SGGA - Sistema de Gerenciamento de Granjas Aviárias - Segmento
-                @if ($segmento->segmento == 1)
+@if (!empty($segmento->segmento) and $segmento->segmento > 0)
+<div class="bg-gray-200 mb-3 p-2 shadow-sm border border-white rounded">
+    <div class="row">
+        <div class="col">
+            <h3 style="font: bold 1rem Sans-serif; text-shadow: 1px 1px #ffffff;"
+                class="text-black-50 text-uppercase pt-2 text-left"><i class="fa fa-kiwi-bird"></i> SGGA - Sistema de
+                Gerenciamento de Granjas Aviárias - Segmento
+                @if (!empty($segmento->segmento) and $segmento->segmento > 0)
                 Frangos
                 @else
                 Perus
                 @endif
             </h3>
         </div>
+        <div class="col-2 border-left">
+            <div style="font: bold 1rem Sans-serif; text-shadow: 1px 1px #ffffff;" class="text-black-50 text-uppercase pt-2 text-left">
+                <span id="data"></span>
+                <span id="hora"></span>
+            </div>
 
+        </div>
     </div>
 </div>
 
@@ -241,7 +254,7 @@
         <div class="bg-white rounded shadow-sm border border-gray-500">
             <div class="">
                 <p class="text-center m-0 px-2 py-4 text-secundary font-weight-bold">
-                    Semana:{{ $semanaatual->semana }}</p>
+                    Semana:{{ empty($semanaatual->semana)?: $semanaatual->semana}}</p>
             </div>
         </div>
     </div>
@@ -250,8 +263,8 @@
         <div class="bg-white rounded shadow-sm border border-gray-500">
             <div class="">
                 <p class="text-center m-0 px-2 py-4 text-secundary font-weight-bold">De
-                    {{ date('d/m/Y', strtotime($semanaatual->data_inicial)) }} à
-                    {{ date('d/m/Y', strtotime($semanaatual->data_final)) }} </p>
+                    {{ date('d/m/Y', strtotime(empty($semanaatual->semana)?: $semanaatual->data_inicial)) }} à
+                    {{ date('d/m/Y', strtotime(empty($semanaatual->semana)?: $semanaatual->data_final)) }} </p>
             </div>
         </div>
     </div>
@@ -259,7 +272,7 @@
         <div class="bg-white rounded shadow-sm border border-gray-500">
             <div class="">
                 <p class="text-center m-0 px-2 py-4 text-secundary font-weight-bold">Meta:
-                    {{ $semanaatual->producao }}% / Parcial: @if ($capitalizadas > 1) {{ $alcancada . '%' }} @else <i
+                    {{ empty($semanaatual->semana)?: $semanaatual->producao }}% / Parcial: @if ($capitalizadas > 1) {{ $alcancada . '%' }} @else <i
                         class="fa fa-exclamation-triangle text-danger"></i> @endif
                 </p>
             </div>
@@ -329,8 +342,32 @@
             }]
         });
 
-        // Gráfico Média semanal *********************************************************
+        // Data e hora *********************************************************
+        function atualizaRelogio(){
+			var momentoAtual = new Date();
 
+			var vhora = momentoAtual.getHours();
+			var vminuto = momentoAtual.getMinutes();
+			var vsegundo = momentoAtual.getSeconds();
+
+			var vdia = momentoAtual.getDate();
+			var vmes = momentoAtual.getMonth() + 1;
+			var vano = momentoAtual.getFullYear();
+
+			if (vdia < 10){ vdia = "0" + vdia;}
+			if (vmes < 10){ vmes = "0" + vmes;}
+			if (vhora < 10){ vhora = "0" + vhora;}
+			if (vminuto < 10){ vminuto = "0" + vminuto;}
+			if (vsegundo < 10){ vsegundo = "0" + vsegundo;}
+
+			dataFormat = vdia + "/" + vmes + "/" + vano + " ";
+			horaFormat = vhora + ":" + vminuto + ":" + vsegundo;
+
+			document.getElementById("data").innerHTML = dataFormat;
+			document.getElementById("hora").innerHTML = horaFormat;
+
+			setTimeout("atualizaRelogio()",1000);
+		}
 </script>
 @else
 <div class="container">

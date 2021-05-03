@@ -57,7 +57,7 @@
                                 <td class="align-middle">{{ $lote->lote }}</td>
                                 <td class="align-middle">{{ $lote->femea }}</td>
                                 <td
-                                    class="align-middle  {{ $lote->femea_capitalizada ? 'bg-success text-white' : 'bg-info text-white' }}">
+                                    class="align-middle  {{ $lote->femea_capitalizada ? 'text-success' : 'text-danger' }}">
                                     @if ($lote->femea_capitalizada)
                                         {{ $lote->femea_capitalizada }} <strong class="text-dark">/</strong>
                                         {{ date('d/m/Y', strtotime($lote->data_femea_capitalizada)) }}
@@ -68,7 +68,7 @@
                                 </td>
                                 <td class="align-middle">{{ $lote->macho }}</td>
                                 <td
-                                    class="align-middle {{ $lote->macho_capitalizado ? 'bg-success text-white' : 'bg-info text-white' }}">
+                                    class="align-middle {{ $lote->macho_capitalizado ? 'text-success' : 'text-danger' }}">
                                     @if ($lote->macho_capitalizado)
                                         {{ $lote->macho_capitalizado }} <strong class="text-dark">/</strong>
                                         {{ date('d/m/Y', strtotime($lote->data_macho_capitalizado)) }}

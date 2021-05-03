@@ -34,7 +34,12 @@ class Periodo extends Model
 
     public function scopeAtivo()
     {
-        return Periodo::where('ativo', 1)->first()->id_periodo;
+        $periodo = Periodo::where('ativo', 1)->first();
+        if($periodo):
+            return $periodo->id_periodo;
+        else:
+            return 0;
+        endif;
     }
 
     public function semanas()
