@@ -24,7 +24,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-            <a class="nav-link {{ (request()->is('/')) ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
+            <a @if($periodo->count() == 0) disabled @endif class="nav-link {{ (request()->is('/')) ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link {{ (request()->is('periodos*')) ? 'active' : '' }}" href="{{ route('periodos.index') }}">Períodos</a>

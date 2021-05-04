@@ -1,4 +1,7 @@
-@php $empresa = App\Models\Empresa::first() @endphp
+@php
+$empresa = App\Models\Empresa::first();
+$periodo = App\Models\Periodo::get();
+@endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -37,9 +40,7 @@
             @yield('content')
         </div>
     @else
-        @php
-            $segmento = \App\Models\Empresa::first();
-        @endphp
+
         <header>
             @if (!empty($segmento->segmento) and $segmento->segmento > 0)
                 @include('parts/navbar')

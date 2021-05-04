@@ -197,7 +197,7 @@
                     @method('POST')
                     @csrf
                     <input type="hidden" name="datarelatorio" value="{{ date('d/m/Y', strtotime(now())) }}">
-                    <button type="submit" class="btn btn-app btn-light shadow-sm border border-white"><i
+                    <button @if(empty($coleta))?: disabled @endif type="submit" class="btn btn-app btn-light shadow-sm border border-white"><i
                             class="fa fa-file-alt"></i>Enviar Relatório</button>
                 </form>
             </div>
@@ -211,7 +211,7 @@
                 <form action="{{ route('backups.gerabackup') }}" method="get" class="inline">
                     @method('PUT')
                     @csrf
-                    <button type="submit" class="btn btn-app btn-light shadow-sm border border-white"><i
+                    <button @if(empty($backup))?: disabled @endif type="submit" class="btn btn-app btn-light shadow-sm border border-white"><i
                             class="fa fa-database"></i>Gerar backup</button>
                 </form>
             </div>
@@ -254,17 +254,17 @@
         <div class="bg-white rounded shadow-sm border border-gray-500">
             <div class="">
                 <p class="text-center m-0 px-2 py-4 text-secundary font-weight-bold">
-                    Semana:{{ empty($semanaatual->semana)?: $semanaatual->semana}}</p>
+                    Semana: {{ empty($semanaatual->semana)? '0' : $semanaatual->semana}}</p>
             </div>
         </div>
     </div>
 
     <div class="col">
         <div class="bg-white rounded shadow-sm border border-gray-500">
-            <div class="">
+            <div class=" '00/00/0000' ">
                 <p class="text-center m-0 px-2 py-4 text-secundary font-weight-bold">De
-                    {{ date('d/m/Y', strtotime(empty($semanaatual->semana)?: $semanaatual->data_inicial)) }} à
-                    {{ date('d/m/Y', strtotime(empty($semanaatual->semana)?: $semanaatual->data_final)) }} </p>
+                    {{ empty($semanaatual->semana) ? '00/00/0000' :  date('d/m/Y', strtotime($semanaatual->data_inicial)) }} à
+                    {{ empty($semanaatual->semana) ? '00/00/0000' : date('d/m/Y', strtotime($semanaatual->data_final)) }} </p>
             </div>
         </div>
     </div>
@@ -272,7 +272,7 @@
         <div class="bg-white rounded shadow-sm border border-gray-500">
             <div class="">
                 <p class="text-center m-0 px-2 py-4 text-secundary font-weight-bold">Meta:
-                    {{ empty($semanaatual->semana)?: $semanaatual->producao }}% / Parcial: @if ($capitalizadas > 1) {{ $alcancada . '%' }} @else <i
+                    {{ empty($semanaatual->semana)? '0' : $semanaatual->producao }}% / Parcial: @if ($capitalizadas > 1) {{ $alcancada . '%' }} @else <i
                         class="fa fa-exclamation-triangle text-danger"></i> @endif
                 </p>
             </div>

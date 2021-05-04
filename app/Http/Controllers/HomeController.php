@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aviario;
+use App\Models\Backup;
 use App\Models\Coleta;
 use App\Models\Consumo;
 use App\Models\Empresa;
@@ -34,6 +35,7 @@ class HomeController extends Controller
 
     public function index()
     {
+        $backup = Backup::first();
         if(Periodo::ativo() > 0){
         // KPI Home
         $lotes = Lote::get();
@@ -43,7 +45,6 @@ class HomeController extends Controller
         $consumos = Consumo::get();
         $lotesperiodo = Lote::where('periodo', Periodo::ativo())->get();
         $semanaatual = Semana::where('data_inicial', '<=', Carbon::now())->where('data_final', '>=', Carbon::now())->first();
-
         $producao = Coleta::where('data_coleta', '>=', $semanaatual->data_inicial)->where('data_coleta', '<=', $semanaatual->data_final)->get();
         // Intervalo de datas da semana
         $periodos = new DatePeriod(new DateTime($semanaatual->data_inicial), new DateInterval('P1D'), new DateTime($semanaatual->data_final));
@@ -105,7 +106,8 @@ class HomeController extends Controller
         'estoqueovos',
         'estoqueaves',
         'tarefas',
-        'capitalizadas'
+        'capitalizadas',
+        'backup'
     ));
     }
 }
