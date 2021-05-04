@@ -15,7 +15,7 @@ class CreateEmpresasTable extends Migration
     {
         Schema::create('empresas', function (Blueprint $table) {
             $table->integer('id_empresa')->primary();
-            $table->text('logotipo');
+            $table->text('logotipo')->nullable();
             $table->char('cnpj', 50);
             $table->char('razao_social', 50);
             $table->integer('segmento')->nullable();

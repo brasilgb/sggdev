@@ -3,8 +3,8 @@
 
     <div class="container ">
     <a class="navbar-brand" href="{{ route('home') }}">
-        @if($empresa->logotipo)
-            <img src="{{ url("storage/thumbnail/{$empresa->logotipo}") }}"  height="30" alt="" class="rounded">
+        @if($empresaexist->logotipo)
+            <img src="{{ url("storage/thumbnail/{$empresaexist->logotipo}") }}"  height="30" alt="" class="rounded">
             @else
             <img src="{{ url("storage/empresa/sggaicon.png") }}"  height="30" alt="" class="rounded">
             @endif
@@ -24,13 +24,13 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-            <a @if($periodo->count() == 0) disabled @endif class="nav-link {{ (request()->is('/')) ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
+            <a class="nav-link {{ (request()->is('/')) ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link {{ (request()->is('periodos*')) ? 'active' : '' }}" href="{{ route('periodos.index') }}">Períodos</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle {{ (request()->is('lotes*', 'aviarios*')) ? 'active' : '' }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="@if(!$periodo) disabled @endif nav-link dropdown-toggle {{ (request()->is('lotes*', 'aviarios*')) ? 'active' : '' }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Lotes/Aviários
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -39,11 +39,11 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('coletas.index') }}">Coletas</a>
+            <a class="@if(!$periodo) disabled @endif nav-link" href="{{ route('coletas.index') }}">Coletas</a>
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle {{ (request()->is('envios*')) ? 'active' : '' }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="@if(!$periodo) disabled @endif nav-link dropdown-toggle {{ (request()->is('envios*')) ? 'active' : '' }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Ovos
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -52,7 +52,7 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle {{ (request()->is('mortalidades*','pesagens*')) ? 'active' : '' }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="@if(!$periodo) disabled @endif nav-link dropdown-toggle {{ (request()->is('mortalidades*','pesagens*')) ? 'active' : '' }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Aves
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -62,7 +62,7 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle {{ (request()->is('recebimentos*','consumos*')) ? 'active' : '' }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="@if(!$periodo) disabled @endif nav-link dropdown-toggle {{ (request()->is('recebimentos*','consumos*')) ? 'active' : '' }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Ração
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -72,7 +72,7 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle {{ (request()->is('geraltarefas*','controlediarios*')) ? 'active' : '' }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="@if(!$periodo) disabled @endif nav-link dropdown-toggle {{ (request()->is('geraltarefas*','controlediarios*')) ? 'active' : '' }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Tarefas
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -82,7 +82,7 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle {{ (request()->is('despesas*')) ? 'active' : '' }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="@if(!$periodo) disabled @endif nav-link dropdown-toggle {{ (request()->is('despesas*')) ? 'active' : '' }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Financeiro
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -92,7 +92,7 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle {{ (request()->is('metas*')) ? 'active' : '' }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="@if(!$periodo) disabled @endif nav-link dropdown-toggle {{ (request()->is('metas*')) ? 'active' : '' }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Metas
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -115,7 +115,7 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="@if(!$periodo) disabled @endif nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Relatórios
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -126,6 +126,7 @@
               <a class="dropdown-item" href="{{ route('relatorios.estoqueovo') }}"><i class="fa fa-caret-right"></i> Estoque ovos</a>
             </div>
           </li>
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fa fa-user"></i>

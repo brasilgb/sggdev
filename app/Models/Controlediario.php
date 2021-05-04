@@ -23,7 +23,7 @@ class Controlediario extends Model
         'leitura_agua',
         'consumo_total',
         'consumo_ave',
-        'valorinicial'
+        'leitura_inicial'
     ];
 
 

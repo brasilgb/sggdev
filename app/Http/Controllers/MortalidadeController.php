@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aviario;
 use App\Models\Empresa;
+use App\Models\Estoque_ave;
 use App\Models\Lote;
 use App\Models\Mortalidade;
 use App\Models\Periodo;
@@ -66,13 +68,13 @@ class MortalidadeController extends Controller
             'id_aviario' => 'required',
             'motivo' => 'required',
             'femea_box1' => 'required',
-            'femea_box2' => 'required',
-            'femea_box3' => 'required',
-            'femea_box4' => 'required',
+            // 'femea_box2' => 'required',
+            // 'femea_box3' => 'required',
+            // 'femea_box4' => 'required',
             'macho_box1' => 'required',
-            'macho_box2' => 'required',
-            'macho_box3' => 'required',
-            'macho_box4' => 'required',
+            // 'macho_box2' => 'required',
+            // 'macho_box3' => 'required',
+            // 'macho_box4' => 'required',
             'femea' => 'required',
             'macho' => 'required'
         ];
@@ -131,13 +133,13 @@ class MortalidadeController extends Controller
             'id_aviario' => 'required',
             'motivo' => 'required',
             'femea_box1' => 'required',
-            'femea_box2' => 'required',
-            'femea_box3' => 'required',
-            'femea_box4' => 'required',
+            // 'femea_box2' => 'required',
+            // 'femea_box3' => 'required',
+            // 'femea_box4' => 'required',
             'macho_box1' => 'required',
-            'macho_box2' => 'required',
-            'macho_box3' => 'required',
-            'macho_box4' => 'required',
+            // 'macho_box2' => 'required',
+            // 'macho_box3' => 'required',
+            // 'macho_box4' => 'required',
             'femea' => 'required',
             'macho' => 'required'
         ];
@@ -166,4 +168,21 @@ class MortalidadeController extends Controller
         $mortalidade->delete();
         return redirect()->route('mortalidades.index')->with('success', 'Baixa de aves deletada com sucesso!');
     }
+
+
+    public function avesaviario(Request $request)
+    {
+        $estoqueaves = Estoque_ave::where('id_aviario', $request->aviarioid)->get();
+
+        $aviarios = Aviario::where('id_aviario', $request->aviarioid)->first();
+        if ($estoqueaves->sum->tot_ave > 0){
+            $femea = $estoqueaves->sum->femea;
+            $macho = $estoqueaves->sum->macho;
+        }else{
+            $femea = $aviarios->femea;
+            $macho = $aviarios->macho;
+        }
+        return response()->json(['femea' => $femea, 'macho' => $macho]);
+    }
+
 }

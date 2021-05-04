@@ -67,13 +67,13 @@ class PesagemController extends Controller
             'aviario_id' => 'required',
             'semana' => 'required',
             'femea_box1' => 'required',
-            'femea_box2' => 'required',
-            'femea_box3' => 'required',
-            'femea_box4' => 'required',
+            // 'femea_box2' => 'required',
+            // 'femea_box3' => 'required',
+            // 'femea_box4' => 'required',
             'macho_box1' => 'required',
-            'macho_box2' => 'required',
-            'macho_box3' => 'required',
-            'macho_box4' => 'required'
+            // 'macho_box2' => 'required',
+            // 'macho_box3' => 'required',
+            // 'macho_box4' => 'required'
         ];
         $messages = [
             'required' => 'O campo :attribute deve ser preenchido!',
@@ -129,13 +129,13 @@ class PesagemController extends Controller
             'aviario_id' => 'required',
             'semana' => 'required',
             'femea_box1' => 'required',
-            'femea_box2' => 'required',
-            'femea_box3' => 'required',
-            'femea_box4' => 'required',
+            // 'femea_box2' => 'required',
+            // 'femea_box3' => 'required',
+            // 'femea_box4' => 'required',
             'macho_box1' => 'required',
-            'macho_box2' => 'required',
-            'macho_box3' => 'required',
-            'macho_box4' => 'required'
+            // 'macho_box2' => 'required',
+            // 'macho_box3' => 'required',
+            // 'macho_box4' => 'required'
         ];
         $messages = [
             'required' => 'O campo :attribute deve ser preenchido!',

@@ -20,7 +20,7 @@ class CreateRecebimentosTable extends Migration
             $table->time('hora_recebimento');
             $table->string('sexo_ave');
             $table->integer('quantidade');
-            $table->integer('nota_fiscal');
+            $table->string('nota_fiscal');
             $table->timestamps();
         });
     }

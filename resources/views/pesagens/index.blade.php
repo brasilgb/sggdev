@@ -53,8 +53,8 @@
                             <tr class="text-left">
                                 <td class="align-middle">{{ $pesagem->lotes->lote }}</td>
                                 <td class="align-middle">{{ $pesagem->aviarios->aviario }}</td>
-                                <td class="align-middle">{{ $pesagem->semana }}</td>
-                                <td class="align-middle">{{ date('d/m/Y', strtotime($pesagem->data_pesagem)) }}</td>
+                                <td class="align-middle">{{ $pesagem->semanas->semana }}</td>
+                                <td class="align-middle">{{ date('d/m/Y', strtotime($pesagem->data_peso)) }}</td>
                                 <td class="align-middle">
 
                                     <button

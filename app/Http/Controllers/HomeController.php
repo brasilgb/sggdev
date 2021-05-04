@@ -36,11 +36,13 @@ class HomeController extends Controller
     public function index()
     {
         $backup = Backup::first();
+        $segmento = Empresa::first();
+        $coletas = Coleta::get();
         if(Periodo::ativo() > 0){
         // KPI Home
         $lotes = Lote::get();
         $aviarios = Aviario::get();
-        $coletas = Coleta::get();
+
         $mortalidades = Mortalidade::get();
         $consumos = Consumo::get();
         $lotesperiodo = Lote::where('periodo', Periodo::ativo())->get();
@@ -51,6 +53,7 @@ class HomeController extends Controller
 
         // Remove division by zero
         $capitalizadas = $lotesperiodo->sum->femea_capitalizada ? $lotesperiodo->sum->femea_capitalizada : 1;
+
         // Datas da semana do gráfico
         foreach ($periodos as $period) :
             $datasemana[] = $period->format('d/m/Y');
@@ -71,23 +74,21 @@ class HomeController extends Controller
         $estoqueaves = Estoque_ave::where('periodo', Periodo::ativo())->get();
         // Tarefas gerais
         $tarefas = Geraltarefa::where('periodo', Periodo::ativo())->get();
-        $segmento = Empresa::first();
+
 
     }else{
-            $segmento = $segmento = Empresa::first();
-            $lotes = Lote::get();
-            $aviarios = Aviario::get();
-            $coletas = Coleta::get();
-            $mortalidades = Mortalidade::get();
-            $consumos = Consumo::get();
-            $semanaatual = Semana::get();
+            $lotes = 0;
+            $aviarios = 0;
+            $mortalidades = 0;
+            $consumos =0;
+            $semanaatual = 0;
             $datasemana = 0;
             $producaosemana = 0;
             $media = 0;
             $alcancada = 0;
-            $estoqueovos = Estoque_ovo::get();
-            $estoqueaves = Estoque_ave::get();
-            $tarefas = Geraltarefa::get();
+            $estoqueovos = 0;
+            $estoqueaves = 0;
+            $tarefas = 0;
             $capitalizadas = 0;
 
     }

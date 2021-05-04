@@ -63,13 +63,13 @@ class AviarioController extends Controller
             'lote_id' => 'required',
             'aviario' => 'required',
             'femea_box1' => 'required',
-            'femea_box2' => 'required',
-            'femea_box3' => 'required',
-            'femea_box4' => 'required',
+            // 'femea_box2' => 'required',
+            // 'femea_box3' => 'required',
+            // 'femea_box4' => 'required',
             'macho_box1' => 'required',
-            'macho_box2' => 'required',
-            'macho_box3' => 'required',
-            'macho_box4' => 'required',
+            // 'macho_box2' => 'required',
+            // 'macho_box3' => 'required',
+            // 'macho_box4' => 'required',
             'femea' => 'required',
             'macho' => 'required'
         ];
@@ -127,13 +127,13 @@ class AviarioController extends Controller
             'lote_id' => 'required',
             'aviario' => 'required',
             'femea_box1' => 'required',
-            'femea_box2' => 'required',
-            'femea_box3' => 'required',
-            'femea_box4' => 'required',
+            // 'femea_box2' => 'required',
+            // 'femea_box3' => 'required',
+            // 'femea_box4' => 'required',
             'macho_box1' => 'required',
-            'macho_box2' => 'required',
-            'macho_box3' => 'required',
-            'macho_box4' => 'required',
+            // 'macho_box2' => 'required',
+            // 'macho_box3' => 'required',
+            // 'macho_box4' => 'required',
             'femea' => 'required',
             'macho' => 'required'
         ];
@@ -182,7 +182,7 @@ class AviarioController extends Controller
     {
         $estoqueaves = Estoque_ave::where('lote', $request->loteid)->get();
 
-        $lotes       = Lote::where('id_lote', $request->loteid)->first();
+        $lotes = Lote::where('id_lote', $request->loteid)->first();
         if ($estoqueaves->sum->tot_ave > 0){
             $femea = $lotes->femea - $estoqueaves->sum->femea;
             $macho = $lotes->macho - $estoqueaves->sum->macho;
@@ -198,4 +198,6 @@ class AviarioController extends Controller
         $aviarios = Aviario::where('lote_id', $request->idlote)->pluck("aviario", "id_aviario");
         return response()->json($aviarios);
     }
+
+
 }

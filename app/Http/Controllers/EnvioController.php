@@ -131,8 +131,9 @@ class EnvioController extends Controller
         $validator = Validator::make($data, $rules, $messages)->validate();
         $data['data_envio'] = Carbon::createFromFormat('d/m/Y', $request->data_envio)->format('Y-m-d');
 
+
         $envio->update($data);
-        return redirect()->route('envios.edit', ['envio' => $envio->id_envio])->with('success', 'Envio Editado com sucesso!');
+        return redirect()->route('envios.show', ['envio' => $envio->id_envio])->with('success', 'Envio Editado com sucesso!');
     }
 
     /**

@@ -12,7 +12,7 @@
                             OPS, a página que está procurando não foi encontrada!
                         </div>
                         <div class="text-center" style="margin-top: 10%">
-                            <a class="btn btn-primary rounded border border-white shadow" href="{{ url()->previous() }}">
+                            <a class="btn btn-primary rounded border border-white shadow" href="{{ route('home') }}">
                                 Prosseguir <i class="fa fa-angle-double-right"></i></a></i>
                         </div>
                     </div>

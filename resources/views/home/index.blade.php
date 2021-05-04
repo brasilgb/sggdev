@@ -16,14 +16,14 @@
         @include("parts/flash-message")
     </div>
 </div>
-@if (!empty($segmento->segmento) and $segmento->segmento > 0)
+@if (!empty($segmento) and $segmento->segmento > 0)
 <div class="bg-gray-200 mb-3 p-2 shadow-sm border border-white rounded">
     <div class="row">
         <div class="col">
             <h3 style="font: bold 1rem Sans-serif; text-shadow: 1px 1px #ffffff;"
                 class="text-black-50 text-uppercase pt-2 text-left"><i class="fa fa-kiwi-bird"></i> SGGA - Sistema de
                 Gerenciamento de Granjas Aviárias - Segmento
-                @if (!empty($segmento->segmento) and $segmento->segmento > 0)
+                @if(!empty($segmento) and $segmento->segmento > 0)
                 Frangos
                 @else
                 Perus
@@ -45,7 +45,7 @@
         <!-- small box -->
         <div class="small-box bg-cyan shadow-sm border border-white rounded">
             <div class="inner">
-                <h3>{{ $lotes->count() }}</h3>
+                <h3>{{ !$lotes? '0' :$lotes->count() }}</h3>
 
                 <p>Lotes</p>
             </div>
@@ -62,7 +62,7 @@
         <!-- small box -->
         <div class="small-box bg-green shadow-sm border border-white rounded">
             <div class="inner">
-                <h3>{{ $aviarios->count() }}</h3>
+                <h3>{{ !$aviarios? '0' :$aviarios->count() }}</h3>
 
                 <p>Aviários</p>
             </div>
@@ -79,7 +79,7 @@
         <!-- small box -->
         <div class="small-box bg-yellow shadow-sm border border-white rounded">
             <div class="inner">
-                <h3>{{ $mortalidades->where('data_coleta', \Carbon\Carbon::now())->sum('tot_ave') }}</h3>
+                <h3>{{ !$mortalidades? '0' :$mortalidades->where('data_coleta',date("Y-m-d", strtotime(\Carbon\Carbon::now())))->sum('tot_ave') }}</h3>
 
                 <p>Mortalidade dia</p>
             </div>
@@ -96,7 +96,7 @@
         <!-- small box -->
         <div class="small-box bg-red shadow-sm border border-white rounded">
             <div class="inner">
-                <h3>{{ $consumos->where('data_coleta', \Carbon\Carbon::now())->sum('femea') + $consumos->where('data_coleta', \Carbon\Carbon::now())->sum('macho') }}
+                <h3>{{ !$consumos? '0' :$consumos->where('data_coleta', date("Y-m-d", strtotime(\Carbon\Carbon::now())))->sum('femea') + $consumos->where('data_coleta', date("Y-m-d", strtotime(\Carbon\Carbon::now())))->sum('macho') }}
                     <small>Kg</small></h3>
 
                 <p>Consumo ração dia</p>
@@ -116,11 +116,13 @@
     <div class="col-lg-3 col-xs-6">
         <!-- small box -->
         <div class="small-box bg-red shadow-sm border border-white rounded">
-            <div class="inner">
-                <h3>{{ $coletas->where('data_coleta', \Carbon\Carbon::now())->sum('postura_dia') }}</h3>
-
-                <p>Coleta do dia</p>
-            </div>
+                <div class="inner pb-0">
+                    <h4 style="margin-bottom: 0.8rem">
+                        CO: {{ !$coletas? 0 :$coletas->where('data_coleta', date("Y-m-d", strtotime(\Carbon\Carbon::now())))->sum->comerciais }}<br>
+                        &nbsp;IN: {{ !$coletas? 0 :$coletas->where('data_coleta', date("Y-m-d", strtotime(\Carbon\Carbon::now())))->sum->incubaveis }}<br>
+                        TO: {{ !$coletas? 0 :$coletas->where('data_coleta', date("Y-m-d", strtotime(\Carbon\Carbon::now())))->sum->postura_dia }}
+                    </h4>
+                </div>
             <div class="icon">
                 <i class="fa fa-cart-plus"></i>
             </div>
@@ -135,9 +137,9 @@
         <div class="small-box bg-yellow shadow-sm border border-white rounded">
             <div class="inner pb-0">
                 <h4 style="margin-bottom: 0.8rem">
-                    CO: {{ $estoqueovos->sum->comerciais }}<br>
-                    &nbsp;IN: {{ $estoqueovos->sum->incubaveis }}<br>
-                    TO: {{ $estoqueovos->sum->comerciais + $estoqueovos->sum->incubaveis }}
+                    CO: {{ !$estoqueovos? 0 :$estoqueovos->sum->comerciais }}<br>
+                    &nbsp;IN: {{ !$estoqueovos? '0' :$estoqueovos->sum->incubaveis }}<br>
+                    TO: {{ !$estoqueovos? 0 :$estoqueovos->sum->comerciais + $estoqueovos->sum->incubaveis }}
                 </h4>
             </div>
             <div class="icon">
@@ -154,9 +156,9 @@
         <div class="small-box bg-green shadow-sm border border-white rounded">
             <div class="inner pb-0">
                 <h4 style="margin-bottom: 0.8rem">
-                    &nbsp;FÊ: {{ $estoqueaves->sum->femea }}<br>
-                    MA: {{ $estoqueaves->sum->macho }}<br>
-                    &nbsp;TO: {{ $estoqueaves->sum->femea + $estoqueaves->sum->macho }}<br>
+                    &nbsp;FÊ: {{ !$estoqueaves? 0 :$estoqueaves->sum->femea }}<br>
+                    MA: {{ !$estoqueaves? 0 :$estoqueaves->sum->macho }}<br>
+                    &nbsp;TO: {{ !$estoqueaves? 0 :$estoqueaves->sum->femea + $estoqueaves->sum->macho }}<br>
                 </h4>
             </div>
             <div class="icon">
@@ -172,7 +174,7 @@
         <!-- small box -->
         <div class="small-box bg-cyan shadow-sm border border-white rounded">
             <div class="inner">
-                <h3> {{ $tarefas->count() }}</h3>
+                <h3> {{ !$tarefas? '0' :$tarefas->count() }}</h3>
                 <p>Tarefas abetas</p>
             </div>
             <div class="icon">
@@ -197,7 +199,7 @@
                     @method('POST')
                     @csrf
                     <input type="hidden" name="datarelatorio" value="{{ date('d/m/Y', strtotime(now())) }}">
-                    <button @if(empty($coleta))?: disabled @endif type="submit" class="btn btn-app btn-light shadow-sm border border-white"><i
+                    <button @if(empty($coleta))? 0 : disabled @endif type="submit" class="btn btn-app btn-light shadow-sm border border-white"><i
                             class="fa fa-file-alt"></i>Enviar Relatório</button>
                 </form>
             </div>
@@ -211,7 +213,7 @@
                 <form action="{{ route('backups.gerabackup') }}" method="get" class="inline">
                     @method('PUT')
                     @csrf
-                    <button @if(empty($backup))?: disabled @endif type="submit" class="btn btn-app btn-light shadow-sm border border-white"><i
+                    <button @if(empty($backup))? 0 : disabled @endif type="submit" class="btn btn-app btn-light shadow-sm border border-white"><i
                             class="fa fa-database"></i>Gerar backup</button>
                 </form>
             </div>
@@ -293,12 +295,12 @@
 
 <div class="row">
     <div class="col mt-3">
-        @if ($capitalizadas > 1)
+        @if ($capitalizadas > 1 and $coletas->count() > 0 )
         <div class="rounded shadow-sm border border-gray-500" id="container" style="width:100%; height:400px;">
         </div>
         @else
         <div class="alert alert-info shadow-sm border border-white"><i
-                class="fa fa-exclamation-triangle text-danger"></i> Capitalizar lotes para gerar gráfico.</div>
+                class="fa fa-exclamation-triangle text-danger"></i> Para gerar gráfico, os lotes devem estar capitalizados, assim como as metas de produção e coletas cadastradas.</div>
         @endif
 
     </div>

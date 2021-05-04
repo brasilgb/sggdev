@@ -33,7 +33,7 @@
             }
         },
         messages: {
-            cnpj: 'Selecione a hora!',
+            cnpj: 'Digite o CNPJ!',
             razao_social: {
                 required: 'Digite a razão social!'
             },

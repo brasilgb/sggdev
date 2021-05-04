@@ -103,10 +103,10 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="leitura_agua" class="col-sm-3 col-form-label text-left">Leitura da água <span
+                        <label for="leitura_edit" class="col-sm-3 col-form-label text-left">Leitura da água <span
                                 class="text-danger">*</span></label>
                         <div class="col-sm-7">
-                            <input id="leitura_agua" type="text" class="form-control" name="leitura_agua"
+                            <input id="leitura_edit" type="text" class="form-control" name="leitura_agua"
                                 value="{{ old('leitura_agua', $controlediario->leitura_agua) }}">
                                 <input type="hidden" id="leituradb" value="{{$controlediario->leitura_agua}}">
                             @error('leitura_agua')

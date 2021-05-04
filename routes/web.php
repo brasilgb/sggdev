@@ -77,6 +77,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::prefix('mortalidades')->name('mortalidades.')->group(function () {
         Route::post('busca', [MortalidadeController::class, 'busca'])->name('busca');
+        Route::post('avesaviario', [MortalidadeController::class, 'avesaviario'])->name('avesaviario');
     });
     Route::resource('mortalidades', MortalidadeController::class);
 

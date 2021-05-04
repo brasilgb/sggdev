@@ -190,3 +190,7 @@ thead > tr{
 .mb-4, .my-4 {
     margin-bottom: 1.5rem !important;
 }
+a[disabled] {
+    pointer-events: none;
+    cursor: default;
+ }

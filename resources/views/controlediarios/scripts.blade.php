@@ -26,7 +26,6 @@
         $("#id_aviario").change(function() {
             idlote = $("#lote_id").val();
             idaviario = $(this).val();
-
             $.ajax({
                 url: "{{ route('controlediarios.verificacontrole') }}",
                 type: 'POST',
@@ -41,9 +40,9 @@
                     $(".leitura-inicial-0").hide('fade');
                     var aves = parseInt(response.aves);
                     var leitura_anterior = parseInt(response.leitura_anterior)
-                    $("#leitura_agua").keyup(function(e) {
+                    $("#leitura_create").keyup(function(e) {
                         e.preventDefault();
-                        leitura_atual = $(this).val();
+                        leitura_atual = parseInt($(this).val());
                         $("#consumo_total").val(leitura_atual - leitura_anterior);
                         $("#consumo_ave").val(((leitura_atual - leitura_anterior) /
                             aves).toFixed(2));
@@ -52,14 +51,11 @@
                     $(".leitura-inicial-0").show('fade');
                     $("#consumo_total, #consumo_ave").val(0);
                 }
-
             });
         });
     });
-
-
     $(function() {
-        $("#leitura_agua").keyup(function(e) {
+        $("#leitura_edit").keyup(function(e) {
             idlote = $("#lote_id").val();
             idaviario = $("#id_aviario").val();
             idcontrole = $("#idcontrole").val();
@@ -87,9 +83,7 @@
                 }
             });
         });
-
     });
-
     $("#formlote").validate({
         rules: {
             data_controle: {
@@ -161,5 +155,4 @@
         param) { // Adding rules for Amount(Not equal to zero)
         return this.optional(element) || value != '0';
     });
-
 </script>

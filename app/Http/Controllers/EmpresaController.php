@@ -65,10 +65,13 @@ class EmpresaController extends Controller
             'image' => 'Arquivo de imagem não é válido, Arquivos: jpg, png ou gif, Tamanho: 1MB!'
         ];
         $validator = Validator::make($data, $rules, $messages)->validate();
+        if($request->file('logotipo')){
+
         if (!is_dir(public_path('/storage/thumbnail')) && !is_dir(public_path('/storage/images'))):
             mkdir(public_path('/storage/thumbnail'), 0777);
             mkdir(public_path('/storage/images'), 0777);
         endif;
+
         $image = $request->file('logotipo');
         $nomeimagem = time() . '.' . $image->extension();
         $destinationPath = public_path('/storage/thumbnail');
@@ -79,11 +82,17 @@ class EmpresaController extends Controller
         $destinationPath = public_path('/storage/images');
         $image->move($destinationPath, $nomeimagem);
         unlink(public_path('/storage/images/' . $nomeimagem));
-
         $data['logotipo'] = $nomeimagem;
+    }
         $data['id_empresa'] = Empresa::idempresa();
-        $empresa->create($data);
-        return redirect()->route('empresas.show', ['empresa' => Empresa::idempresa()-1])->with('success', 'Dados da empresa salvos com sucesso!');
+
+        if(Empresa::first()){
+            $empresa->create($data);
+            return redirect()->route('empresas.show', ['empresa' => Empresa::idempresa()-1])->with('success', 'Dados da empresa salvos com sucesso!');
+        }else{
+            $empresa->create($data);
+            return redirect()->route('periodos.index');
+        }
     }
 
     /**

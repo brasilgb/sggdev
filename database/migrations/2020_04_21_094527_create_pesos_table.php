@@ -19,16 +19,16 @@ class CreatePesosTable extends Migration
             $table->integer('periodo');
             $table->integer('aviario_id');
             $table->integer('semana');
-            $table->integer('femea_box1');
-            $table->integer('femea_box2')->nullable();
-            $table->integer('femea_box3')->nullable();
-            $table->integer('femea_box4')->nullable();
-            $table->integer('macho_box1');
-            $table->integer('macho_box2')->nullable();
-            $table->integer('macho_box3')->nullable();
-            $table->integer('macho_box4')->nullable();
-            $table->integer('femea')->nullable();;
-            $table->integer('macho')->nullable();
+            $table->decimal('femea_box1', 10,2);
+            $table->decimal('femea_box2', 10,2)->nullable();
+            $table->decimal('femea_box3', 10,2)->nullable();
+            $table->decimal('femea_box4', 10,2)->nullable();
+            $table->decimal('macho_box1', 10,2);
+            $table->decimal('macho_box2', 10,2)->nullable();
+            $table->decimal('macho_box3', 10,2)->nullable();
+            $table->decimal('macho_box4', 10,2)->nullable();
+            $table->decimal('femea', 10,2)->nullable();;
+            $table->decimal('macho', 10,2)->nullable();
             $table->timestamps();
         });
     }

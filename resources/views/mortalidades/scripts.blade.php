@@ -23,15 +23,15 @@ $(function() {
     });
 
     $(function() {
-            loteid = $("#lote_id").val();
-            if (loteid) {
+        aviarioid = $("#id_aviario").val();
+            if (aviarioid) {
                 $.ajax({
-                    url: "{{ route('aviarios.aveslote') }}",
+                    url: "{{ route('mortalidades.avesaviario') }}",
                     dataType: "JSON",
                     type: "POST",
                     data: {
                         _token: "{{ csrf_token() }}",
-                        loteid: loteid
+                        aviarioid: aviarioid
                     }
                 }).done(function(response) {
                     $("#avesfemeas, #avesmachos").attr("style",
@@ -54,12 +54,12 @@ $(function() {
             var machodb = $("#machodb").val();
 
             $.ajax({
-                url: "{{ route('aviarios.aveslote') }}",
+                url: "{{ route('mortalidades.avesaviario') }}",
                 dataType: "JSON",
                 type: "POST",
                 data: {
                     _token: "{{ csrf_token() }}",
-                    loteid: loteid
+                    aviarioid: aviarioid
                 }
             }).done(function(response) {
                 if (avesfemeas > response.femea + parseInt(femeadb)) {
@@ -96,17 +96,17 @@ $(function() {
     });
 
     $(function() {
-        $("#lote_id").change(function(e) {
+        $("#id_aviario").change(function(e) {
             e.preventDefault();
-            loteid = $(this).val();
-            if (loteid) {
+            aviarioid = $(this).val();
+            if (aviarioid) {
                 $.ajax({
-                    url: "{{ route('aviarios.aveslote') }}",
+                    url: "{{ route('mortalidades.avesaviario') }}",
                     dataType: "JSON",
                     type: "POST",
                     data: {
                         _token: "{{ csrf_token() }}",
-                        loteid: loteid
+                        aviarioid: aviarioid
                     }
                 }).done(function(response) {
 

@@ -74,7 +74,7 @@ class ControlediarioController extends Controller
         $data['id_controle'] = Controlediario::idcontrole();
         $data['periodo'] = Periodo::ativo();
         $data['data_controle'] = Carbon::createFromFormat('d/m/Y', $request->data_controle)->format('Y-m-d');
-        $data['controle_inicial'] = Controlediario::idcontrole() > 1 ? 0 : 1;
+        $data['leitura_inicial'] = Controlediario::get()->count() > 1 ? 0 : 1;
         $controlediario->create($data);
         return redirect()->route('controlediarios.index')->with('success', 'Controle diário cadastrado com sucesso!');
     }
@@ -145,20 +145,22 @@ class ControlediarioController extends Controller
      */
     public function destroy(Controlediario $controlediario)
     {
-        //
+        $controlediario->delete();
+        return redirect()->route('controlediarios.index', ['controlediario' => $controlediario->id_controle])->with('success', 'Controle deletado com sucesso!');
     }
 
     public function verificacontrole(Request $request)
     {
         $controle = Controlediario::orderBy('id_controle', 'DESC')->where('lote_id', $request->idlote)->where('aviario', $request->idaviario)->first();
         $aviarios = Aviario::orderBy('id_aviario', 'DESC')->where('lote_id', $request->idlote)->where('id_aviario', $request->idaviario)->first();
-        if (!empty($controle->leitura_agua)) {
-            $leitura = 1;
+        if (!empty($controle)) {
+            $leitura = '1';
             $leitura_inicial = $controle->leitura_inicial;
             $leitura_anterior = $controle->leitura_agua;
             $aves = $aviarios->tot_ave;
         } else {
             $leitura = '0';
+            $leitura_inicial = '0';
             $leitura_anterior = '0';
             $aves = '0';
         }
@@ -174,10 +176,11 @@ class ControlediarioController extends Controller
             $leitura_anterior = $controle->leitura_agua - $controle->consumo_total;
             $aves = $aviarios->tot_ave;
         } else {
-            $leitura_inicial = '0';
-            $leitura_anterior = '0';
-            $aves = '0';
+            $leitura_inicial = 0;
+            $leitura_anterior = 0;
+            $aves = 0;
         }
+
         return response()->json(['aves' => $aves, 'leitura_inicial' => $leitura_inicial, 'leitura_anterior' => $leitura_anterior]);
     }
 }
