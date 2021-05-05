@@ -131,12 +131,20 @@ thead > tr{
     border-color: #6c757d!important;
 }
 .frango-img {
-    background: url('../storage/images/galinhacomovos.jpg');
+    background: url('../storage/images/galinha-inicio.jpg');
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: cover;
-    height: 250px;
-    width: 300px;
+    background-size: contain;
+    height: 300px;
+    width: 100px;
+}
+.frango-404 {
+    background: url('../storage/images/galinha-perdida.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 300px;
+    width: 100px;
 }
 /*Boxes home */
 .small-box {

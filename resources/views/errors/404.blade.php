@@ -16,7 +16,7 @@
                                 Prosseguir <i class="fa fa-angle-double-right"></i></a></i>
                         </div>
                     </div>
-                    <div class="col frango-img">
+                    <div class="col frango-404">
 
                     </div>
                 </div>
