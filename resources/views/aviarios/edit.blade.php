@@ -42,7 +42,7 @@
                             class="text-danger">*</span></label>
                     <div class="col-sm-7">
                         <input id="dataform" type="text" class="form-control" name="data_aviario"
-                            value="{{ old('data_aviario', date('d/m/Y', strtotime(now()))) }}">
+                            value="{{ old('data_aviario', date('d/m/Y', strtotime($aviario->data_aviario))) }}">
                         @error('data_aviario')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror

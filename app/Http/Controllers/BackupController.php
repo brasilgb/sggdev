@@ -126,8 +126,8 @@ class BackupController extends Controller
 
     public function executabackup()
     {
-        $horaatual = date("H:i", strtotime(Carbon::now()));
-        $horaagendada = date("H:i", strtotime(Backup::first()->agendamento));
+        $horaatual = date("H:i:s", strtotime(Carbon::now()));
+        $horaagendada = date("H:i:s", strtotime(Backup::first()->agendamento));
         if ($horaatual == $horaagendada) {
             $this->createbackup();
         }
@@ -145,7 +145,7 @@ class BackupController extends Controller
         $username = env('DB_USERNAME');
         $password = env('DB_PASSWORD');
         $database = env('DB_DATABASE');
-        $file = $backup->local . 'backup-sgga.sql';
+        $file = $backup->local .DIRECTORY_SEPARATOR. 'backup-sgga.sql';
 
         if (!is_dir($backup->local)) {
             mkdir($backup->local, 0777, true);

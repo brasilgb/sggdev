@@ -70,7 +70,7 @@
                                 id="situacao" class="btn btn-primary border border-white shadow"><i
                                     class="fa fa-edit"></i> Editar</button>
 
-                            <button class="btn btn-danger border border-white shadow" data-toggle="modal"
+                            <button @if($controlediarios->count() > 1 and $controlediario->leitura_inicial == 1) disabled @endif class="btn btn-danger border border-white shadow" data-toggle="modal"
                                 onclick="deleteData({{ $controlediario->id_controle }})" data-target="#DeleteModal"><i
                                     class="fa fa-trash"></i> Excluir</button>
                         </td>

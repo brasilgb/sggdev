@@ -79,7 +79,7 @@
         <!-- small box -->
         <div class="small-box bg-yellow shadow-sm border border-white rounded">
             <div class="inner">
-                <h3>{{ !$mortalidades? '0' :$mortalidades->where('data_coleta',date("Y-m-d", strtotime(\Carbon\Carbon::now())))->sum('tot_ave') }}</h3>
+                <h3>{{ !$mortalidades? '0' :$mortalidades->where('data_mortalidade',date("Y-m-d", strtotime(\Carbon\Carbon::now())))->sum('tot_ave') }}</h3>
 
                 <p>Mortalidade dia</p>
             </div>
@@ -96,7 +96,7 @@
         <!-- small box -->
         <div class="small-box bg-red shadow-sm border border-white rounded">
             <div class="inner">
-                <h3>{{ !$consumos? '0' :$consumos->where('data_coleta', date("Y-m-d", strtotime(\Carbon\Carbon::now())))->sum('femea') + $consumos->where('data_coleta', date("Y-m-d", strtotime(\Carbon\Carbon::now())))->sum('macho') }}
+                <h3>{{ !$consumos? '0' :$consumos->where('data_consumo', date("Y-m-d", strtotime(\Carbon\Carbon::now())))->sum('femea') + $consumos->where('data_coleta', date("Y-m-d", strtotime(\Carbon\Carbon::now())))->sum('macho') }}
                     <small>Kg</small></h3>
 
                 <p>Consumo ração dia</p>

@@ -36,13 +36,13 @@
                     idaviario: idaviario
                 }
             }).done(function(response) {
-                if (response.leitura > 0) {
+                if (response.leitura < 1) {
                     $(".leitura-inicial-0").hide('fade');
                     var aves = parseInt(response.aves);
                     var leitura_anterior = parseInt(response.leitura_anterior)
                     $("#leitura_create").keyup(function(e) {
                         e.preventDefault();
-                        leitura_atual = parseInt($(this).val());
+                        leitura_atual = parseInt($("#leitura_create").val());
                         $("#consumo_total").val(leitura_atual - leitura_anterior);
                         $("#consumo_ave").val(((leitura_atual - leitura_anterior) /
                             aves).toFixed(2));
@@ -54,12 +54,13 @@
             });
         });
     });
+
     $(function() {
         $("#leitura_edit").keyup(function(e) {
             idlote = $("#lote_id").val();
             idaviario = $("#id_aviario").val();
             idcontrole = $("#idcontrole").val();
-            leitura_agua = parseInt($("#leitura_agua").val());
+            leitura_agua = parseInt($("#leitura_edit").val());
             $.ajax({
                 url: "{{ route('controlediarios.editacontrole') }}",
                 type: 'POST',
@@ -74,8 +75,8 @@
                 if (response.leitura_inicial > 0) {
                     $("#formlote :input").attr('disabled', true);
                 } else {
-                    var aves = parseInt(response.aves);
-                    var leitura_anterior = parseInt(response.leitura_anterior)
+                    aves = parseInt(response.aves);
+                    leitura_anterior = parseInt(response.leitura_anterior)
                     e.preventDefault();
                     $("#consumo_total").val(leitura_agua - leitura_anterior);
                     $("#consumo_ave").val(((leitura_agua - leitura_anterior) / aves).toFixed(

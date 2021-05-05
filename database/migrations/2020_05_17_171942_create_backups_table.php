@@ -15,9 +15,9 @@ class CreateBackupsTable extends Migration
     {
         Schema::create('backups', function (Blueprint $table) {
             $table->integer('id_backup')->primary();
-            $table->char('basedados', 50);
-            $table->char('usuario', 50);
-            $table->char('senha', 50);
+            $table->char('basedados', 50)->nullable();
+            $table->char('usuario', 50)->nullable();
+            $table->char('senha', 50)->nullable();
             $table->string('local');
             $table->time('agendamento')->nullable();
             $table->timestamps();
