@@ -21,6 +21,7 @@ class Empresa extends Model
         'cidade',
         'uf',
         'telefone',
+        'celular',
         'email'
     ];
 

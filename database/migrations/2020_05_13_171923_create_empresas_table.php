@@ -22,7 +22,8 @@ class CreateEmpresasTable extends Migration
             $table->char('endereco', 50);
             $table->char('cidade', 50);
             $table->string('uf');
-            $table->char('telefone', 15);
+            $table->char('telefone', 15)->nullable();
+            $table->char('celular', 15);
             $table->char('email', 50);
             $table->timestamps();
         });

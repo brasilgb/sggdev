@@ -157,6 +157,15 @@
             </div>
 
             <div class="form-group row">
+                <label for="celular" class="col-sm-3 col-form-label text-left">Celular <span
+                        class="text-danger">*</span></label>
+                <div class="col-sm-7">
+                    <input id="celular" type="text" class="form-control @error('celular') is-invalid @enderror"
+                        name="celular" value="{{ old('celular', $empresa->celular) }}">
+                </div>
+            </div>
+
+            <div class="form-group row">
                 <label for="email" class="col-sm-3 col-form-label text-left">E-mail <span
                         class="text-danger">*</span></label>
                 <div class="col-sm-7">

@@ -117,12 +117,20 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="telefone" class="col-sm-3 col-form-label text-left">Telefone <span
-                            class="text-danger">*</span></label>
+                    <label for="telefone" class="col-sm-3 col-form-label text-left">Telefone </label>
                     <div class="col-sm-7">
                         <input id="telefone" type="text" class="form-control @error('telefone') is-invalid @enderror" name="telefone"
                             value="{{ old('telefone') }}">
-                        @error('telefone')
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="celular" class="col-sm-3 col-form-label text-left">Celular <span
+                            class="text-danger">*</span></label>
+                    <div class="col-sm-7">
+                        <input id="celular" type="text" class="form-control @error('celular') is-invalid @enderror" name="celular"
+                            value="{{ old('celular') }}">
+                        @error('celular')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>

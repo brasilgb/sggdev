@@ -52,7 +52,7 @@ class EmpresaController extends Controller
             'endereco' => 'required',
             'cidade' => 'required',
             'uf' => 'required',
-            'telefone' => 'required',
+            'celular' => 'required',
             'email' => 'required|email'
         ];
 
@@ -137,7 +137,7 @@ class EmpresaController extends Controller
                 'endereco' => 'required',
                 'cidade' => 'required',
                 'uf' => 'required',
-                'telefone' => 'required',
+                'celular' => 'required',
                 'email' => 'required|email'
             ];
 
