@@ -23,6 +23,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    
         /**
      * Create a new controller instance.
      *
@@ -38,6 +39,7 @@ class HomeController extends Controller
         $backup = Backup::first();
         $segmento = Empresa::first();
         $coletas = Coleta::get();
+        //dd($coletas);
         if(Periodo::ativo() > 0){
         // KPI Home
         $lotes = Lote::get();
@@ -74,7 +76,6 @@ class HomeController extends Controller
         $estoqueaves = Estoque_ave::where('periodo', Periodo::ativo())->get();
         // Tarefas gerais
         $tarefas = Geraltarefa::where('periodo', Periodo::ativo())->get();
-
 
     }else{
             $lotes = 0;

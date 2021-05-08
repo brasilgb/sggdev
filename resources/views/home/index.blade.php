@@ -16,14 +16,14 @@
         @include("parts/flash-message")
     </div>
 </div>
-@if (!empty($segmento) and $segmento->segmento > 0)
+@if ($segmento->count() > 0)
 <div class="bg-gray-200 mb-3 p-2 shadow-sm border border-white rounded">
     <div class="row">
         <div class="col">
             <h3 style="font: bold 1rem Sans-serif; text-shadow: 1px 1px #ffffff;"
                 class="text-black-50 text-uppercase pt-2 text-left"><i class="fa fa-kiwi-bird"></i> SGGA - Sistema de
                 Gerenciamento de Granjas Aviárias - Segmento
-                @if(!empty($segmento) and $segmento->segmento > 0)
+                @if($segmento->segmento == 1)
                 Frangos
                 @else
                 Perus
@@ -174,13 +174,13 @@
         <!-- small box -->
         <div class="small-box bg-cyan shadow-sm border border-white rounded">
             <div class="inner">
-                <h3> {{ !$tarefas? '0' :$tarefas->count() }}</h3>
+                <h3> {{ $tarefas->count() }}</h3>
                 <p>Tarefas abetas</p>
             </div>
             <div class="icon">
                 <i class="fas fa-fw fa-tasks"></i>
             </div>
-            <a href="{{ route('consumos.index') }}" class="small-box-footer">
+            <a href="{{ route('geraltarefas.index') }}" class="small-box-footer">
                 Acessar tarefas <i class="fa fa-arrow-circle-right"></i>
             </a>
         </div>
@@ -199,7 +199,7 @@
                     @method('POST')
                     @csrf
                     <input type="hidden" name="datarelatorio" value="{{ date('d/m/Y', strtotime(now())) }}">
-                    <button @if(empty($coleta))? 0 : disabled @endif type="submit" class="btn btn-app btn-light shadow-sm border border-white"><i
+                    <button @if($coletas->count() == 0) disabled @endif type="submit" class="btn btn-app btn-light shadow-sm border border-white"><i
                             class="fa fa-file-alt"></i>Enviar Relatório</button>
                 </form>
             </div>
@@ -213,7 +213,7 @@
                 <form action="{{ route('backups.gerabackup') }}" method="get" class="inline">
                     @method('PUT')
                     @csrf
-                    <button @if(empty($backup))? 0 : disabled @endif type="submit" class="btn btn-app btn-light shadow-sm border border-white"><i
+                    <button @if($backup->count() == 0) disabled @endif type="submit" class="btn btn-app btn-light shadow-sm border border-white"><i
                             class="fa fa-database"></i>Gerar backup</button>
                 </form>
             </div>
@@ -241,7 +241,7 @@
                 <form action="{{ route('envios.index') }}" method="get" class="inline">
                     @method('PUT')
                     @csrf
-                    <button type="submit" class="btn btn-app btn-light shadow-sm border border-white"><i
+                    <button @if(!$coletas) disabled @endif type="submit" class="btn btn-app btn-light shadow-sm border border-white"><i
                             class="fa fa-truck"></i>Enviar ovos</button>
                 </form>
             </div>
