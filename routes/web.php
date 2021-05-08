@@ -147,6 +147,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('pdfestoqueave', [RelatorioController::class, 'pdfestoqueave'])->name('pdfestoqueave');
         Route::get('estoqueovo', [RelatorioController::class, 'estoqueovo'])->name('estoqueovo');
         Route::post('pdfestoqueovo', [RelatorioController::class, 'pdfestoqueovo'])->name('pdfestoqueovo');
+        Route::get('consumo', [RelatorioController::class, 'consumo'])->name('consumo');
+        Route::post('pdfconsumo', [RelatorioController::class, 'pdfconsumo'])->name('pdfconsumo');
     });
 
     Route::prefix('usuarios')->name('usuarios.')->group(function () {

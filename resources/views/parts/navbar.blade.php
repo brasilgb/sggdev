@@ -124,6 +124,7 @@
               <a class="dropdown-item" href="{{ route('relatorios.financeiro') }}"><i class="fa fa-caret-right"></i> Financeiro</a>
               <a class="dropdown-item" href="{{ route('relatorios.estoqueave') }}"><i class="fa fa-caret-right"></i> Estoque aves</a>
               <a class="dropdown-item" href="{{ route('relatorios.estoqueovo') }}"><i class="fa fa-caret-right"></i> Estoque ovos</a>
+              <a class="dropdown-item" href="{{ route('relatorios.consumo') }}"><i class="fa fa-caret-right"></i> Consumo ração</a>
             </div>
           </li>
 

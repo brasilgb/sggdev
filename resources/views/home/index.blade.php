@@ -263,6 +263,16 @@
 
     <div class="col">
         <div class="bg-white rounded shadow-sm border border-gray-500">
+            <div class="">
+                <p class="text-center m-0 px-2 py-4 text-secundary font-weight-bold">Média: @if ($capitalizadas > 1)
+                    {{ $media . '%' }} @else <i class="fa fa-exclamation-triangle text-danger"></i> @endif
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col">
+        <div class="bg-white rounded shadow-sm border border-gray-500">
             <div class=" '00/00/0000' ">
                 <p class="text-center m-0 px-2 py-4 text-secundary font-weight-bold">De
                     {{ empty($semanaatual->semana) ? '00/00/0000' :  date('d/m/Y', strtotime($semanaatual->data_inicial)) }} à
@@ -276,16 +286,6 @@
                 <p class="text-center m-0 px-2 py-4 text-secundary font-weight-bold">Meta:
                     {{ empty($semanaatual->semana)? '0' : $semanaatual->producao }}% / Parcial: @if ($capitalizadas > 1) {{ $alcancada . '%' }} @else <i
                         class="fa fa-exclamation-triangle text-danger"></i> @endif
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col">
-        <div class="bg-white rounded shadow-sm border border-gray-500">
-            <div class="">
-                <p class="text-center m-0 px-2 py-4 text-secundary font-weight-bold">Média: @if ($capitalizadas > 1)
-                    {{ $media . '%' }} @else <i class="fa fa-exclamation-triangle text-danger"></i> @endif
                 </p>
             </div>
         </div>

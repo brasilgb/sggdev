@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Aviario;
 use App\Models\Coleta;
+use App\Models\Consumo;
 use App\Models\Despesa;
 use App\Models\Email;
 use App\Models\Empresa;
@@ -254,6 +255,34 @@ class RelatorioController extends Controller
 
       $pdf = PDF::loadView('relatorios.estoqueovo.pdfestoqueovo', $data)->setPaper('a4', 'landscape');
       return $pdf->stream('relatorio-estoque-ovos.pdf');
+  }
+
+ /**
+  * Relatório consumo de ração
+  */
+  public function consumo()
+  {
+      $datarelatorio = date("Y-m-d", strtotime(Carbon::now()));
+      $lotes = Lote::get();
+      $aviarios = Aviario::get();
+      $consumos = Consumo::where('data_consumo', $datarelatorio)->get();
+
+      return view('relatorios.consumo.consumo', compact('datarelatorio', 'lotes', 'aviarios', 'consumos'));
+  }
+
+
+  public function pdfconsumo(Request $request)
+  {
+      $datarelatorio = Carbon::createFromFormat('d/m/Y', $request->datarelatorio)->format('Y-m-d');
+      $data = [
+          'datarelatorio' => $datarelatorio,
+          'lotes' => Lote::get(),
+          'aviarios' => Aviario::get(),
+          'consumos' => Consumo::where('data_consumo', $datarelatorio)->get()
+      ];
+
+      $pdf = PDF::loadView('relatorios.consumo.pdfconsumo', $data)->setPaper('a4', 'landscape');
+      return $pdf->stream('relatorio-consumo-racao.pdf');
   }
 
 
