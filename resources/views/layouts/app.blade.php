@@ -12,7 +12,7 @@ $periodo = App\Models\Periodo::exists();
     @if (!empty($empresaexist->logotipo))
         <link rel="shortcut icon" href="{{ asset("storage/thumbnail/{$empresaexist->logotipo}") }}">
     @else
-        <link rel="shortcut icon" href="{{ asset('storage/images/logo-padrao.png') }}">
+        <link rel="shortcut icon" href="{{ asset('storage/images/logo_padrao.png') }}">
     @endif
 
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
