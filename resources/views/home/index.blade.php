@@ -213,7 +213,7 @@
                 <form action="{{ route('backups.gerabackup') }}" method="get" class="inline">
                     @method('PUT')
                     @csrf
-                    <button @if($backup->count() == 0) disabled @endif type="submit" class="btn btn-app btn-light shadow-sm border border-white"><i
+                    <button @if(!$backup) disabled @endif type="submit" class="btn btn-app btn-light shadow-sm border border-white"><i
                             class="fa fa-database"></i>Gerar backup</button>
                 </form>
             </div>
