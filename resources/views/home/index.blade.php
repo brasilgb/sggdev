@@ -16,7 +16,7 @@
         @include("parts/flash-message")
     </div>
 </div>
-@if ($segmento->count() > 0)
+@if ($segmento)
 <div class="bg-gray-200 mb-3 p-2 shadow-sm border border-white rounded">
     <div class="row">
         <div class="col">
@@ -270,7 +270,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="col">
         <div class="bg-white rounded shadow-sm border border-gray-500">
             <div class=" '00/00/0000' ">

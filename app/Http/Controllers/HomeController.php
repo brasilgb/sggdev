@@ -23,7 +23,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    
+
         /**
      * Create a new controller instance.
      *
@@ -37,7 +37,7 @@ class HomeController extends Controller
     public function index()
     {
         $backup = Backup::first();
-        $segmento = Empresa::first();
+        $segmento = Empresa::first(); 
         $coletas = Coleta::get();
         //dd($coletas);
         if(Periodo::ativo() > 0){
