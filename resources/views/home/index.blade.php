@@ -1,10 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<script src="{{ asset('js/highcharts.js') }}"></script>
-<script src="{{ asset('js/exporting.js') }}"></script>
-<script src="{{ asset('js/export-data.js') }}"></script>
-<script src="{{ asset('js/accessibility.js') }}"></script>
+
 <script>
     jQuery(window).on('load', function($){
         atualizaRelogio();
@@ -197,6 +194,7 @@
             <div class="p-2 text-center">
                 <form action="{{ route('relatorios.enviarelatorio') }}" method="post" class="inline">
                     @method('POST')
+
                     @csrf
                     <input type="hidden" name="datarelatorio" value="{{ date('d/m/Y', strtotime(now())) }}">
                     <button @if($coletas->count() == 0) disabled @endif type="submit" class="btn btn-app btn-light shadow-sm border border-white"><i
@@ -259,20 +257,7 @@
                     Semana: {{ empty($semanaatual->semana)? '0' : $semanaatual->semana}}</p>
             </div>
         </div>
-    </div>
-
-    <div class="col">
-        <div class="bg-white rounded shadow-sm border border-gray-500">
-            <div class="">
-                <p class="text-center m-0 px-2 py-4 text-secundary font-weight-bold">Média: @if ($capitalizadas > 1)
-                    {{ $media . '%' }} @else <i class="fa fa-exclamation-triangle text-danger"></i> @endif
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col">
-        <div class="bg-white rounded shadow-sm border border-gray-500">
+        <div class="bg-white rounded shadow-sm border border-gray-500 mt-2">
             <div class=" '00/00/0000' ">
                 <p class="text-center m-0 px-2 py-4 text-secundary font-weight-bold">De
                     {{ empty($semanaatual->semana) ? '00/00/0000' :  date('d/m/Y', strtotime($semanaatual->data_inicial)) }} à
@@ -280,15 +265,33 @@
             </div>
         </div>
     </div>
+
     <div class="col">
-        <div class="bg-white rounded shadow-sm border border-gray-500">
+        {{-- <div class="bg-white rounded shadow-sm border border-gray-500">
+            <div class="">
+                <p class="text-center m-0 px-2 py-4 text-secundary font-weight-bold">Média: @if ($capitalizadas > 1)
+                    {{ $media . '%' }} @else <i class="fa fa-exclamation-triangle text-danger"></i> @endif
+                </p>
+            </div>
+        </div> --}}
+        
+            <div id="container-speed" class="chart-container"></div>
+
+
+    </div>
+
+    <div class="col">
+        {{-- <div class="bg-white rounded shadow-sm border border-gray-500">
             <div class="">
                 <p class="text-center m-0 px-2 py-4 text-secundary font-weight-bold">Meta:
                     {{ empty($semanaatual->semana)? '0' : $semanaatual->producao }}% / Parcial: @if ($capitalizadas > 1) {{ $alcancada . '%' }} @else <i
                         class="fa fa-exclamation-triangle text-danger"></i> @endif
                 </p>
             </div>
-        </div>
+        </div> --}}
+
+            <div id="container-rpm" class="chart-container"></div>
+
     </div>
 
 </div>
@@ -305,72 +308,7 @@
 
     </div>
 </div>
-
-<script>
-    // Gráfico produção semanal
-        var producaosemana = <?php echo json_encode($producaosemana,
-        JSON_NUMERIC_CHECK); ?>;    var datasemana = <?php echo json_encode($datasemana); ?>;    Highcharts.chart('container', {
-            chart: {
-                type: 'line'
-            },
-            title: {
-                text: 'Produção da Semana'
-            },
-            subtitle: {
-                text: 'Comparativo diário de produção semanal'
-            },
-            xAxis: {
-                categories: datasemana
-            },
-            yAxis: {
-                title: {
-                    text: 'Produção %'
-                },
-                labels: {
-                    format: '{value:f}'
-                }
-            },
-            plotOptions: {
-                line: {
-                    dataLabels: {
-                        enabled: true
-                    },
-                    enableMouseTracking: false
-                }
-            },
-            series: [{
-                name: '% Produção geral por dia da Semana',
-                data: producaosemana
-            }]
-        });
-
-        // Data e hora *********************************************************
-        function atualizaRelogio(){
-			var momentoAtual = new Date();
-
-			var vhora = momentoAtual.getHours();
-			var vminuto = momentoAtual.getMinutes();
-			var vsegundo = momentoAtual.getSeconds();
-
-			var vdia = momentoAtual.getDate();
-			var vmes = momentoAtual.getMonth() + 1;
-			var vano = momentoAtual.getFullYear();
-
-			if (vdia < 10){ vdia = "0" + vdia;}
-			if (vmes < 10){ vmes = "0" + vmes;}
-			if (vhora < 10){ vhora = "0" + vhora;}
-			if (vminuto < 10){ vminuto = "0" + vminuto;}
-			if (vsegundo < 10){ vsegundo = "0" + vsegundo;}
-
-			dataFormat = vdia + "/" + vmes + "/" + vano + " ";
-			horaFormat = vhora + ":" + vminuto + ":" + vsegundo;
-
-			document.getElementById("data").innerHTML = dataFormat;
-			document.getElementById("hora").innerHTML = horaFormat;
-
-			setTimeout("atualizaRelogio()",1000);
-		}
-</script>
+@include('home/scripts')
 @else
 <div class="container">
     <div class="d-flex justify-content-center">
