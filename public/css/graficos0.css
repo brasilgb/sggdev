@@ -1,6 +1,6 @@
 .highcharts-figure .chart-container {
 	width: auto;
-	height: 100px;
+	height: 200px!important;
 	float: left;
 }
 

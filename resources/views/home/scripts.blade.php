@@ -48,8 +48,8 @@ var gaugeOptions = {
     title: null,
 
     pane: {
-        center: ['50%', '85%'],
-        size: '140%',
+        center: ['50%', '75%'],
+        size: '120%',
         startAngle: -90,
         endAngle: 90,
         background: {
@@ -72,9 +72,9 @@ var gaugeOptions = {
     // the value axis
     yAxis: {
         stops: [
-            [0.1, '#55BF3B'], // green
+            [0.1, '#DF5353'], // green
             [0.5, '#DDDF0D'], // yellow
-            [0.9, '#DF5353'] // red
+            [0.9, '#55BF3B'] // red
         ],
         lineWidth: 0,
         tickWidth: 0,
@@ -99,13 +99,13 @@ var gaugeOptions = {
     }
 };
 
-// The speed gauge
-var chartSpeed = Highcharts.chart('container-speed', Highcharts.merge(gaugeOptions, {
+// The media gauge
+var chartSpeed = Highcharts.chart('container-media', Highcharts.merge(gaugeOptions, {
     yAxis: {
         min: 0,
-        max: 200,
+        max: {{!$semanaatual->producao?'0':$semanaatual->producao}},
         title: {
-            text: 'Speed'
+            text: 'Produção Semanal'
         }
     },
 
@@ -114,13 +114,13 @@ var chartSpeed = Highcharts.chart('container-speed', Highcharts.merge(gaugeOptio
     },
 
     series: [{
-        name: 'Speed',
-        data: [80],
+        name: 'Media',
+        data: [{{!$media ? '0': $media}}],
         dataLabels: {
             format:
                 '<div style="text-align:center">' +
-                '<span style="font-size:25px">{y}</span><br/>' +
-                '<span style="font-size:12px;opacity:0.4">km/h</span>' +
+                '<span style="font-size:25px">{y}</span>%<br/>' +
+                '<span style="font-size:12px;opacity:0.4">Média</span>' +
                 '</div>'
         },
         tooltip: {
@@ -130,25 +130,25 @@ var chartSpeed = Highcharts.chart('container-speed', Highcharts.merge(gaugeOptio
 
 }));
 
-// The RPM gauge
-var chartRpm = Highcharts.chart('container-rpm', Highcharts.merge(gaugeOptions, {
+// The meta gauge
+var chartRpm = Highcharts.chart('container-meta', Highcharts.merge(gaugeOptions, {
     yAxis: {
         min: 0,
-        max: 5,
+        max: 100,
         title: {
-            text: 'RPM'
+            text: 'Produção Semanal'
         }
     },
 
     series: [{
-        name: 'RPM',
-        data: [1],
+        name: 'Meta',
+        data: [{{!$alcancada?'0':$alcancada}}],
         dataLabels: {
             format:
                 '<div style="text-align:center">' +
-                '<span style="font-size:25px">{y:.1f}</span><br/>' +
+                '<span style="font-size:25px">{y}</span>%<br/>' +
                 '<span style="font-size:12px;opacity:0.4">' +
-                '* 1000 / min' +
+                'Meta alcançada' +
                 '</span>' +
                 '</div>'
         },
@@ -160,37 +160,37 @@ var chartRpm = Highcharts.chart('container-rpm', Highcharts.merge(gaugeOptions, 
 }));
 
 // Bring life to the dials
-setInterval(function () {
-    // Speed
-    var point,
-        newVal,
-        inc;
+// setInterval(function () {
+//     // Speed
+//     var point,
+//         newVal,
+//         inc;
 
-    if (chartSpeed) {
-        point = chartSpeed.series[0].points[0];
-        inc = Math.round((Math.random() - 0.5) * 100);
-        newVal = point.y + inc;
+//     if (chartSpeed) {
+//         point = chartSpeed.series[0].points[0];
+//         inc = Math.round((Math.random() - 0.5) * 100);
+//         newVal = point.y + inc;
 
-        if (newVal < 0 || newVal > 200) {
-            newVal = point.y - inc;
-        }
+//         if (newVal < 0 || newVal > 200) {
+//             newVal = point.y - inc;
+//         }
 
-        point.update(newVal);
-    }
+//         point.update(newVal);
+//     }
 
-    // RPM
-    if (chartRpm) {
-        point = chartRpm.series[0].points[0];
-        inc = Math.random() - 0.5;
-        newVal = point.y + inc;
+//     // RPM
+//     if (chartRpm) {
+//         point = chartRpm.series[0].points[0];
+//         inc = Math.random() - 0.5;
+//         newVal = point.y + inc;
 
-        if (newVal < 0 || newVal > 5) {
-            newVal = point.y - inc;
-        }
+//         if (newVal < 0 || newVal > 5) {
+//             newVal = point.y - inc;
+//         }
 
-        point.update(newVal);
-    }
-}, 2000);
+//         point.update(newVal);
+//     }
+// }, 2000);
 
 
 

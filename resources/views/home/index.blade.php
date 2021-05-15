@@ -250,48 +250,39 @@
 
 {{-- KPI produção --}}
 <div class="row mt-3">
+
     <div class="col">
         <div class="bg-white rounded shadow-sm border border-gray-500">
             <div class="">
-                <p class="text-center m-0 px-2 py-4 text-secundary font-weight-bold">
-                    Semana: {{ empty($semanaatual->semana)? '0' : $semanaatual->semana}}</p>
+                <p class="text-center pt-2"><span class="text-teal">Semana</span> / <span class="text-indigo">Meta</span></p>
+                <h1 class="text-center m-0 px-2 py-4 text-secundary font-weight-bold" style="font-size: 2.65rem;">
+                    <span class="text-teal">{{ empty($semanaatual->semana)? '0' : $semanaatual->semana}}</span>
+                    /
+                    <span class="text-indigo">{{ empty($semanaatual->producao)? '0' : $semanaatual->producao}}<small style="font-size: 14px">%</small></span>
+                </h1>
             </div>
-        </div>
-        <div class="bg-white rounded shadow-sm border border-gray-500 mt-2">
+
             <div class=" '00/00/0000' ">
-                <p class="text-center m-0 px-2 py-4 text-secundary font-weight-bold">De
-                    {{ empty($semanaatual->semana) ? '00/00/0000' :  date('d/m/Y', strtotime($semanaatual->data_inicial)) }} à
+                <p class="text-center m-0 py-2 text-secundary font-weight-bold text-black-50">&nbsp;&nbsp;&nbsp;&nbsp;
+                   Início:
+                    {{ empty($semanaatual->semana) ? '00/00/0000' :  date('d/m/Y', strtotime($semanaatual->data_inicial)) }} <br>
+                    Término:
                     {{ empty($semanaatual->semana) ? '00/00/0000' : date('d/m/Y', strtotime($semanaatual->data_final)) }} </p>
             </div>
         </div>
     </div>
 
     <div class="col">
-        {{-- <div class="bg-white rounded shadow-sm border border-gray-500">
-            <div class="">
-                <p class="text-center m-0 px-2 py-4 text-secundary font-weight-bold">Média: @if ($capitalizadas > 1)
-                    {{ $media . '%' }} @else <i class="fa fa-exclamation-triangle text-danger"></i> @endif
-                </p>
-            </div>
-        </div> --}}
-        
-            <div id="container-speed" class="chart-container"></div>
-
+        <div class="bg-white rounded shadow-sm border border-gray-500 p-1">
+            <div id="container-media" class="chart-container" style="height: 200px;"></div>
+        </div>
 
     </div>
 
     <div class="col">
-        {{-- <div class="bg-white rounded shadow-sm border border-gray-500">
-            <div class="">
-                <p class="text-center m-0 px-2 py-4 text-secundary font-weight-bold">Meta:
-                    {{ empty($semanaatual->semana)? '0' : $semanaatual->producao }}% / Parcial: @if ($capitalizadas > 1) {{ $alcancada . '%' }} @else <i
-                        class="fa fa-exclamation-triangle text-danger"></i> @endif
-                </p>
-            </div>
-        </div> --}}
-
-            <div id="container-rpm" class="chart-container"></div>
-
+        <div class="bg-white rounded shadow-sm border border-gray-500 p-1">
+            <div id="container-meta" class="chart-container" style="height: 200px;"></div>
+        </div>
     </div>
 
 </div>
