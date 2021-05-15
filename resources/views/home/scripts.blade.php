@@ -119,12 +119,12 @@ var chartSpeed = Highcharts.chart('container-media', Highcharts.merge(gaugeOptio
         dataLabels: {
             format:
                 '<div style="text-align:center">' +
-                '<span style="font-size:25px">{y}</span>%<br/>' +
+                '<span style="font-size:25px">{y:.2f}</span>%<br/>' +
                 '<span style="font-size:12px;opacity:0.4">Média</span>' +
                 '</div>'
         },
         tooltip: {
-            valueSuffix: ' km/h'
+            valueSuffix: ' Media'
         }
     }]
 
@@ -146,14 +146,14 @@ var chartRpm = Highcharts.chart('container-meta', Highcharts.merge(gaugeOptions,
         dataLabels: {
             format:
                 '<div style="text-align:center">' +
-                '<span style="font-size:25px">{y}</span>%<br/>' +
+                '<span style="font-size:25px">{y:.2f}</span>%<br/>' +
                 '<span style="font-size:12px;opacity:0.4">' +
                 'Meta alcançada' +
                 '</span>' +
                 '</div>'
         },
         tooltip: {
-            valueSuffix: ' revolutions/min'
+            valueSuffix: ' Meta'
         }
     }]
 
