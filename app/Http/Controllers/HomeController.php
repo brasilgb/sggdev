@@ -36,7 +36,6 @@ class HomeController extends Controller
 
     public function index()
     {
-        $dataatual = date("Y-m-d", strtotime(now()));
         $backup = Backup::first();
         $segmento = Empresa::first();
         $coletas = Coleta::get();
@@ -69,7 +68,9 @@ class HomeController extends Controller
         // Média de produção semanal
         $media = number_format((($producao->sum->postura_dia / 7) / $capitalizadas) * 100, 2, '.', '');
         // Produção alcançada na semana
-        $alcancada = number_format(($coletas->where('data_coleta', $dataatual)->sum->postura_dia / $capitalizadas) * 100, 2, '.', '');
+        $pcap = (($semanaatual->producao * ($capitalizadas * 7)) / 100);
+
+        $alcancada = (($producao->sum->postura_dia / $pcap)*100);//($pcap - $producao->sum->postura_dia);// number_format(($pcap) * 100, 2, '.', '');
 
         // Estoque de ovos
         $estoqueovos = Estoque_ovo::where('periodo', Periodo::ativo())->get();
