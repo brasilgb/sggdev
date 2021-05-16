@@ -70,7 +70,7 @@ class HomeController extends Controller
         // Produção alcançada na semana
         $pcap = (($semanaatual->producao * ($capitalizadas * 7)) / 100);
 
-        $alcancada = (($producao->sum->postura_dia / $pcap)*100);//($pcap - $producao->sum->postura_dia);// number_format(($pcap) * 100, 2, '.', '');
+        $alcancada = !$semanaatual->producao? '0':(($producao->sum->postura_dia / $pcap)*100);//($pcap - $producao->sum->postura_dia);// number_format(($pcap) * 100, 2, '.', '');
 
         // Estoque de ovos
         $estoqueovos = Estoque_ovo::where('periodo', Periodo::ativo())->get();
