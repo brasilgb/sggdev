@@ -153,11 +153,11 @@ class BackupController extends Controller
         }
         //if (PHP_OS_FAMILY == 'Linux'){
             // Backup do BD em Linux
-            $dump = "/usr/bin/mysqldump --user={$username} --password={$password} --host={{$host}} {$database} --result-file={$file} 2>&1";
+            $dump = "/usr/bin/mysqldump --user={$username} --password={$password} --host={$host} {$database} --result-file={$file} 2>&1";
             exec($dump);
             //}else{
             // Backup do BD em Windows
-            //$dump = "C:\webserver\mariadb\bin\mysqldump -u {$username} -p{$password} -h {{$host}} {$database} > {$file}";
+            //$dump = "C:\webserver\mariadb\bin\mysqldump -u {$username} -p{$password} -h {$host} {$database} > {$file}";
             //system($dump);
             //}
         //$dump = "/usr/bin/mysqldump -u {$username} -p{$password} -h {$host} {$database} > {$file}";
