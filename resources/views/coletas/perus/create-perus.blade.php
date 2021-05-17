@@ -73,7 +73,7 @@
                     <label for="limpos_ninho" class="col-sm-5 col-form-label text-left">Limpos de ninho <span
                             class="text-danger">*</span></label>
                     <div class="col-sm-7">
-                        <input id="limpos_ninho" type="text" class="form-control cleanzero nosubmit  incubaveisbons incubaveis posturadia" name="limpos_ninho"
+                        <input id="limpos_ninho" type="text" class="form-control cleanzero nosubmit incubaveisbons incubaveis posturadia" name="limpos_ninho"
                             value="{{ old('limpos_ninho', '0') }}" onkeydown="javascript:EnterTab('sujos_ninho',event)">
                         @error('limpos_ninho')
                             <div class="alert alert-danger">{{ $message }}</div>

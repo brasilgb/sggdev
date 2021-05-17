@@ -22,7 +22,7 @@
                     incubaveisbons += parseInt($(element).val());
                 }
             });
-            $("#incubaveisbons").val(incubaveisbons).addClass('bg-gray-light');
+            $("#incubaveis_bons").val(incubaveisbons).addClass('bg-gray-light');
         });
     });
     // Comerciais
