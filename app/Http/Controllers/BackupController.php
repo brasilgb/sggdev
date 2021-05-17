@@ -149,7 +149,7 @@ class BackupController extends Controller
         $file = $backup->local .DIRECTORY_SEPARATOR. 'backup-sgga.sql';
 
         if (!is_dir($backup->local)) {
-            mkdir($backup->local, 0777, true);
+            mkdir($backup->local, 0775, true);
         }
 
         //$dump = "/usr/bin/mysqldump -u {$username} -p{$password} -h {$host} {$database} > {$file}";
