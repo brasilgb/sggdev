@@ -103,7 +103,7 @@ var gaugeOptions = {
 var chartSpeed = Highcharts.chart('container-media', Highcharts.merge(gaugeOptions, {
     yAxis: {
         min: 0,
-        max: {{!$semanaatual->producao?'0':$semanaatual->producao}},
+        max: 100,//{{!$semanaatual->producao?'0':$semanaatual->producao}},
         title: {
             text: 'Produção Semanal'
         }
