@@ -150,7 +150,9 @@ class BackupController extends Controller
         if (!is_dir($backup->local)) {
             mkdir($backup->local, 0777, true);
         }
-        $dump = "C:\webserver\mariadb\bin\mysqldump -u {$username} -p{$password} -h {$host} {$database} > {$file}";
+
+        $dump = "/usr/bin/mysqldump -u {$username} -p{$password} -h {$host} {$database} > {$file}";
+        //$dump = "C:\webserver\mariadb\bin\mysqldump -u {$username} -p{$password} -h {$host} {$database} > {$file}";
         shell_exec($dump);
     }
 }
