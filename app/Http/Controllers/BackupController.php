@@ -132,10 +132,11 @@ class BackupController extends Controller
             $this->createbackup();
         }
     }
+
     public function gerabackup()
     {
         $this->createbackup();
-        return back();
+        return redirect()->route('home')->with('success', 'Backup efetuado com sucesso!');
     }
 
     public function createbackup()
@@ -151,8 +152,8 @@ class BackupController extends Controller
             mkdir($backup->local, 0777, true);
         }
 
-        $dump = "/usr/bin/mysqldump -u {$username} -p{$password} -h {$host} {$database} > {$file}";
-        //$dump = "C:\webserver\mariadb\bin\mysqldump -u {$username} -p{$password} -h {$host} {$database} > {$file}";
+        //$dump = "/usr/bin/mysqldump -u {$username} -p{$password} -h {$host} {$database} > {$file}";
+        $dump = "C:\webserver\mariadb\bin\mysqldump -u {$username} -p{$password} -h {$host} {$database} > {$file}";
         shell_exec($dump);
     }
 }
