@@ -66,7 +66,7 @@
             </div> --}}
 
             <div class="form-group row">
-                <label for="local" class="col-sm-3 col-form-label text-left">Local <span
+                <label for="local" class="col-sm-3 col-form-label text-left">Nome Diretório <span
                         class="text-danger">*</span></label>
                 <div class="col-sm-7">
                     <input id="local" type="text" class="form-control @error('local') is-invalid @enderror"
