@@ -13,6 +13,7 @@ class Financeiro extends Model
     public $incrementing = false;
     protected $fillable = [
         'id_financeiro',
+        'periodo',
         'valor_ovo'
     ];
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Empresa;
 use App\Models\Financeiro;
+use App\Models\Periodo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -22,7 +23,7 @@ class FinanceiroController extends Controller
      */
     public function index()
     {
-        $financeiros = Financeiro::first();
+        $financeiros = Financeiro::where('periodo', Periodo::ativo())->first();
         if ($financeiros):
             return redirect()->route('financeiros.show', ['financeiro' => $financeiros->id_financeiro]);
         else:
@@ -61,6 +62,7 @@ class FinanceiroController extends Controller
         $validator = Validator::make($data, $rules, $messages)->validate();
 
         $data['id_financeiro'] = Financeiro::idfinanceiro();
+        $data['periodo'] = Periodo::ativo();
         $financeiro->create($data);
         return redirect()->route('financeiros.show', ['financeiro' => Financeiro::idfinanceiro()-1])->with('success', 'Dados do financeiro salvo com sucesso!');
     }
@@ -108,6 +110,7 @@ class FinanceiroController extends Controller
         ];
         $validator = Validator::make($data, $rules, $messages)->validate();
 
+        $data['periodo'] = Periodo::ativo();
         $financeiro->update($data);
         return redirect()->route('financeiros.show', ['financeiro' => $financeiro->id_financeiro])->with('success', 'Dados do financeiro salvo com sucesso!');
     }
