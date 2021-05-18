@@ -36,6 +36,7 @@ class HomeController extends Controller
 
     public function index()
     {
+        $dataatual =
         $backup = Backup::first();
         $segmento = Empresa::first();
         $coletas = Coleta::get();
@@ -49,6 +50,7 @@ class HomeController extends Controller
         $consumos = Consumo::get();
         $lotesperiodo = Lote::where('periodo', Periodo::ativo())->get();
         $semanaatual = Semana::where('data_inicial', '<=', Carbon::now())->where('data_final', '>=', Carbon::now())->first();
+
         $producao = Coleta::where('data_coleta', '>=', $semanaatual->data_inicial)->where('data_coleta', '<=', $semanaatual->data_final)->get();
         // Intervalo de datas da semana
         $periodos = new DatePeriod(new DateTime($semanaatual->data_inicial), new DateInterval('P1D'), new DateTime($semanaatual->data_final));
@@ -60,6 +62,7 @@ class HomeController extends Controller
         foreach ($periodos as $period) :
             $datasemana[] = $period->format('d/m/Y');
         endforeach;
+
         //Produção da semana por dia gráfico
         foreach ($periodos as $periodo) :
             $posturadia = Coleta::where('data_coleta', $periodo->format('Y-m-d'))->sum('postura_dia');
@@ -67,10 +70,11 @@ class HomeController extends Controller
         endforeach;
         // Média de produção semanal
         $media = number_format((($producao->sum->postura_dia / 7) / $capitalizadas) * 100, 2, '.', '');
+        //dd($media);
         // Produção alcançada na semana
         $pcap = (($semanaatual->producao * ($capitalizadas * 7)) / 100);
 
-        $alcancada = !$semanaatual->producao? '0':(($producao->sum->postura_dia / $pcap)*100);//($pcap - $producao->sum->postura_dia);// number_format(($pcap) * 100, 2, '.', '');
+        $alcancada = !$semanaatual->producao? '0':(($producao->sum->postura_dia / $pcap)*100);
 
         // Estoque de ovos
         $estoqueovos = Estoque_ovo::where('periodo', Periodo::ativo())->get();

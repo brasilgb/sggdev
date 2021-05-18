@@ -3,7 +3,7 @@
     // Gráfico produção semanal
         var producaosemana = <?php echo json_encode($producaosemana, JSON_NUMERIC_CHECK); ?>;
         var datasemana = <?php echo json_encode($datasemana); ?>;
-
+        var producao = <?php echo json_encode($semanaatual->producao, JSON_NUMERIC_CHECK); ?>;
         Highcharts.chart('container', {
             chart: {
                 type: 'line'
@@ -103,7 +103,7 @@ var gaugeOptions = {
 var chartSpeed = Highcharts.chart('container-media', Highcharts.merge(gaugeOptions, {
     yAxis: {
         min: 0,
-        max: {{!$semanaatual->producao?'0':$semanaatual->producao}},
+        max: producao,
         title: {
             text: 'Produção Semanal'
         }
@@ -142,7 +142,7 @@ var chartRpm = Highcharts.chart('container-meta', Highcharts.merge(gaugeOptions,
 
     series: [{
         name: 'Meta',
-        data: [{{!$alcancada?'0':$alcancada}}],
+        data: [{{$alcancada}}],
         dataLabels: {
             format:
                 '<div style="text-align:center">' +
