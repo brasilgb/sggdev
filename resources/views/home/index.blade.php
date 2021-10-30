@@ -171,7 +171,7 @@
         <!-- small box -->
         <div class="small-box bg-cyan shadow-sm border border-white rounded">
             <div class="inner">
-                <h3> {{ $tarefas->count() }}</h3>
+                <h3> {{ $tarefas > 0 ? $tarefas->count() : 0 }}</h3>
                 <p>Tarefas abetas</p>
             </div>
             <div class="icon">

@@ -96,6 +96,7 @@ class HomeController extends Controller
             $alcancada = 0;
             $estoqueovos = 0;
             $estoqueaves = 0;
+            $tarefas = 0;
             $capitalizadas = 0;
 
     }
