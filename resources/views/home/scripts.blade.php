@@ -3,7 +3,7 @@
     // Gráfico produção semanal
         var producaosemana = <?php echo json_encode($producaosemana, JSON_NUMERIC_CHECK); ?>;
         var datasemana = <?php echo json_encode($datasemana); ?>;
-        var producao = <?php echo json_encode($semanaatual->producao > 0 ? $semanaatual->producao : 0, JSON_NUMERIC_CHECK); ?>;
+        var producao = <?php echo json_encode($semanaatual->producao ? $semanaatual->producao : 1, JSON_NUMERIC_CHECK); ?>;
         Highcharts.chart('container', {
             chart: {
                 type: 'line'
