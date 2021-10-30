@@ -51,6 +51,7 @@ class HomeController extends Controller
         $lotesperiodo = Lote::where('periodo', Periodo::ativo())->get();
         $semanaatual = Semana::where('data_inicial', '<=', Carbon::now())->where('data_final', '>=', Carbon::now())->first();
 
+        //Busca o que foi produzido no intervalo
         $producao = Coleta::where('data_coleta', '>=', $semanaatual->data_inicial)->where('data_coleta', '<=', $semanaatual->data_final)->get();
         // Intervalo de datas da semana
         $periodos = new DatePeriod(new DateTime($semanaatual->data_inicial), new DateInterval('P1D'), new DateTime($semanaatual->data_final));
