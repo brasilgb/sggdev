@@ -299,7 +299,6 @@
 
     </div>
 </div>
-@include('home/scripts')
 
 @else
 <div class="container">
