@@ -89,7 +89,14 @@ class RelatorioController extends Controller
         $mail = new PHPMailer(true);
 
         try {
-            $mail->SMTPDebug = 1;
+            $mail->SMTPOptions = array(
+                'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+                )
+                );
+            $mail->SMTPDebug = 2;
             $mail->CharSet = "UTF-8";
             $mail->isSMTP();
             $mail->Host = $emaildata->smtp;             //  smtp host
