@@ -89,7 +89,7 @@ class RelatorioController extends Controller
         $mail = new PHPMailer(true);
 
         try {
-            $mail->SMTPDebug = 0;
+            $mail->SMTPDebug = 1;
             $mail->CharSet = "UTF-8";
             $mail->isSMTP();
             $mail->Host = $emaildata->smtp;             //  smtp host
