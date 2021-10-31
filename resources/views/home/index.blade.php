@@ -300,7 +300,9 @@
     </div>
 </div>
 
-@include('home/scripts')
+@if ($producaosemana > 0)
+    @include('home/scripts')
+@endif
 
 @else
 <div class="container">
