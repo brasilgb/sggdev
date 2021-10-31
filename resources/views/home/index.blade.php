@@ -7,6 +7,7 @@
         atualizaRelogio();
     });
 </script>
+
 {{-- KPI Tabelas --}}
 <div class="row">
     <div class="col-12">
@@ -28,7 +29,8 @@
             </h3>
         </div>
         <div class="col-3 border-left">
-            <div style="font: bold 1rem Sans-serif; text-shadow: 1px 1px #ffffff;" class="text-black-50 text-uppercase pt-2 text-left">
+            <div style="font: bold 1rem Sans-serif; text-shadow: 1px 1px #ffffff;"
+                class="text-black-50 text-uppercase pt-2 text-left">
                 <span id="data"></span>
                 <span id="hora"></span>
             </div>
@@ -76,7 +78,8 @@
         <!-- small box -->
         <div class="small-box bg-yellow shadow-sm border border-white rounded">
             <div class="inner">
-                <h3>{{ !$mortalidades? '0' :$mortalidades->where('data_mortalidade',date("Y-m-d", strtotime(\Carbon\Carbon::now())))->sum('tot_ave') }}</h3>
+                <h3>{{ !$mortalidades? '0' :$mortalidades->where('data_mortalidade',date("Y-m-d",
+                    strtotime(\Carbon\Carbon::now())))->sum('tot_ave') }}</h3>
 
                 <p>Mortalidade dia</p>
             </div>
@@ -93,8 +96,11 @@
         <!-- small box -->
         <div class="small-box bg-red shadow-sm border border-white rounded">
             <div class="inner">
-                <h3>{{ !$consumos? '0' :$consumos->where('data_consumo', date("Y-m-d", strtotime(\Carbon\Carbon::now())))->sum('femea') + $consumos->where('data_coleta', date("Y-m-d", strtotime(\Carbon\Carbon::now())))->sum('macho') }}
-                    <small>Kg</small></h3>
+                <h3>{{ !$consumos? '0' :$consumos->where('data_consumo', date("Y-m-d",
+                    strtotime(\Carbon\Carbon::now())))->sum('femea') + $consumos->where('data_coleta', date("Y-m-d",
+                    strtotime(\Carbon\Carbon::now())))->sum('macho') }}
+                    <small>Kg</small>
+                </h3>
 
                 <p>Consumo ração dia</p>
             </div>
@@ -113,13 +119,16 @@
     <div class="col-lg-3 col-xs-6">
         <!-- small box -->
         <div class="small-box bg-red shadow-sm border border-white rounded">
-                <div class="inner pb-0">
-                    <h4 style="margin-bottom: 0.8rem">
-                        CO: {{ !$coletas? 0 :$coletas->where('data_coleta', date("Y-m-d", strtotime(\Carbon\Carbon::now())))->sum->comerciais }}<br>
-                        &nbsp;IN: {{ !$coletas? 0 :$coletas->where('data_coleta', date("Y-m-d", strtotime(\Carbon\Carbon::now())))->sum->incubaveis }}<br>
-                        TO: {{ !$coletas? 0 :$coletas->where('data_coleta', date("Y-m-d", strtotime(\Carbon\Carbon::now())))->sum->postura_dia }}
-                    </h4>
-                </div>
+            <div class="inner pb-0">
+                <h4 style="margin-bottom: 0.8rem">
+                    CO: {{ !$coletas? 0 :$coletas->where('data_coleta', date("Y-m-d",
+                    strtotime(\Carbon\Carbon::now())))->sum->comerciais }}<br>
+                    &nbsp;IN: {{ !$coletas? 0 :$coletas->where('data_coleta', date("Y-m-d",
+                    strtotime(\Carbon\Carbon::now())))->sum->incubaveis }}<br>
+                    TO: {{ !$coletas? 0 :$coletas->where('data_coleta', date("Y-m-d",
+                    strtotime(\Carbon\Carbon::now())))->sum->postura_dia }}
+                </h4>
+            </div>
             <div class="icon">
                 <i class="fa fa-cart-plus"></i>
             </div>
@@ -197,8 +206,8 @@
 
                     @csrf
                     <input type="hidden" name="datarelatorio" value="{{ date('d/m/Y', strtotime(now())) }}">
-                    <button @if($coletas->count() == 0) disabled @endif type="submit" class="btn btn-app btn-light shadow-sm border border-white"><i
-                            class="fa fa-file-alt"></i>Enviar Relatório</button>
+                    <button @if($coletas->count() == 0) disabled @endif type="submit" class="btn btn-app btn-light
+                        shadow-sm border border-white"><i class="fa fa-file-alt"></i>Enviar Relatório</button>
                 </form>
             </div>
         </div>
@@ -211,8 +220,9 @@
                 <form action="{{ route('backups.gerabackup') }}" method="get" class="inline">
                     @method('PUT')
                     @csrf
-                    <button @if(!$backup) disabled @endif type="submit" class="btn btn-app btn-light shadow-sm border border-white"><i
-                            class="fa fa-database"></i>Gerar backup</button>
+                    <button @if(!$backup) disabled @endif type="submit"
+                        class="btn btn-app btn-light shadow-sm border border-white"><i class="fa fa-database"></i>Gerar
+                        backup</button>
                 </form>
             </div>
         </div>
@@ -239,8 +249,9 @@
                 <form action="{{ route('envios.index') }}" method="get" class="inline">
                     @method('PUT')
                     @csrf
-                    <button @if(!$coletas) disabled @endif type="submit" class="btn btn-app btn-light shadow-sm border border-white"><i
-                            class="fa fa-truck"></i>Enviar ovos</button>
+                    <button @if(!$coletas) disabled @endif type="submit"
+                        class="btn btn-app btn-light shadow-sm border border-white"><i class="fa fa-truck"></i>Enviar
+                        ovos</button>
                 </form>
             </div>
         </div>
@@ -254,20 +265,24 @@
     <div class="col">
         <div class="bg-white rounded shadow-sm border border-gray-500">
             <div class="">
-                <p class="text-center pt-2"><span class="text-teal">Semana</span> / <span class="text-indigo">Meta</span></p>
+                <p class="text-center pt-2"><span class="text-teal">Semana</span> / <span
+                        class="text-indigo">Meta</span></p>
                 <h1 class="text-center m-0 px-2 py-4 text-secundary font-weight-bold" style="font-size: 2.65rem;">
                     <span class="text-teal">{{ empty($semanaatual->semana)? '0' : $semanaatual->semana}}</span>
                     /
-                    <span class="text-indigo">{{ empty($semanaatual->producao)? '0' : $semanaatual->producao}}<small style="font-size: 14px">%</small></span>
+                    <span class="text-indigo">{{ empty($semanaatual->producao)? '0' : $semanaatual->producao}}<small
+                            style="font-size: 14px">%</small></span>
                 </h1>
             </div>
 
             <div class=" '00/00/0000' ">
                 <p class="text-center m-0 py-2 text-secundary font-weight-bold text-black-50">&nbsp;&nbsp;&nbsp;&nbsp;
-                   Início:
-                    {{ empty($semanaatual->semana) ? '00/00/0000' :  date('d/m/Y', strtotime($semanaatual->data_inicial)) }} <br>
+                    Início:
+                    {{ empty($semanaatual->semana) ? '00/00/0000' : date('d/m/Y', strtotime($semanaatual->data_inicial))
+                    }} <br>
                     Término:
-                    {{ empty($semanaatual->semana) ? '00/00/0000' : date('d/m/Y', strtotime($semanaatual->data_final)) }} </p>
+                    {{ empty($semanaatual->semana) ? '00/00/0000' : date('d/m/Y', strtotime($semanaatual->data_final))
+                    }} </p>
             </div>
         </div>
     </div>
@@ -294,14 +309,15 @@
         </div>
         @else
         <div class="alert alert-info shadow-sm border border-white"><i
-                class="fa fa-exclamation-triangle text-danger"></i> Para gerar gráfico, os lotes devem estar capitalizados, assim como as metas de produção e coletas cadastradas.</div>
+                class="fa fa-exclamation-triangle text-danger"></i> Para gerar gráfico, os lotes devem estar
+            capitalizados, assim como as metas de produção e coletas cadastradas.</div>
         @endif
 
     </div>
 </div>
 
 @if ($producaosemana > 0)
-    @include('home/scripts')
+@include('home/scripts')
 @endif
 
 @else
