@@ -103,7 +103,7 @@ class RelatorioController extends Controller
             $mail->SMTPAuth = true;
             $mail->Username = $emaildata->usuario;   //  sender username
             $mail->Password = $emaildata->senha;       // sender password
-            $mail->SMTPSecure = $emaildata->seguranca == TLS ? $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS : PHPMailer::ENCRYPTION_SMTPS;                   // encryption - ssl/tls
+            $mail->SMTPSecure = $emaildata->seguranca == 'TLS' ? $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS : PHPMailer::ENCRYPTION_SMTPS;                   // encryption - ssl/tls
             $mail->Port = $emaildata->porta;                          // port - 587/465
 
             $mail->setFrom($emaildata->usuario, $emaildata->remetente);
