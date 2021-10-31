@@ -300,6 +300,8 @@
     </div>
 </div>
 
+@include('home/scripts')
+
 @else
 <div class="container">
     <div class="d-flex justify-content-center">
