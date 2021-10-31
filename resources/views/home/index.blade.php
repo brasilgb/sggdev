@@ -27,7 +27,7 @@
                 @endif
             </h3>
         </div>
-        <div class="col-2 border-left">
+        <div class="col-3 border-left">
             <div style="font: bold 1rem Sans-serif; text-shadow: 1px 1px #ffffff;" class="text-black-50 text-uppercase pt-2 text-left">
                 <span id="data"></span>
                 <span id="hora"></span>
