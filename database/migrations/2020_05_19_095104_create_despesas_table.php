@@ -16,7 +16,7 @@ class CreateDespesasTable extends Migration
         Schema::create('despesas', function (Blueprint $table) {
             $table->integer('id_despesa')->primary();
             $table->integer('periodo');
-            $table->date('vencimento');
+            $table->timestamp('vencimento');
             $table->string('descritivo');
             $table->decimal('valor', 10,2);
             $table->string('situacao');

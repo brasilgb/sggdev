@@ -16,7 +16,7 @@ class CreateAviarioTable extends Migration
         Schema::create('aviarios', function (Blueprint $table) {
             $table->integer('id_aviario')->primary();
             $table->integer('periodo');
-            $table->date('data_aviario');
+            $table->timestamp('data_aviario');
             $table->string('aviario');
             $table->integer('femea_box1');
             $table->integer('femea_box2')->nullable();

@@ -16,7 +16,7 @@ class CreateRecebimentosTable extends Migration
         Schema::create('recebimentos', function (Blueprint $table) {
             $table->integer('id_recebimento')->primary();
             $table->integer('periodo');
-            $table->date('data_recebimento');
+            $table->timestamp('data_recebimento');
             $table->time('hora_recebimento');
             $table->string('sexo_ave');
             $table->integer('quantidade');

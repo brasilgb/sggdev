@@ -17,7 +17,7 @@ class CreateConsumosTable extends Migration
             $table->integer('id_consumo')->primary();
             $table->integer('periodo');
             $table->integer('aviario_id');
-            $table->date('data_consumo');
+            $table->timestamp('data_consumo');
             $table->integer('femea_box1');
             $table->integer('femea_box2')->nullable();
             $table->integer('femea_box3')->nullable();

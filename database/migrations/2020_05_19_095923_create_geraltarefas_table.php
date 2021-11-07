@@ -15,13 +15,13 @@ class CreateGeralTarefasTable extends Migration {
         Schema::create('geraltarefas', function (Blueprint $table) {
             $table->integer('id_tarefa')->primary();
             $table->integer('periodo');
-            $table->date('data_inicio');
+            $table->timestamp('data_inicio');
             $table->time('hora_inicio');
-            $table->date('data_previsao');
+            $table->timestamp('data_previsao');
             $table->time('hora_previsao');
             $table->string('descritivo');
             $table->text('descricao');
-            $table->date('data_termino')->nullable();
+            $table->timestamp('data_termino')->nullable();
             $table->time('hora_termino')->nullable();
             $table->string('situacao');
             $table->text('observacao')->nullable();

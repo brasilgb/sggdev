@@ -15,7 +15,7 @@ class CreatePesosTable extends Migration
     {
         Schema::create('pesos', function (Blueprint $table) {
             $table->integer('id_peso')->primary();
-            $table->date('data_peso');
+            $table->timestamp('data_peso');
             $table->integer('periodo');
             $table->integer('aviario_id');
             $table->integer('semana');

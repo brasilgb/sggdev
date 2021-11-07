@@ -15,7 +15,7 @@ class CreateControlediariosTable extends Migration
     {
         Schema::create('controlediarios', function (Blueprint $table) {
             $table->integer('id_controle')->primary();
-            $table->date('data_controle');
+            $table->timestamp('data_controle');
             $table->integer('periodo');
             $table->integer('aviario');
             $table->decimal('temperatura_max', 10,1);

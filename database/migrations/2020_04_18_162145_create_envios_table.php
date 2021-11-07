@@ -15,7 +15,7 @@ class CreateEnviosTable extends Migration
     {
         Schema::create('envios', function (Blueprint $table) {
             $table->integer('id_envio')->primary();
-            $table->date('data_envio');
+            $table->timestamp('data_envio');
             $table->time('hora_envio');
             $table->integer('periodo');
             $table->integer('incubaveis');

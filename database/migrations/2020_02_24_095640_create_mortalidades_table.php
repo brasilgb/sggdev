@@ -16,7 +16,7 @@ class CreateMortalidadesTable extends Migration {
             $table->integer('id_mortalidade')->primary();
             $table->string('id_aviario');
             $table->integer('periodo');
-            $table->date('data_mortalidade');
+            $table->timestamp('data_mortalidade');
             $table->integer('femea_box1');
             $table->integer('femea_box2')->nullable();
             $table->integer('femea_box3')->nullable();

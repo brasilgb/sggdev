@@ -18,7 +18,7 @@ class CreateColetasTable extends Migration
             $table->integer('id_aviario');
             $table->integer('periodo');
             $table->integer('coleta');
-            $table->date('data_coleta');
+            $table->timestamp('data_coleta');
             $table->time('hora_coleta');
             $table->integer('limpos_ninho');
             $table->integer('sujos_ninho');

@@ -16,8 +16,8 @@ class CreateSemanasTable extends Migration
         Schema::create('semanas', function (Blueprint $table) {
             $table->bigIncrements('id_semana');
             $table->integer('semana');
-            $table->date('data_inicial');
-            $table->date('data_final');
+            $table->timestamp('data_inicial');
+            $table->timestamp('data_final');
             $table->decimal('eclosao', 10,2)->nullable();
             $table->decimal('fertilidade', 10,2)->nullable();
             $table->decimal('producao', 10,2)->nullable();

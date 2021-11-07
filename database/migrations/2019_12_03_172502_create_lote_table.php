@@ -16,14 +16,14 @@ class CreateLoteTable extends Migration
         Schema::create('lotes', function (Blueprint $table) {
             $table->integer('id_lote')->primary();
             $table->integer('periodo');
-            $table->date('data_lote');
+            $table->timestamp('data_lote');
             $table->string('lote', 50);
             $table->integer('femea');
             $table->integer('macho');
             $table->integer('femea_capitalizada')->nullable();
-            $table->date('data_femea_capitalizada')->nullable();
+            $table->timestamp('data_femea_capitalizada')->nullable();
             $table->integer('macho_capitalizado')->nullable();
-            $table->date('data_macho_capitalizado')->nullable();
+            $table->timestamp('data_macho_capitalizado')->nullable();
             $table->timestamps();
         });
     }

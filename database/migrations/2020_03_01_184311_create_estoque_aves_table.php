@@ -16,7 +16,7 @@ class CreateEstoqueAvesTable extends Migration {
             $table->bigIncrements('id_estoque');
             $table->integer('id_aviario');
             $table->integer('periodo');
-            $table->date('data_estoque');
+            $table->timestamp('data_estoque');
             $table->integer('femea_box1');
             $table->integer('femea_box2')->nullable();
             $table->integer('femea_box3')->nullable();
