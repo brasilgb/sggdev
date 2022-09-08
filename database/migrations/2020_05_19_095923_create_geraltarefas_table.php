@@ -17,7 +17,7 @@ class CreateGeralTarefasTable extends Migration {
             $table->integer('periodo');
             $table->timestamp('data_inicio');
             $table->time('hora_inicio');
-            $table->timestamp('data_previsao');
+            $table->timestamp('data_previsao')->nullable();
             $table->time('hora_previsao');
             $table->string('descritivo');
             $table->text('descricao');

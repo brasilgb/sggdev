@@ -17,7 +17,7 @@ class CreateChecklistTable extends Migration
             $table->bigIncrements('id_checklist');
             $table->integer('mes');
             $table->timestamp('data_inicial');
-            $table->timestamp('data_final');
+            $table->timestamp('data_final')->nullable();
             $table->decimal('check', 10,2)->nullable();
             $table->timestamps();
         });
